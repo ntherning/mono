@@ -36,7 +36,12 @@ namespace Mono {
 #endif
 	static class Runtime
 	{
-
+		[MethodImplAttribute (MethodImplOptions.InternalCall)]
+		public static extern void MartinTest (object obj);
+		
+		[MethodImplAttribute (MethodImplOptions.InternalCall)]
+		public static extern void MartinTest2 ();
+		
 		[MethodImplAttribute (MethodImplOptions.InternalCall)]
 		private static extern void mono_runtime_install_handlers ();
 

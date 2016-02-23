@@ -7675,6 +7675,9 @@ mono_arch_emit_exceptions (MonoCompile *cfg)
 
 			if (cfg->compile_aot)
 				continue;
+			
+			if (cfg->verbose_level)
+				G_BREAKPOINT ();
 
 			/*loading is faster against aligned addresses.*/
 			code = (guint8*)ALIGN_TO (code, 8);

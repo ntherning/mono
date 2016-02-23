@@ -1284,6 +1284,8 @@ namespace System.Net
 		{
 			if (Aborted)
 				return;
+			
+			Mono.Runtime.MartinTest (this);
 
 			WebAsyncResult r = asyncWrite;
 			if (r == null)

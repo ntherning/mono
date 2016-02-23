@@ -120,6 +120,22 @@ mono_class_init_or_throw (MonoClass *klass)
 		mono_raise_exception (mono_class_get_exception_for_failure (klass));
 }
 
+ICALL_EXPORT void
+ves_icall_Martin_Test (MonoObject *obj)
+{
+	g_message (G_STRLOC ": %p", obj);
+}
+
+ICALL_EXPORT void
+ves_icall_Martin_Test2 (void)
+{
+#if defined(__x86_64__)
+	void *ptr;
+	__asm ("mov %%r13, %0" : "=r"(ptr));
+	g_message (G_STRLOC ": %p", ptr);
+#endif
+}
+
 ICALL_EXPORT MonoObject *
 ves_icall_System_Array_GetValueImpl (MonoArray *arr, guint32 pos)
 {

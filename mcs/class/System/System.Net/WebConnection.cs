@@ -688,7 +688,11 @@ namespace System.Net
 		
 		void InitConnection (object state)
 		{
+			Console.Error.WriteLine ("INIT CONNECTION #0");
+			Mono.Runtime.MartinTest (this);
 			HttpWebRequest request = (HttpWebRequest) state;
+			Mono.Runtime.MartinTest (request);
+			Mono.Runtime.MartinTest2 ();
 			request.WebConnection = this;
 			if (request.ReuseConnection)
 				request.StoredConnection = this;
@@ -711,7 +715,13 @@ namespace System.Net
 				return;
 			}
 			
+			Console.Error.WriteLine ("BEFORE CS");
+			Mono.Runtime.MartinTest (request);
+			Mono.Runtime.MartinTest2 ();
 			if (!CreateStream (request)) {
+				Console.Error.WriteLine ("AFTER CS");
+				Mono.Runtime.MartinTest (request);
+				Mono.Runtime.MartinTest2 ();
 				if (request.Aborted)
 					return;
 
@@ -721,6 +731,9 @@ namespace System.Net
 
 				Exception cnc_exc = connect_exception;
 				connect_exception = null;
+				Console.Error.WriteLine ("INIT CONNECTION #2");
+				Mono.Runtime.MartinTest (this);
+				Mono.Runtime.MartinTest (request);
 				request.SetWriteStreamError (st, cnc_exc);
 				Close (true);
 				return;

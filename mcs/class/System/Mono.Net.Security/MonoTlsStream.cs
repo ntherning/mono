@@ -100,33 +100,47 @@ namespace Mono.Net.Security
 
 		internal Stream CreateStream (byte[] buffer)
 		{
+			Mono.Runtime.MartinTest2 ();
 			sslStream = provider.CreateSslStream (networkStream, false, settings);
+			
+			Console.Error.WriteLine ("BEFORE TRY");
+			Mono.Runtime.MartinTest2 ();
 
 			try {
+				Mono.Runtime.MartinTest2 ();
+				Console.Error.WriteLine ("INSIDE TRY");
 				sslStream.AuthenticateAsClient (
 					request.Address.Host, (XX509CertificateCollection)(object)request.ClientCertificates,
 					(SslProtocols)ServicePointManager.SecurityProtocol,
 					ServicePointManager.CheckCertificateRevocationList);
 
 				status = WebExceptionStatus.Success;
+				Mono.Runtime.MartinTest2 ();
 			} finally {
+				Mono.Runtime.MartinTest2 ();
 				if (CertificateValidationFailed)
 					status = WebExceptionStatus.TrustFailure;
 
 				request.ServicePoint.SetClientCertificate (sslStream.InternalLocalCertificate);
 				if (status != WebExceptionStatus.Success)
 					sslStream = null;
+				Mono.Runtime.MartinTest2 ();
 			}
 
 			try {
+				Mono.Runtime.MartinTest2 ();
 				if (buffer != null)
 					sslStream.Write (buffer, 0, buffer.Length);
+				Mono.Runtime.MartinTest2 ();
 			} catch {
+				Mono.Runtime.MartinTest2 ();
 				status = WebExceptionStatus.SendFailure;
 				sslStream = null;
+				Mono.Runtime.MartinTest2 ();
 				throw;
 			}
 
+			Mono.Runtime.MartinTest2 ();
 			return sslStream.AuthenticatedStream;
 		}
 #endif

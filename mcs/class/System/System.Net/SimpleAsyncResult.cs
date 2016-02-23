@@ -48,19 +48,31 @@ namespace System.Net
 		bool callbackDone;
 		Exception exc;
 		object locker = new object ();
+		static int nextID;
+		int id = ++nextID;
 
 		SimpleAsyncResult (SimpleAsyncCallback cb)
 		{
 			this.cb = cb;
+			MartinTest (id, locker);
 		}
 
 		protected SimpleAsyncResult (AsyncCallback cb, object state)
 		{
+			MartinTest (id, locker);
 			this.state = state;
 			this.cb = result => {
 				if (cb != null)
 					cb (this);
 			};
+		}
+
+		public static void MartinTest (int id, object test)
+		{
+			lock (test) {
+				// Console.WriteLine ("SIMPLE ASYNC RESULT: {0}", id);
+				Mono.Runtime.MartinTest (test);
+			}
 		}
 
 		public static void Run (SimpleAsyncFunc func, SimpleAsyncCallback callback)
@@ -125,8 +137,14 @@ namespace System.Net
 
 		protected void SetCompleted_internal (bool synch, Exception e)
 		{
+			Console.Error.WriteLine ("SET COMPLETED INTERNAL: {0}", id);
+			Console.Error.WriteLine (Environment.StackTrace);
+			Mono.Runtime.MartinTest (this);
+			return;
 			this.synch = synch;
 			exc = e;
+			if (locker == null)
+				Console.Error.WriteLine ("FUCK: {0}", id);
 			lock (locker) {
 				isCompleted = true;
 				if (handle != null)
