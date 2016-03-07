@@ -136,16 +136,16 @@ namespace System.Security.Cryptography.X509Certificates
 			return sha.ComputeHash (_cert.RawData);
 		}
 
-		public override DateTime GetEffectiveDateString ()
+		public override DateTime GetValidFrom ()
 		{
 			ThrowIfContextInvalid ();
-			return _cert.ValidFrom.ToLocalTime ();
+			return _cert.ValidFrom;
 		}
 
-		public override DateTime GetExpirationDateString ()
+		public override DateTime GetValidUntil ()
 		{
 			ThrowIfContextInvalid ();
-			return _cert.ValidUntil.ToLocalTime ();
+			return _cert.ValidUntil;
 		}
 
 		public override bool Equals (X509CertificateImpl other, out bool result)
@@ -265,22 +265,6 @@ namespace System.Security.Cryptography.X509Certificates
 				return issuer_name;
 			}
 		} 
-
-		public override DateTime NotAfter {
-			get {
-				if (_cert == null)
-					throw new CryptographicException (empty_error);
-				return _cert.ValidUntil.ToLocalTime ();
-			}
-		}
-
-		public override DateTime NotBefore {
-			get {
-				if (_cert == null)
-					throw new CryptographicException (empty_error);
-				return _cert.ValidFrom.ToLocalTime ();
-			}
-		}
 
 		public override AsymmetricAlgorithm PrivateKey {
 			get {
@@ -634,8 +618,8 @@ namespace System.Security.Cryptography.X509Certificates
 			if (!verbose) {
 				sb.AppendFormat ("[Subject]{0}  {1}{0}{0}", nl, GetSubjectName (false));
 				sb.AppendFormat ("[Issuer]{0}  {1}{0}{0}", nl, GetIssuerName (false));
-				sb.AppendFormat ("[Not Before]{0}  {1}{0}{0}", nl, GetEffectiveDateString ());
-				sb.AppendFormat ("[Not After]{0}  {1}{0}{0}", nl, GetExpirationDateString ());
+				sb.AppendFormat ("[Not Before]{0}  {1}{0}{0}", nl, GetValidFrom ().ToLocalTime ());
+				sb.AppendFormat ("[Not After]{0}  {1}{0}{0}", nl, GetValidUntil ().ToLocalTime ());
 				sb.AppendFormat ("[Thumbprint]{0}  {1}{0}", nl, X509Helper.ToHexString (GetCertHash ()));
 				sb.Append (nl);
 				return sb.ToString ();
@@ -645,8 +629,8 @@ namespace System.Security.Cryptography.X509Certificates
 			sb.AppendFormat ("[Subject]{0}  {1}{0}{0}", nl, GetSubjectName (false));
 			sb.AppendFormat ("[Issuer]{0}  {1}{0}{0}", nl, GetIssuerName (false));
 			sb.AppendFormat ("[Serial Number]{0}  {1}{0}{0}", nl, SerialNumber);
-			sb.AppendFormat ("[Not Before]{0}  {1}{0}{0}", nl, NotBefore);
-			sb.AppendFormat ("[Not After]{0}  {1}{0}{0}", nl, NotAfter);
+			sb.AppendFormat ("[Not Before]{0}  {1}{0}{0}", nl, GetValidFrom ().ToLocalTime ());
+			sb.AppendFormat ("[Not After]{0}  {1}{0}{0}", nl, GetValidUntil ().ToLocalTime ());
 			sb.AppendFormat ("[Thumbprint]{0}  {1}{0}", nl, X509Helper.ToHexString (GetCertHash ()));
 			sb.AppendFormat ("[Signature Algorithm]{0}  {1}({2}){0}{0}", nl, SignatureAlgorithm.FriendlyName, 
 				SignatureAlgorithm.Value);

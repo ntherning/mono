@@ -47,14 +47,6 @@ namespace System.Security.Cryptography.X509Certificates
 			get;
 		}
 
-		public abstract DateTime NotAfter {
-			get;
-		}
-
-		public abstract DateTime NotBefore {
-			get;
-		}
-
 		public abstract AsymmetricAlgorithm PrivateKey {
 			get; set;
 		}

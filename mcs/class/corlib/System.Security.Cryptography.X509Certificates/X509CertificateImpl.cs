@@ -53,9 +53,9 @@ namespace System.Security.Cryptography.X509Certificates
 
 		public abstract byte[] GetRawCertData ();
 
-		public abstract DateTime GetEffectiveDateString ();
+		public abstract DateTime GetValidFrom ();
 
-		public abstract DateTime GetExpirationDateString ();
+		public abstract DateTime GetValidUntil ();
 
 		byte[] cachedCertificateHash;
 

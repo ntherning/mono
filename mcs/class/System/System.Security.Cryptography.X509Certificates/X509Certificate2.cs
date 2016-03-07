@@ -170,11 +170,11 @@ namespace System.Security.Cryptography.X509Certificates {
 		} 
 
 		public DateTime NotAfter {
-			get { return Impl.NotAfter; }
+			get { return Impl.GetValidUntil ().ToLocalTime (); }
 		}
 
 		public DateTime NotBefore {
-			get { return Impl.NotBefore; }
+			get { return Impl.GetValidFrom ().ToLocalTime (); }
 		}
 
 		public AsymmetricAlgorithm PrivateKey {

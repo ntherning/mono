@@ -190,7 +190,7 @@ namespace System.Security.Cryptography.X509Certificates {
 				return null;
 			X509Helper.ThrowIfContextInvalid (impl);
 
-			return impl.GetEffectiveDateString ().ToString ();
+			return impl.GetValidFrom ().ToLocalTime ().ToString ();
 		}
 	
 		// strangly there are no DateTime returning function
@@ -200,7 +200,7 @@ namespace System.Security.Cryptography.X509Certificates {
 				return null;
 			X509Helper.ThrowIfContextInvalid (impl);
 
-			return impl.GetExpirationDateString ().ToString ();
+			return impl.GetValidUntil ().ToLocalTime ().ToString ();
 		}
 	
 		// well maybe someday there'll be support for PGP or SPKI ?
