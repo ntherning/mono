@@ -1465,14 +1465,14 @@ WYpnKQqsKIzlSqv9wwXs7B1iA7ZdvHk3TAnSnLP1o2H7ME05UnZPKCvraONdezon
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
+		[ExpectedException (typeof (CryptographicException))]
 		public void GetNameInfo_Invalid_True ()
 		{
 			new X509Certificate2 ().GetNameInfo ((X509NameType) Int32.MinValue, true);
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
+		[ExpectedException (typeof (CryptographicException))]
 		public void GetNameInfo_Invalid_False ()
 		{
 			new X509Certificate2 ().GetNameInfo ((X509NameType) Int32.MinValue, false);
@@ -1486,7 +1486,7 @@ WYpnKQqsKIzlSqv9wwXs7B1iA7ZdvHk3TAnSnLP1o2H7ME05UnZPKCvraONdezon
 		}
 
 		[Test]
-		[ExpectedException (typeof (NullReferenceException))]
+		[ExpectedException (typeof (CryptographicException))]
 		public void Empty_GetNameInfo_DnsName ()
 		{
 			new X509Certificate2 ().GetNameInfo (X509NameType.DnsName, true);
