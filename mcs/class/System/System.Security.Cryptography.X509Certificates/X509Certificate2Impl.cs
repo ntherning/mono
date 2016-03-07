@@ -55,9 +55,6 @@ namespace System.Security.Cryptography.X509Certificates
 			get;
 		}
 
-		public abstract string SerialNumber {
-			get;
-		}
 		public abstract Oid SignatureAlgorithm {
 			get;
 		}

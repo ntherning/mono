@@ -191,7 +191,7 @@ namespace System.Security.Cryptography.X509Certificates {
 		}
 
 		public string SerialNumber {
-			get { return Impl.SerialNumber; }
+			get { return GetSerialNumberString (); }
 		} 
 
 		public Oid SignatureAlgorithm {

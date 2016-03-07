@@ -325,22 +325,6 @@ namespace System.Security.Cryptography.X509Certificates
 			}
 		}
 
-		public override string SerialNumber {
-			get { 
-				if (_cert == null)
-					throw new CryptographicException (empty_error);
-
-				if (_serial == null) {
-					StringBuilder sb = new StringBuilder ();
-					byte[] serial = _cert.SerialNumber;
-					for (int i=serial.Length - 1; i >= 0; i--)
-						sb.Append (serial [i].ToString ("X2"));
-					_serial = sb.ToString ();
-				}
-				return _serial; 
-			}
-		} 
-
 		public override Oid SignatureAlgorithm {
 			get {
 				if (_cert == null)
@@ -622,7 +606,7 @@ namespace System.Security.Cryptography.X509Certificates
 			sb.AppendFormat ("[Version]{0}  V{1}{0}{0}", nl, Version);
 			sb.AppendFormat ("[Subject]{0}  {1}{0}{0}", nl, GetSubjectName (false));
 			sb.AppendFormat ("[Issuer]{0}  {1}{0}{0}", nl, GetIssuerName (false));
-			sb.AppendFormat ("[Serial Number]{0}  {1}{0}{0}", nl, SerialNumber);
+			sb.AppendFormat ("[Serial Number]{0}  {1}{0}{0}", nl, GetSerialNumber ());
 			sb.AppendFormat ("[Not Before]{0}  {1}{0}{0}", nl, GetValidFrom ().ToLocalTime ());
 			sb.AppendFormat ("[Not After]{0}  {1}{0}{0}", nl, GetValidUntil ().ToLocalTime ());
 			sb.AppendFormat ("[Thumbprint]{0}  {1}{0}", nl, X509Helper.ToHexString (GetCertHash ()));
