@@ -108,12 +108,6 @@ namespace System.Security.Cryptography.X509Certificates
 				return MX.X501.ToString (_cert.GetIssuerName (), true, ", ", true);
 		}
 
-		public override string GetSubjectSummary ()
-		{
-			ThrowIfContextInvalid ();
-			return _cert.SubjectName;
-		}
-
 		public override string GetSubjectName (bool legacyV1Mode)
 		{
 			ThrowIfContextInvalid ();

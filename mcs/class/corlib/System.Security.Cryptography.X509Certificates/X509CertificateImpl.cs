@@ -45,8 +45,6 @@ namespace System.Security.Cryptography.X509Certificates
 
 		public abstract X509CertificateImpl Clone ();
 
-		public abstract string GetSubjectSummary ();
-
 		public abstract string GetIssuerName (bool legacyV1Mode);
 
 		public abstract string GetSubjectName (bool legacyV1Mode);
