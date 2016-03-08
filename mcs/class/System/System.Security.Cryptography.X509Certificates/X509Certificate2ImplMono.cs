@@ -42,8 +42,6 @@ using Mono.Security.Cryptography;
 using MX = Mono.Security.X509;
 #endif
 
-#endif
-
 using System.IO;
 using System.Text;
 using System.Collections;
@@ -52,7 +50,6 @@ namespace System.Security.Cryptography.X509Certificates
 {
 	internal class X509Certificate2ImplMono : X509Certificate2Impl
 	{
-#if SECURITY_DEP
 		bool _archived;
 		X509ExtensionCollection _extensions;
 		string _serial;
@@ -64,15 +61,10 @@ namespace System.Security.Cryptography.X509Certificates
 		MX.X509Certificate _cert;
 
 		static string empty_error = Locale.GetText ("Certificate instance is empty.");
-#endif
 
 		public override bool IsValid {
 			get {
-#if SECURITY_DEP
 				return _cert != null;
-#else
-				return false;
-#endif
 			}
 		}
 
@@ -80,21 +72,15 @@ namespace System.Security.Cryptography.X509Certificates
 			get { return IntPtr.Zero; }
 		}
 
-#if SECURITY_DEP
 		internal X509Certificate2ImplMono (MX.X509Certificate cert)
 		{
 			this._cert = cert;
 		}
-#endif
 
 		public override X509CertificateImpl Clone ()
 		{
 			ThrowIfContextInvalid ();
-#if SECURITY_DEP
 			return new X509Certificate2ImplMono (_cert);
-#else
-			throw new NotSupportedException ();
-#endif
 		}
 
 		#region Implemented X509CertificateImpl members
@@ -194,7 +180,6 @@ namespace System.Security.Cryptography.X509Certificates
 
 		#endregion
 
-#if SECURITY_DEP
 		// constructors
 
 		public X509Certificate2ImplMono ()
@@ -723,7 +708,7 @@ namespace System.Security.Cryptography.X509Certificates
 		internal MX.X509Certificate MonoCertificate {
 			get { return _cert; }
 		}
-#endif
 	}
 }
 
+#endif

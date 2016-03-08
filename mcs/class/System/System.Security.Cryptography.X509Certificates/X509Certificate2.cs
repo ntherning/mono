@@ -51,6 +51,13 @@ namespace System.Security.Cryptography.X509Certificates {
 	[Serializable]
 	public class X509Certificate2 : X509Certificate {
 	
+#if !SECURITY_DEP
+		// Used in Mono.Security HttpsClientStream
+		public X509Certificate2 (byte[] rawData)
+		{
+		}
+#endif
+#if SECURITY_DEP
 		new internal X509Certificate2Impl Impl {
 			get {
 				var impl2 = base.Impl as X509Certificate2Impl;
@@ -59,13 +66,6 @@ namespace System.Security.Cryptography.X509Certificates {
 			}
 		}
 
-#if !SECURITY_DEP
-		// Used in Mono.Security HttpsClientStream
-		public X509Certificate2 (byte[] rawData)
-		{
-		}
-#endif
-#if SECURITY_DEP
 		string friendlyName = string.Empty;
 
 		// constructors

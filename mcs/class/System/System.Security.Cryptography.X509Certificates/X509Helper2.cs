@@ -25,11 +25,11 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
+#if SECURITY_DEP
 namespace System.Security.Cryptography.X509Certificates
 {
 	internal static class X509Helper2
 	{
-#if SECURITY_DEP
 		internal static void ThrowIfContextInvalid (X509CertificateImpl impl)
 		{
 			X509Helper.ThrowIfContextInvalid (impl);
@@ -54,7 +54,6 @@ namespace System.Security.Cryptography.X509Certificates
 		{
 			return new X509ChainImplMono (useMachineContext);
 		}
-#endif
 
 		public static bool IsValid (X509ChainImpl impl)
 		{
@@ -71,6 +70,6 @@ namespace System.Security.Cryptography.X509Certificates
 		{
 			return new CryptographicException (Locale.GetText ("Chain instance is empty."));
 		}
-
 	}
 }
+#endif
