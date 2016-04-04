@@ -10,10 +10,7 @@
 
 #include "config.h"
 
-#ifdef HOST_WIN32
-#include <windows.h>
-#include <io.h>
-#else
+#ifndef HOST_WIN32
 #include <sys/types.h>
 #if HAVE_SYS_STAT_H
 #include <sys/stat.h>
