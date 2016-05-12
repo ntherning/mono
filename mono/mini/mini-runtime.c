@@ -901,7 +901,7 @@ mono_set_lmf_addr (gpointer lmf_addr)
  *
  * In coop mode:
  *  - @dummy: contains the original domain
- *  - @return: a cookie containing current MonoThreadInfo* if it was in BLOCKING mode, NULL otherwise
+ *  - @return: a cookie containing current MonoThreadInfo*.
  */
 gpointer
 mono_jit_thread_attach (MonoDomain *domain, gpointer *dummy)
@@ -915,7 +915,18 @@ mono_jit_thread_attach (MonoDomain *domain, gpointer *dummy)
 
 	g_assert (domain);
 
-	if (!mono_threads_is_coop_enabled ()) {
+	/* On coop, when we detached, we moved the thread from  RUNNING->BLOCKING.  If we try to
+	 * reattach we do a BLOCKING->RUNNING transition.  If the thread is fresh,
+	 * mono_thread_attach() will do a STARTING->RUNNING transition so we're only responsible
+	 * for making the cookie. */
+	gboolean fresh_thread = FALSE;
+	{
+		MonoThreadInfo *info;
+
+		info = mono_thread_info_current_unchecked ();
+		fresh_thread = !info || !mono_thread_info_is_live (info);
+	}
+	{
 		gboolean attached;
 
 #ifdef MONO_HAVE_FAST_TLS
@@ -935,33 +946,17 @@ mono_jit_thread_attach (MonoDomain *domain, gpointer *dummy)
 		if (orig != domain)
 			mono_domain_set (domain, TRUE);
 
+	}
+	if (!mono_threads_is_coop_enabled ()) {
 		return orig != domain ? orig : NULL;
 	} else {
-		MonoThreadInfo *info;
-
-		info = mono_thread_info_current_unchecked ();
-		if (!info || !mono_thread_info_is_live (info)) {
-			/* thread state STARTING -> RUNNING */
-			mono_thread_attach (domain);
-
-			// #678164
-			mono_thread_set_state (mono_thread_internal_current (), ThreadState_Background);
-
+		if (fresh_thread) {
 			*dummy = NULL;
-
-			/* mono_threads_reset_blocking_start returns the current MonoThreadInfo
-			 * if we were in BLOCKING mode */
-			return mono_thread_info_current ();
+			/* mono_thread_attach put the thread in RUNNING mode from STARTING, but we need to
+			 * return the right cookie. */
+			return mono_threads_cookie_for_reset_blocking_start (mono_thread_info_current (), 1);
 		} else {
-			orig = mono_domain_get ();
-
-			/* orig might be null if we did an attach -> detach -> attach sequence */
-
-			if (orig != domain)
-				mono_domain_set (domain, TRUE);
-
 			*dummy = orig;
-
 			/* thread state (BLOCKING|RUNNING) -> RUNNING */
 			return mono_threads_reset_blocking_start (dummy);
 		}
@@ -1112,8 +1107,6 @@ mono_thread_attach_cb (intptr_t tid, gpointer stack_start)
 	thread = mono_thread_info_current_unchecked ();
 	if (thread)
 		thread->jit_data = jit_tls;
-	if (mono_profiler_get_events () & MONO_PROFILE_STATISTICAL)
-		mono_runtime_setup_stat_profiler ();
 
 	mono_arch_cpu_init ();
 }
@@ -1501,16 +1494,6 @@ mono_resolve_patch_target (MonoMethod *method, MonoDomain *domain, guint8 *code,
 #endif
 		break;
 	case MONO_PATCH_INFO_METHOD:
-#if defined(__native_client_codegen__) && defined(USE_JUMP_TABLES)
-		/*
-		 * If we use jumptables, for recursive calls we cannot
-		 * avoid trampoline, as we not yet know where we will
-		 * be installed.
-		 */
-		target = mono_create_jit_trampoline (domain, patch_info->data.method, error);
-		if (!mono_error_ok (error))
-			return NULL;
-#else
 		if (patch_info->data.method == method) {
 			target = code;
 		} else {
@@ -1519,7 +1502,6 @@ mono_resolve_patch_target (MonoMethod *method, MonoDomain *domain, guint8 *code,
 			if (!mono_error_ok (error))
 				return NULL;
 		}
-#endif
 		break;
 	case MONO_PATCH_INFO_METHOD_CODE_SLOT: {
 		gpointer code_slot;
@@ -2025,7 +2007,7 @@ mono_jit_compile_method_with_opt (MonoMethod *method, guint32 opt, MonoError *er
 
 		mono_class_init (method->klass);
 
-		if ((code = mono_aot_get_method (domain, method))) {
+		if ((code = mono_aot_get_method_checked (domain, method, error))) {
 			MonoVTable *vtable;
 
 			/*
@@ -2040,6 +2022,8 @@ mono_jit_compile_method_with_opt (MonoMethod *method, guint32 opt, MonoError *er
 					return NULL;
 			}
 		}
+		if (!is_ok (error))
+			return NULL;
 	}
 #endif
 
@@ -3840,6 +3824,9 @@ mini_init (const char *filename, const char *runtime_version)
 	mono_thread_attach (domain);
 #endif
 
+	if (mono_profiler_get_events () & MONO_PROFILE_STATISTICAL)
+		mono_runtime_setup_stat_profiler ();
+
 	mono_profiler_runtime_initialized ();
 
 	MONO_VES_INIT_END ();
@@ -3900,8 +3887,8 @@ register_icalls (void)
 	register_icall (mono_thread_interruption_checkpoint, "mono_thread_interruption_checkpoint", "object", FALSE);
 	register_icall (mono_thread_force_interruption_checkpoint_noraise, "mono_thread_force_interruption_checkpoint_noraise", "object", FALSE);
 #ifndef DISABLE_REMOTING
-	register_icall (mono_load_remote_field_new, "mono_load_remote_field_new", "object object ptr ptr", FALSE);
-	register_icall (mono_store_remote_field_new, "mono_store_remote_field_new", "void object ptr ptr object", FALSE);
+	register_icall (mono_load_remote_field_new_icall, "mono_load_remote_field_new_icall", "object object ptr ptr", FALSE);
+	register_icall (mono_store_remote_field_new_icall, "mono_store_remote_field_new_icall", "void object ptr ptr object", FALSE);
 #endif
 
 #if defined(__native_client__) || defined(__native_client_codegen__)
@@ -4050,7 +4037,7 @@ register_icalls (void)
 	register_icall (mono_helper_stelem_ref_check, "mono_helper_stelem_ref_check", "void object object", FALSE);
 	register_icall (ves_icall_object_new, "ves_icall_object_new", "object ptr ptr", FALSE);
 	register_icall (ves_icall_object_new_specific, "ves_icall_object_new_specific", "object ptr", FALSE);
-	register_icall (mono_array_new, "mono_array_new", "object ptr ptr int32", FALSE);
+	register_icall (ves_icall_array_new, "ves_icall_array_new", "object ptr ptr int32", FALSE);
 	register_icall (ves_icall_array_new_specific, "ves_icall_array_new_specific", "object ptr int32", FALSE);
 	register_icall (ves_icall_runtime_class_init, "ves_icall_runtime_class_init", "void ptr", FALSE);
 	register_icall (mono_ldftn, "mono_ldftn", "ptr ptr", FALSE);
@@ -4234,10 +4221,6 @@ mini_cleanup (MonoDomain *domain)
 	mono_os_mutex_destroy (&jit_mutex);
 
 	mono_code_manager_cleanup ();
-
-#ifdef USE_JUMP_TABLES
-	mono_jumptable_cleanup ();
-#endif
 }
 
 void
@@ -4363,98 +4346,3 @@ mono_personality (void)
 	/* Not used */
 	g_assert_not_reached ();
 }
-
-#ifdef USE_JUMP_TABLES
-#define DEFAULT_JUMPTABLE_CHUNK_ELEMENTS 128
-
-typedef struct MonoJumpTableChunk {
-	guint32 total;
-	guint32 active;
-	struct MonoJumpTableChunk *previous;
-	/* gpointer entries[total]; */
-} MonoJumpTableChunk;
-
-static MonoJumpTableChunk* g_jumptable;
-#define mono_jumptable_lock() mono_os_mutex_lock (&jumptable_mutex)
-#define mono_jumptable_unlock() mono_os_mutex_unlock (&jumptable_mutex)
-static mono_mutex_t jumptable_mutex;
-
-static  MonoJumpTableChunk*
-mono_create_jumptable_chunk (guint32 max_entries)
-{
-	guint32 size = sizeof (MonoJumpTableChunk) + max_entries * sizeof(gpointer);
-	MonoJumpTableChunk *chunk = (MonoJumpTableChunk*) g_new0 (guchar, size);
-	chunk->total = max_entries;
-	return chunk;
-}
-
-void
-mono_jumptable_init (void)
-{
-	if (g_jumptable == NULL) {
-		mono_os_mutex_init_recursive (&jumptable_mutex);
-		g_jumptable = mono_create_jumptable_chunk (DEFAULT_JUMPTABLE_CHUNK_ELEMENTS);
-	}
-}
-
-gpointer*
-mono_jumptable_add_entry (void)
-{
-	return mono_jumptable_add_entries (1);
-}
-
-gpointer*
-mono_jumptable_add_entries (guint32 entries)
-{
-	guint32 index;
-	gpointer *result;
-
-	mono_jumptable_init ();
-	mono_jumptable_lock ();
-	index = g_jumptable->active;
-	if (index + entries >= g_jumptable->total) {
-		/*
-		 * Grow jumptable, by adding one more chunk.
-		 * We cannot realloc jumptable, as there could be pointers
-		 * to existing jump table entries in the code, so instead
-		 * we just add one more chunk.
-		 */
-		guint32 max_entries = entries;
-		MonoJumpTableChunk *new_chunk;
-
-		if (max_entries < DEFAULT_JUMPTABLE_CHUNK_ELEMENTS)
-			max_entries = DEFAULT_JUMPTABLE_CHUNK_ELEMENTS;
-		new_chunk = mono_create_jumptable_chunk (max_entries);
-		/* Link old jumptable, so that we could free it up later. */
-		new_chunk->previous = g_jumptable;
-		g_jumptable = new_chunk;
-		index = 0;
-	}
-	g_jumptable->active = index + entries;
-	result = (gpointer*)((guchar*)g_jumptable + sizeof(MonoJumpTableChunk)) + index;
-	mono_jumptable_unlock();
-
-	return result;
-}
-
-void
-mono_jumptable_cleanup (void)
-{
-	if (g_jumptable) {
-		MonoJumpTableChunk *current = g_jumptable, *prev;
-		while (current != NULL) {
-			prev = current->previous;
-			g_free (current);
-			current = prev;
-		}
-		g_jumptable = NULL;
-		mono_os_mutex_destroy (&jumptable_mutex);
-	}
-}
-
-gpointer*
-mono_jumptable_get_entry (guint8 *code_ptr)
-{
-	return mono_arch_jumptable_entry_from_code (code_ptr);
-}
-#endif

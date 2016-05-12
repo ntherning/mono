@@ -2418,7 +2418,7 @@ MonoInst *mono_get_got_var (MonoCompile *cfg);
 void      mono_add_seq_point (MonoCompile *cfg, MonoBasicBlock *bb, MonoInst *ins, int native_offset);
 void      mono_add_var_location (MonoCompile *cfg, MonoInst *var, gboolean is_reg, int reg, int offset, int from, int to);
 MonoInst* mono_emit_jit_icall (MonoCompile *cfg, gconstpointer func, MonoInst **args);
-MonoInst* mono_emit_jit_icall_by_info (MonoCompile *cfg, MonoJitICallInfo *info, MonoInst **args);
+MonoInst* mono_emit_jit_icall_by_info (MonoCompile *cfg, int il_offset, MonoJitICallInfo *info, MonoInst **args);
 MonoInst* mono_emit_method_call (MonoCompile *cfg, MonoMethod *method, MonoInst **args, MonoInst *this_ins);
 void      mono_create_helper_signatures (void);
 
@@ -2486,6 +2486,8 @@ void      mono_aot_init                     (void);
 void      mono_aot_cleanup                  (void);
 gpointer  mono_aot_get_method               (MonoDomain *domain,
 											 MonoMethod *method);
+gpointer  mono_aot_get_method_checked       (MonoDomain *domain,
+											 MonoMethod *method, MonoError *error);
 gpointer  mono_aot_get_method_from_token    (MonoDomain *domain, MonoImage *image, guint32 token);
 gboolean  mono_aot_is_got_entry             (guint8 *code, guint8 *addr);
 guint8*   mono_aot_get_plt_entry            (guint8 *code);
@@ -2747,21 +2749,6 @@ void     mono_arch_skip_breakpoint              (MonoContext *ctx, MonoJitInfo *
 void     mono_arch_skip_single_step             (MonoContext *ctx);
 gpointer mono_arch_get_seq_point_info           (MonoDomain *domain, guint8 *code);
 void     mono_arch_init_lmf_ext                 (MonoLMFExt *ext, gpointer prev_lmf);
-#endif
-
-#ifdef USE_JUMP_TABLES
-void
-mono_jumptable_init  (void);
-gpointer*
-mono_jumptable_add_entry (void);
-gpointer*
-mono_jumptable_add_entries (guint32 entries);
-void
-mono_jumptable_cleanup  (void);
-gpointer*
-mono_arch_jumptable_entry_from_code (guint8 *code);
-gpointer*
-mono_jumptable_get_entry (guint8 *code);
 #endif
 
 gboolean
@@ -3186,7 +3173,7 @@ void mono_cross_helpers_run (void);
  * Signal handling
  */
 
-#ifdef DISABLE_HW_TRAPS
+#if defined(DISABLE_HW_TRAPS) || defined(MONO_ARCH_DISABLE_HW_TRAPS)
  // Signal handlers not available
 #define MONO_ARCH_NEED_DIV_CHECK 1
 #endif

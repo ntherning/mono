@@ -151,7 +151,9 @@ typedef enum {
 	GSHAREDVT_RET_I1 = 3,
 	GSHAREDVT_RET_U1 = 4,
 	GSHAREDVT_RET_I2 = 5,
-	GSHAREDVT_RET_U2 = 6
+	GSHAREDVT_RET_U2 = 6,
+	GSHAREDVT_RET_VFP_R4 = 7,
+	GSHAREDVT_RET_VFP_R8 = 8
 } GSharedVtRetMarshal;
 
 typedef struct {
@@ -170,6 +172,9 @@ typedef struct {
 	int calli;
 	/* Whenever this is a in or an out call */
 	int gsharedvt_in;
+	/* Whenever this call uses fp registers */
+	int have_fregs;
+	gpointer caller_cinfo, callee_cinfo;
 	/* Maps stack slots/registers in the caller to the stack slots/registers in the callee */
 	/* A negative value means a register, i.e. -1=r0, -2=r1 etc. */
 	int map [MONO_ZERO_LEN_ARRAY];
@@ -229,12 +234,15 @@ typedef struct {
 
 
 #define PARAM_REGS 4
+#define FP_PARAM_REGS 8
 #define DYN_CALL_STACK_ARGS 10
 
 typedef struct {
-	mgreg_t regs [PARAM_REGS + DYN_CALL_STACK_ARGS];
+	mgreg_t regs [PARAM_REGS + FP_PARAM_REGS];
+	double fpregs [FP_PARAM_REGS];
 	mgreg_t res, res2;
 	guint8 *ret;
+	guint32 has_fpregs;
 } DynCallArgs;
 
 void arm_patch (guchar *code, const guchar *target);
@@ -245,7 +253,7 @@ void
 mono_arm_throw_exception_by_token (guint32 type_token, mgreg_t pc, mgreg_t sp, mgreg_t *int_regs, gdouble *fp_regs);
 
 gpointer
-mono_arm_start_gsharedvt_call (GSharedVtCallInfo *info, gpointer *caller, gpointer *callee, gpointer mrgctx_reg);
+mono_arm_start_gsharedvt_call (GSharedVtCallInfo *info, gpointer *caller, gpointer *callee, gpointer mrgctx_reg, double *caller_fregs, double *callee_fregs);
 
 typedef enum {
 	MONO_ARM_FPU_NONE = 0,
@@ -354,6 +362,11 @@ typedef struct MonoCompileArch {
 #define MONO_ARCH_HAVE_TLS_GET (mono_arm_have_tls_get ())
 #define MONO_ARCH_HAVE_TLS_GET_REG 1
 
+#ifdef TARGET_WATCHOS
+#define MONO_ARCH_DISABLE_HW_TRAPS 1
+#define MONO_ARCH_HAVE_UNWIND_BACKTRACE 1
+#endif
+
 /* ARM doesn't have too many registers, so we have to use a callee saved one */
 #define MONO_ARCH_RGCTX_REG ARMREG_V5
 #define MONO_ARCH_IMT_REG MONO_ARCH_RGCTX_REG
@@ -394,14 +407,6 @@ mono_arm_patchable_b (guint8 *code, int cond);
 
 guint8*
 mono_arm_patchable_bl (guint8 *code, int cond);
-
-#ifdef USE_JUMP_TABLES
-guint8*
-mono_arm_load_jumptable_entry_addr (guint8 *code, gpointer *jte, ARMReg reg);
-
-guint8*
-mono_arm_load_jumptable_entry (guint8 *code, gpointer *jte, ARMReg reg);
-#endif
 
 gboolean
 mono_arm_is_hard_float (void);

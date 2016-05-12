@@ -10586,7 +10586,7 @@
     </type>
     <type name="ExtensibleTester`1[U]">
       <method name="Void Direct()" attrs="134">
-        <size>24</size>
+        <size>25</size>
       </method>
       <method name="Void .ctor(U)" attrs="6278">
         <size>15</size>
@@ -14348,7 +14348,7 @@
     </type>
     <type name="TestIssue.Program">
       <method name="Int32 Main()" attrs="150">
-        <size>31</size>
+        <size>32</size>
       </method>
       <method name="Void .ctor()" attrs="6278">
         <size>7</size>
@@ -14936,7 +14936,7 @@
         <size>7</size>
       </method>
       <method name="Int32 Main()" attrs="150">
-        <size>36</size>
+        <size>37</size>
       </method>
       <method name="Void .ctor()" attrs="6278">
         <size>7</size>
@@ -30747,6 +30747,56 @@
       </method>
     </type>
   </test>
+  <test name="gtest-optional-38.cs">
+    <type name="C">
+      <method name="Void .ctor()" attrs="6278">
+        <size>7</size>
+      </method>
+    </type>
+    <type name="Foo">
+      <method name="Int32 SetValue(System.String, System.String, System.String, Boolean)" attrs="134">
+        <size>10</size>
+      </method>
+      <method name="Int32 SetValue(System.String, C, C, Boolean, C, Boolean, System.String)" attrs="134">
+        <size>10</size>
+      </method>
+      <method name="Int32 SetValue(System.String, System.Object, C)" attrs="134">
+        <size>10</size>
+      </method>
+      <method name="Void .ctor()" attrs="6278">
+        <size>7</size>
+      </method>
+    </type>
+    <type name="Test">
+      <method name="Int32 Main()" attrs="145">
+        <size>50</size>
+      </method>
+      <method name="Void .ctor()" attrs="6278">
+        <size>7</size>
+      </method>
+    </type>
+  </test>
+  <test name="gtest-optional-39.cs">
+    <type name="A">
+      <method name="Int32 GetValues(System.String[], System.String)" attrs="134">
+        <size>10</size>
+      </method>
+      <method name="Int32 GetValues(System.String, System.String[])" attrs="134">
+        <size>10</size>
+      </method>
+      <method name="Void .ctor()" attrs="6278">
+        <size>7</size>
+      </method>
+    </type>
+    <type name="B">
+      <method name="Int32 Main()" attrs="150">
+        <size>37</size>
+      </method>
+      <method name="Void .ctor()" attrs="6278">
+        <size>7</size>
+      </method>
+    </type>
+  </test>
   <test name="gtest-partial-01.cs">
     <type name="B`1[U]">
       <method name="Void .ctor()" attrs="6278">
@@ -43639,7 +43689,7 @@
   <test name="test-555.cs">
     <type name="Test">
       <method name="Int32 Main()" attrs="150">
-        <size>360</size>
+        <size>361</size>
       </method>
       <method name="Void .ctor()" attrs="6278">
         <size>7</size>
@@ -52036,6 +52086,16 @@
       </method>
       <method name="Int32 Main()" attrs="145">
         <size>29</size>
+      </method>
+      <method name="Void .ctor()" attrs="6278">
+        <size>7</size>
+      </method>
+    </type>
+  </test>
+  <test name="test-934.cs">
+    <type name="X">
+      <method name="Int32 Main()" attrs="150">
+        <size>106</size>
       </method>
       <method name="Void .ctor()" attrs="6278">
         <size>7</size>
@@ -68791,7 +68851,7 @@
         <size>14</size>
       </method>
       <method name="Boolean MoveNext()" attrs="486">
-        <size>167</size>
+        <size>168</size>
       </method>
       <method name="Void Dispose()" attrs="486">
         <size>15</size>
@@ -69651,6 +69711,47 @@
       </method>
       <method name="Int32 Main()" attrs="145">
         <size>62</size>
+      </method>
+      <method name="Void .ctor()" attrs="6278">
+        <size>7</size>
+      </method>
+    </type>
+  </test>
+  <test name="test-null-operator-04.cs">
+    <type name="C1">
+      <method name="Void Foo[T](IFoo`1[T])" attrs="134">
+        <size>38</size>
+      </method>
+      <method name="Void Foo2[T](IFoo`1[T])" attrs="134">
+        <size>17</size>
+      </method>
+      <method name="Void .ctor()" attrs="6278">
+        <size>7</size>
+      </method>
+    </type>
+    <type name="C2`1[T]">
+      <method name="Void Foo()" attrs="134">
+        <size>33</size>
+      </method>
+      <method name="Void .ctor()" attrs="6278">
+        <size>7</size>
+      </method>
+    </type>
+    <type name="Program">
+      <method name="Void Test[T](System.Func`1[T])" attrs="145">
+        <size>31</size>
+      </method>
+      <method name="Void Test2[T](System.Func`1[T])" attrs="145">
+        <size>17</size>
+      </method>
+      <method name="Void Main()" attrs="145">
+        <size>102</size>
+      </method>
+      <method name="Int32 &lt;Main&gt;m__0()" attrs="145">
+        <size>9</size>
+      </method>
+      <method name="Int32 &lt;Main&gt;m__1()" attrs="145">
+        <size>9</size>
       </method>
       <method name="Void .ctor()" attrs="6278">
         <size>7</size>
