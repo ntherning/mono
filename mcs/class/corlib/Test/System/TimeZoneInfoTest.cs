@@ -42,6 +42,7 @@ namespace MonoTests.System
 		static FieldInfo localField;
 		static FieldInfo cachedDataField;
 		static object localFieldObj;
+		static readonly bool RunningOnMono = Type.GetType ("Mono.Runtime") != null;
 
 		public static string MapTimeZoneId (string id)
 		{
@@ -79,13 +80,13 @@ namespace MonoTests.System
 		public static void SetLocal (TimeZoneInfo val)
 		{
 			if (localField == null) {
-				if (Type.GetType ("Mono.Runtime") != null) {
-					localField = typeof (TimeZoneInfo).GetField ("local",
-							BindingFlags.Static | BindingFlags.GetField | BindingFlags.NonPublic);
-				} else {
-					cachedDataField = typeof (TimeZoneInfo).GetField ("s_cachedData",
-							BindingFlags.Static | BindingFlags.GetField | BindingFlags.NonPublic);
+				cachedDataField = typeof (TimeZoneInfo).GetField ("s_cachedData",
+						BindingFlags.Static | BindingFlags.GetField | BindingFlags.NonPublic);
 
+				if (RunningOnMono) {
+					localField = cachedDataField.FieldType.GetField ("_localTimeZone",
+						BindingFlags.Instance | BindingFlags.GetField | BindingFlags.NonPublic);
+				} else {
 					localField = cachedDataField.FieldType.GetField ("m_localTimeZone",
 						BindingFlags.Instance | BindingFlags.GetField | BindingFlags.NonPublic);
 				}
@@ -385,23 +386,20 @@ namespace MonoTests.System
 			[Test]
 			public void TestAthensDST_InDSTDelta ()
 			{
-				// In .NET GetUtcOffset() returns the BaseUtcOffset for times within the hour
-				// lost when DST starts but IsDaylightSavingTime() returns true.
-
 				TimeZoneInfo tzi = TimeZoneInfo.FindSystemTimeZoneById (MapTimeZoneId ("Europe/Athens"));
 
 				var date = new DateTime (2014, 3, 30 , 3, 0, 0);
-				Assert.IsTrue (tzi.IsDaylightSavingTime (date));
+				Assert.IsFalse (tzi.IsDaylightSavingTime (date));
 				Assert.AreEqual (new TimeSpan (2, 0, 0), tzi.GetUtcOffset (date));
 				Assert.IsTrue (tzi.IsDaylightSavingTime (new DateTimeOffset (date, tzi.GetUtcOffset (date))));
 
 				date = new DateTime (2014, 3, 30 , 3, 1, 0);
-				Assert.IsTrue (tzi.IsDaylightSavingTime (date));
+				Assert.IsFalse (tzi.IsDaylightSavingTime (date));
 				Assert.AreEqual (new TimeSpan (2, 0, 0), tzi.GetUtcOffset (date));
 				Assert.IsTrue (tzi.IsDaylightSavingTime (new DateTimeOffset (date, tzi.GetUtcOffset (date))));
 
 				date = new DateTime (2014, 3, 30 , 3, 59, 0);
-				Assert.IsTrue (tzi.IsDaylightSavingTime (date));
+				Assert.IsFalse (tzi.IsDaylightSavingTime (date));
 				Assert.AreEqual (new TimeSpan (2, 0, 0), tzi.GetUtcOffset (date));
 				Assert.IsTrue (tzi.IsDaylightSavingTime (new DateTimeOffset (date, tzi.GetUtcOffset (date))));
 
@@ -481,6 +479,22 @@ namespace MonoTests.System
 
 				oldLocal = TimeZoneInfo.Local;
 				TimeZoneInfoTest.SetLocal (TimeZoneInfo.Utc);
+			}
+
+			[Test]
+			public override void ConvertToTimeZone ()
+			{
+				// Overridden to disable the test in the super class. This test
+				// fails on both Mono and .NET when local TimeZoneInfo is
+				// TimeZoneInfo.Utc.
+			}
+
+			[Test]
+			public override void ConvertTime_DateTime_TimeZoneInfo_DateTimeKindMatch ()
+			{
+				// Overridden to disable the test in the super class. This test
+				// fails on both Mono and .NET when local TimeZoneInfo is
+				// TimeZoneInfo.Utc.
 			}
 
 			[TearDown]
@@ -638,7 +652,7 @@ namespace MonoTests.System
 			}
 
 			[Test]
-			public void ConvertToTimeZone ()
+			public virtual void ConvertToTimeZone ()
 			{
 				TimeZoneInfo.ConvertTime (DateTime.Now, TimeZoneInfo.FindSystemTimeZoneById (MapTimeZoneId ("Pacific/Auckland")));
 			}
@@ -651,7 +665,7 @@ namespace MonoTests.System
 			}
 
 			[Test]
-			public void ConvertTime_DateTime_TimeZoneInfo_DateTimeKindMatch ()
+			public virtual void ConvertTime_DateTime_TimeZoneInfo_DateTimeKindMatch ()
 			{
 				var sdt = new DateTime (2014, 1, 9, 23, 0, 0, DateTimeKind.Utc);
 				var ddt = TimeZoneInfo.ConvertTime (sdt, TimeZoneInfo.Utc);
@@ -665,7 +679,7 @@ namespace MonoTests.System
 
 				sdt = new DateTime (2014, 1, 9, 23, 0, 0);
 				ddt = TimeZoneInfo.ConvertTime (sdt, TimeZoneInfo.Local);
-				var expectedKind = (TimeZoneInfo.Local == TimeZoneInfo.Utc)? DateTimeKind.Utc : sdt.Kind;
+				var expectedKind = (TimeZoneInfo.Local == TimeZoneInfo.Utc)? DateTimeKind.Utc : DateTimeKind.Local;
 				Assert.AreEqual (expectedKind,  ddt.Kind, "#3.1");
 				Assert.AreEqual (DateTimeKind.Unspecified, sdt.Kind, "#3.2");
 			}
@@ -800,19 +814,19 @@ namespace MonoTests.System
 			[Test]
 			public void AmbiguousDates ()
 			{
-				Assert.IsFalse (london.IsAmbiguousTime (new DateTime (2007, 10, 28, 1, 0, 0)));
+				Assert.IsTrue (london.IsAmbiguousTime (new DateTime (2007, 10, 28, 1, 0, 0)));
 				Assert.IsTrue (london.IsAmbiguousTime (new DateTime (2007, 10, 28, 1, 0, 1)));
-				Assert.IsTrue (london.IsAmbiguousTime (new DateTime (2007, 10, 28, 2, 0, 0)));
+				Assert.IsFalse (london.IsAmbiguousTime (new DateTime (2007, 10, 28, 2, 0, 0)));
 				Assert.IsFalse (london.IsAmbiguousTime (new DateTime (2007, 10, 28, 2, 0, 1)));
 			}
 		
 			[Test]
 			public void AmbiguousUTCDates ()
 			{
-				Assert.IsFalse (london.IsAmbiguousTime (new DateTime (2007, 10, 28, 0, 0, 0, DateTimeKind.Utc)));
+				Assert.IsTrue (london.IsAmbiguousTime (new DateTime (2007, 10, 28, 0, 0, 0, DateTimeKind.Utc)));
 				Assert.IsTrue (london.IsAmbiguousTime (new DateTime (2007, 10, 28, 0, 0, 1, DateTimeKind.Utc)));
 				Assert.IsTrue (london.IsAmbiguousTime (new DateTime (2007, 10, 28, 0, 59, 59, DateTimeKind.Utc)));
-				Assert.IsFalse (london.IsAmbiguousTime (new DateTime (2007, 10, 28, 1, 0, 0, DateTimeKind.Utc)));
+				Assert.IsTrue (london.IsAmbiguousTime (new DateTime (2007, 10, 28, 1, 0, 0, DateTimeKind.Utc)));
 			}
 		
 		#if SLOW_TESTS
@@ -862,17 +876,6 @@ namespace MonoTests.System
 				var timeZones = (global::System.Collections.ObjectModel.ReadOnlyCollection<TimeZoneInfo>) method.Invoke (null, null);
 				Assert.IsTrue (timeZones.Count > 0, "GetSystemTimeZones should not return an empty collection.");
 			}
-
-#if !MOBILE
-			[Test]
-			public void WindowsRegistryTimezoneWithParentheses ()
-			{
-				var method = (MethodInfo) typeof (TimeZoneInfo).GetMember ("TrimSpecial", MemberTypes.Method, BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)[0];
-
-				var name = method.Invoke (null, new object [] { " <--->  Central Standard Time (Mexico)   ||<<>>" });
-				Assert.AreEqual (name, "Central Standard Time (Mexico)", "#1");
-			}
-#endif
 		}
 		
 		[TestFixture]
@@ -1232,7 +1235,7 @@ namespace MonoTests.System
 					TimeZoneInfo.AdjustmentRule.CreateAdjustmentRule (DateTime.MinValue, DateTime.MaxValue.Date, TimeSpan.FromHours (-1), startTransition, endTransition) });
 
 				var offset = ctz.GetUtcOffset (DateTime.MinValue);
-				Assert.AreEqual (TimeSpan.FromHours (-5), offset); // TODO: Wrong it should be -6
+				Assert.AreEqual (TimeSpan.FromHours (-6), offset);
 			}
     }
 
@@ -1301,6 +1304,9 @@ namespace MonoTests.System
 			[Test]
 			public void Bug31432 ()
 			{
+				if (!RunningOnMono)
+					Assert.Ignore ();
+
 				// Europe/Moscow from failing device
 				var base64Data = "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";
 

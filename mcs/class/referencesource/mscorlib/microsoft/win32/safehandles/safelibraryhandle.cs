@@ -26,10 +26,24 @@ namespace Microsoft.Win32 {
     sealed internal class SafeLibraryHandle : SafeHandleZeroOrMinusOneIsInvalid {
         internal SafeLibraryHandle() : base(true) {}
 
+#if MONO
+        internal SafeLibraryHandle(IntPtr handle) : base(true) { SetHandle(handle); }
+
+        [DllImport(Win32Native.KERNEL32, CharSet=System.Runtime.InteropServices.CharSet.Unicode)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        [ResourceExposure(ResourceScope.None)]
+        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
+        internal static extern bool FreeLibrary(IntPtr hModule);
+#endif
+
         [System.Security.SecurityCritical]
         override protected bool ReleaseHandle()
         {
+#if MONO
+            return FreeLibrary(handle);
+#else
             return UnsafeNativeMethods.FreeLibrary(handle);
+#endif
         }
     }
 }

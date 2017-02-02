@@ -141,7 +141,6 @@ System/TimeZone.cs
 System/TimeZoneInfo.cs
 System/TimeZoneInfo.Android.cs
 System/TimeZoneInfo.MonoTouch.cs
-System/TimeZoneInfo.Serialization.cs
 ../../build/common/MonoTODOAttribute.cs
 System/TypeIdentifier.cs
 System/TypeSpec.cs
@@ -1034,7 +1033,6 @@ ReferenceSources/Type.cs
 ../referencesource/mscorlib/system/threadattributes.cs
 ../referencesource/mscorlib/system/threadstaticattribute.cs
 ../referencesource/mscorlib/system/throwhelper.cs
-../referencesource/mscorlib/system/timezoneinfo.cs
 ../referencesource/mscorlib/system/timezonenotfoundexception.cs
 ../referencesource/mscorlib/system/type.cs
 ../referencesource/mscorlib/system/typeaccessexception.cs
@@ -1640,6 +1638,7 @@ ReferenceSources/Type.cs
 
 ../referencesource/mscorlib/microsoft/win32/safehandles/safefilehandle.cs
 ../referencesource/mscorlib/microsoft/win32/safehandles/safefindhandle.cs
+../referencesource/mscorlib/microsoft/win32/safehandles/safelibraryhandle.cs
 ../referencesource/mscorlib/microsoft/win32/safehandles/saferegistryhandle.cs
 ../referencesource/mscorlib/microsoft/win32/safehandles/safewaithandle.cs
 ../referencesource/mscorlib/microsoft/win32/safehandles/win32safehandles.cs
@@ -1659,3 +1658,15 @@ corert/SR.cs
 ../../../external/corert/src/System.Private.CoreLib/src/System/Runtime/CompilerServices/ITuple.cs
 ../../../external/corert/src/System.Private.CoreLib/src/System/Runtime/CompilerServices/TupleElementNamesAttribute.cs
 
+../../../external/corert/src/System.Private.CoreLib/src/System/TimeZoneInfo.cs
+../../../external/corert/src/System.Private.CoreLib/src/System/Globalization/DayLightTime.cs
+
+../../../external/corert/src/Common/src/System/Collections/Generic/LowLevelDictionary.cs
+../../../external/corert/src/Common/src/System/Collections/Generic/LowLevelList.cs
+../../../external/corert/src/System.Private.CoreLib/src/System/TimeZoneInfo.Win32.cs
+../../../external/corert/src/Common/src/Interop/Windows/mincore/Interop.Errors.cs
+../../../external/corert/src/Common/src/Interop/Windows/mincore/Interop.TimeZone.cs
+../../../external/corert/src/Common/src/Interop/Windows/mincore/Interop.TimeZone.Win32.cs
+../../../external/corert/src/Common/src/Interop/Windows/mincore/Interop.GetSystemDirectory.cs
+../../../external/corert/src/Common/src/Interop/Windows/mincore/Interop.DynamicLoad.cs
+../../../external/corert/src/Common/src/Interop/Windows/mincore/Interop.MUI.cs

@@ -44,6 +44,7 @@ namespace System
 {
 	partial class TimeZoneInfo
 	{
+#if !MONO
 		TimeSpan baseUtcOffset;
 		public TimeSpan BaseUtcOffset {
 			get { return baseUtcOffset; }
@@ -928,71 +929,40 @@ namespace System
 		{
 			return IsDaylightSavingTime (dateTimeOffset.DateTime);
 		}
-
+#endif // !MONO
 		internal DaylightTime GetDaylightChanges (int year)
 		{
 			DateTime start = DateTime.MinValue, end = DateTime.MinValue;
 			TimeSpan delta = new TimeSpan ();
+			AdjustmentRule first = null, last = null;
 
-			if (transitions != null) {
-				end = DateTime.MaxValue;
-				for (var i =  transitions.Count - 1; i >= 0; i--) {
-					var pair = transitions [i];
-					DateTime ttime = pair.Key;
-					TimeType ttype = pair.Value;
+			// Rule start/end dates are either very specific or very broad depending on the platform
+			//   2015-10-04..2016-04-03 - Rule for a time zone in southern hemisphere on non-Windows platforms
+			//   2016-03-27..2016-10-03 - Rule for a time zone in northern hemisphere on non-Windows platforms
+			//   0001-01-01..9999-12-31 - Rule for a time zone on Windows
 
-					if (ttime.Year > year)
-						continue;
-					if (ttime.Year < year)
-						break;
-
-					if (ttype.IsDst) {
-						// DaylightTime.Delta is relative to the current BaseUtcOffset.
-						delta =  new TimeSpan (0, 0, ttype.Offset) - BaseUtcOffset;
-						start = ttime;
-					} else {
-						end = ttime;
-					}
-				}
-
-				// DaylightTime.Start is relative to the Standard time.
-				if (!TryAddTicks (start, BaseUtcOffset.Ticks, out start))
-					start = DateTime.MinValue;
-
-				// DaylightTime.End is relative to the DST time.
-				if (!TryAddTicks (end, BaseUtcOffset.Ticks + delta.Ticks, out end))
-					end = DateTime.MinValue;
-			} else {
-				AdjustmentRule first = null, last = null;
-
-				// Rule start/end dates are either very specific or very broad depending on the platform
-				//   2015-10-04..2016-04-03 - Rule for a time zone in southern hemisphere on non-Windows platforms
-				//   2016-03-27..2016-10-03 - Rule for a time zone in northern hemisphere on non-Windows platforms
-				//   0001-01-01..9999-12-31 - Rule for a time zone on Windows
-
-				foreach (var rule in GetAdjustmentRules ()) {
-					if (rule.DateStart.Year > year || rule.DateEnd.Year < year)
-						continue;
-					if (rule.DateStart.Year <= year && (first == null || rule.DateStart.Year > first.DateStart.Year))
-						first = rule;
-					if (rule.DateEnd.Year >= year && (last == null || rule.DateEnd.Year < last.DateEnd.Year))
-						last = rule;
-				}
-
-				if (first == null || last == null)
-					return new DaylightTime (new DateTime (), new DateTime (), new TimeSpan ());
-
-				start = TransitionPoint (first.DaylightTransitionStart, year);
-				end = TransitionPoint (last.DaylightTransitionEnd, year);
-				delta = first.DaylightDelta;
+			foreach (var rule in GetAdjustmentRules ()) {
+				if (rule.DateStart.Year > year || rule.DateEnd.Year < year)
+					continue;
+				if (rule.DateStart.Year <= year && (first == null || rule.DateStart.Year > first.DateStart.Year))
+					first = rule;
+				if (rule.DateEnd.Year >= year && (last == null || rule.DateEnd.Year < last.DateEnd.Year))
+					last = rule;
 			}
+
+			if (first == null || last == null)
+				return new DaylightTime (new DateTime (), new DateTime (), new TimeSpan ());
+
+			start = TransitionPoint (first.DaylightTransitionStart, year);
+			end = TransitionPoint (last.DaylightTransitionEnd, year);
+			delta = first.DaylightDelta;
 
 			if (start == DateTime.MinValue || end == DateTime.MinValue)
 				return new DaylightTime (new DateTime (), new DateTime (), new TimeSpan ());
 
 			return new DaylightTime (start, end, delta);
 		}
-
+#if !MONO
 		public bool IsInvalidTime (DateTime dateTime)
 		{
 			if (dateTime.Kind == DateTimeKind.Utc)
@@ -1211,7 +1181,7 @@ namespace System
 
 			return false;
 		}
-
+#endif // !MONO
 		private static DateTime TransitionPoint (TransitionTime transition, int year)
 		{
 			if (transition.IsFixedDateRule)
@@ -1391,7 +1361,7 @@ namespace System
 			}
 
 			TimeZoneInfo tz;
-			if (adjustmentRules.Count == 0 && !storeTransition) {
+			if (adjustmentRules.Count == 0) {
 				if (standardDisplayName == null) {
 					var t = time_types [0];
 					standardDisplayName = t.Name;
@@ -1399,12 +1369,7 @@ namespace System
 				}
 				tz = CreateCustomTimeZone (id, baseUtcOffset, id, standardDisplayName);
 			} else {
-				tz = CreateCustomTimeZone (id, baseUtcOffset, id, standardDisplayName, daylightDisplayName, ValidateRules (adjustmentRules).ToArray ());
-			}
-
-			if (storeTransition && transitions.Count > 0) {
-				tz.transitions = transitions;
-				tz.supportsDaylightSavingTime = true;
+				tz = CreateCustomTimeZone (id, baseUtcOffset, id, standardDisplayName, daylightDisplayName, ValidateRules (adjustmentRules).ToArray (), true);
 			}
 
 			return tz;
@@ -1476,6 +1441,7 @@ namespace System
 			return date_time.AddSeconds (unix_time);
 		}
 
+#if !MONO
 #region reference sources
 		// Shortcut for TimeZoneInfo.Local.GetUtcOffset
 		internal static TimeSpan GetLocalUtcOffset(DateTime dateTime, TimeZoneInfoOptions flags)
@@ -1504,6 +1470,7 @@ namespace System
 			return zone.GetUtcOffset (time, out isDaylightSavings);
 		}
 #endregion
+#endif // !MONO
 	}
 
 	class TimeType {
