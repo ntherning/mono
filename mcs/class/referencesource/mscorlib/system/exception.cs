@@ -248,6 +248,16 @@ namespace System {
 
             return false;
         }
+#else
+        [FriendAccessAllowed]
+        internal void AddExceptionDataForRestrictedErrorInfo(
+            string restrictedError, 
+            string restrictedErrorReference, 
+            string restrictedCapabilitySid,
+            object restrictedErrorObject,
+            bool hasrestrictedLanguageErrorObject = false)
+        {
+        }
 #endif // FEATURE_COMINTEROP
 
         private string GetClassName()

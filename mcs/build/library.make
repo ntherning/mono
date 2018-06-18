@@ -403,3 +403,7 @@ endif
 update-corefx-sr: $(RESX_RESOURCE_STRING) $(XTEST_RESX_RESOURCE_STRING)
 	make SR_OUTPUT=corefx/SR.cs RESX_STRINGS="$(RESX_RESOURCE_STRING)" RESX_EXTRA_ARGUMENTS="$(RESX_EXTRA_ARGUMENTS)" update-corefx-sr-generic \
 	&& make SR_OUTPUT=corefx/SR.tests.cs RESX_STRINGS=$(XTEST_RESX_RESOURCE_STRING) update-corefx-sr-generic
+
+update-corert-sr: $(RESX_RESOURCE_STRING) $(XTEST_RESX_RESOURCE_STRING)
+	make SR_OUTPUT=corert/SR.cs RESX_STRINGS="$(RESX_RESOURCE_STRING)" RESX_EXTRA_ARGUMENTS="$(RESX_EXTRA_ARGUMENTS)" update-corefx-sr-generic \
+	&& make SR_OUTPUT=corert/SR.tests.cs RESX_STRINGS=$(XTEST_RESX_RESOURCE_STRING) update-corefx-sr-generic

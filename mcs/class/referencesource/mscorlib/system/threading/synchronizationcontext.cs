@@ -43,7 +43,7 @@ namespace System.Threading
     };
 #endif
 
-#if FEATURE_COMINTEROP && FEATURE_APPX
+#if FEATURE_COMINTEROP && FEATURE_APPX || MONO
     //
     // This is implemented in System.Runtime.WindowsRuntime, allowing us to ask that assembly for a WinRT-specific SyncCtx.
     // I'd like this to be an interface, or at least an abstract class - but neither seems to play nice with FriendAccessAllowed.

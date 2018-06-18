@@ -1,0 +1,217 @@
+diff --git a/src/System.Private.Interop/src/Shared/ComCallableObject.cs b/src/System.Private.Interop/src/Shared/ComCallableObject.cs
+index 7f5ef41..a06c80b 100644
+--- a/src/System.Private.Interop/src/Shared/ComCallableObject.cs
++++ b/src/System.Private.Interop/src/Shared/ComCallableObject.cs
+@@ -103,7 +103,6 @@ namespace System.Runtime.InteropServices
+         internal static __interface_ccw* Allocate(ComCallableObject managedCCW, RuntimeTypeHandle typeHandle)
+         {
+             __interface_ccw* pCcw = (__interface_ccw*)McgComHelpers.CachedAlloc(sizeof(__interface_ccw), ref s_cached_interface_ccw);
+-
+             IntPtr vt = typeHandle.GetCcwVtable();
+ 
+ #if !CORECLR && ENABLE_WINRT
+diff --git a/src/System.Private.Interop/src/Shared/McgComHelpers.cs b/src/System.Private.Interop/src/Shared/McgComHelpers.cs
+index 7812320..5bcb88a 100644
+--- a/src/System.Private.Interop/src/Shared/McgComHelpers.cs
++++ b/src/System.Private.Interop/src/Shared/McgComHelpers.cs
+@@ -35,7 +35,7 @@ namespace System.Runtime.InteropServices
+         /// </summary>
+         internal static string GetRuntimeClassName(Object obj)
+         {
+-#if  ENABLE_WINRT
++#if  ENABLE_MIN_WINRT
+             System.IntPtr pWinRTItf = default(IntPtr);
+ 
+             try
+@@ -60,7 +60,7 @@ namespace System.Runtime.InteropServices
+         /// </summary>
+         internal static string GetRuntimeClassName(IntPtr pWinRTItf)
+         {
+-#if  ENABLE_WINRT
++#if  ENABLE_MIN_WINRT
+             void* unsafe_hstring = null;
+ 
+             try
+diff --git a/src/System.Private.Interop/src/Shared/McgIntrinsics.cs b/src/System.Private.Interop/src/Shared/McgIntrinsics.cs
+index cf87bea..a314b0e 100644
+--- a/src/System.Private.Interop/src/Shared/McgIntrinsics.cs
++++ b/src/System.Private.Interop/src/Shared/McgIntrinsics.cs
+@@ -492,7 +492,7 @@ namespace System.Runtime.InteropServices
+             return default(T);
+         }
+ 
+-#if ENABLE_WINRT
++#if ENABLE_MIN_WINRT
+         // For SharedCCW_IVector/SharedCCW_IVectorView
+         internal static T Call<T>(IntPtr pfn, object list, Toolbox.IList_Oper oper, int index, ref object item)
+         {
+@@ -628,7 +628,7 @@ namespace System.Runtime.InteropServices
+ #endif        
+     }
+ 
+-#if !CORECLR && ENABLE_WINRT
++//#if !CORECLR && ENABLE_WINRT
+     [McgIntrinsics]
+     internal class WinRTAddrOfIntrinsics
+     {
+@@ -636,7 +636,7 @@ namespace System.Runtime.InteropServices
+         internal delegate int AddrOfGetIndexedProperty(System.IntPtr pComThis, HSTRING unsafe_name, TypeName unsafe_type, IntPtr __IntPtr__unsafe_customProperty);
+         internal delegate int AddrOfTarget19(IntPtr p0, IntPtr p1, int p2);
+     }
+-#endif // !CORECLR && ENABLE_WINRT
++//#endif // !CORECLR && ENABLE_WINRT
+ 
+     public delegate IntPtr AddrOfGetCCWVtable();
+     public delegate int AddrOfRelease(IntPtr pComThis);
+diff --git a/src/System.Private.Interop/src/Shared/McgMarshal.cs b/src/System.Private.Interop/src/Shared/McgMarshal.cs
+index 4e937b7..a664230 100644
+--- a/src/System.Private.Interop/src/Shared/McgMarshal.cs
++++ b/src/System.Private.Interop/src/Shared/McgMarshal.cs
+@@ -351,7 +351,7 @@ namespace System.Runtime.InteropServices
+         }
+ #endif
+ 
+-#if ENABLE_WINRT
++#if ENABLE_MIN_WINRT
+        
+         [MethodImplAttribute(MethodImplOptions.NoInlining)]
+         public static unsafe HSTRING StringToHString(string sourceString)
+@@ -722,6 +722,15 @@ namespace System.Runtime.InteropServices
+         }
+ 
+         [MethodImpl(MethodImplOptions.NoInlining)]
++        public static IntPtr DelegateToComInterface(Delegate del, RuntimeTypeHandle typeHnd, IntPtr stubFunctionAddr)
++        {
++            if (del == null)
++                return IntPtr.Zero;
++            McgMarshal.DelegateTargetMethodEquals(del, stubFunctionAddr);
++            return McgMarshal.ObjectToComInterface(!McgMarshal.DelegateTargetMethodEquals(del, stubFunctionAddr) ? (object) del : del.Target, typeHnd);
++        }
++
++        [MethodImpl(MethodImplOptions.NoInlining)]
+         public static IntPtr DelegateToComInterface(Delegate del, RuntimeTypeHandle typeHnd)
+         {
+             if (del == null)
+@@ -745,6 +754,15 @@ namespace System.Runtime.InteropServices
+         }
+ 
+         [MethodImpl(MethodImplOptions.NoInlining)]
++        public static Delegate ComInterfaceToDelegate(IntPtr pComItf, RuntimeTypeHandle typeHnd, IntPtr stubFunctionAddr)
++        {
++            if (pComItf == default(IntPtr))
++                return null;
++            object obj = McgMarshal.ComInterfaceToObject(pComItf, typeHnd, new RuntimeTypeHandle());
++            return obj as Delegate ?? InteropExtensions.CreateDelegate(typeHnd, stubFunctionAddr, obj, true, false, false);
++        }
++
++        [MethodImpl(MethodImplOptions.NoInlining)]
+         public static Delegate ComInterfaceToDelegate(IntPtr pComItf, RuntimeTypeHandle typeHnd)
+         {
+             if (pComItf == default(IntPtr))
+@@ -974,6 +992,12 @@ namespace System.Runtime.InteropServices
+         }
+ 
+         [MethodImpl(MethodImplOptions.NoInlining)]
++        public static void ThrowFailed(int hr, System.RuntimeTypeHandle typeHnd)
++        {
++            ThrowOnExternalCallFailed(hr, typeHnd);
++        }
++
++        [MethodImpl(MethodImplOptions.NoInlining)]
+         public static void ThrowOnExternalCallFailed(int hr, System.RuntimeTypeHandle typeHnd)
+         {
+             bool isWinRTScenario
+diff --git a/src/System.Private.Interop/src/Shared/McgModule.cs b/src/System.Private.Interop/src/Shared/McgModule.cs
+index 3c41f3f..de80541 100644
+--- a/src/System.Private.Interop/src/Shared/McgModule.cs
++++ b/src/System.Private.Interop/src/Shared/McgModule.cs
+@@ -72,6 +72,30 @@ namespace System.Runtime.InteropServices
+ 
+         public static readonly RuntimeTypeHandle s_DependencyReductionTypeRemovedTypeHandle =
+             typeof(DependencyReductionTypeRemoved).TypeHandle;
++        public unsafe McgModule(
++            int mcgDataModulePriority,
++            McgInterfaceData[] interfaceData,
++            CCWTemplateData[] ccwTemplateData,
++            FixupRuntimeTypeHandle[] supportedInterfaceList,
++            McgClassData[] classData,
++            McgBoxingData[] boxingData,
++            McgAdditionalClassData[] additionalClassData,
++            McgCollectionData[] collectionData,
++            McgPInvokeDelegateData[] pinvokeDelegateData,
++            McgCCWFactoryInfoEntry[] ccwFactories,
++            McgStructMarshalData[] structMarshalData,
++            McgUnsafeStructFieldOffsetData[] unsafeStructFieldOffsetData,
++            McgGenericArgumentMarshalInfo[] genericArgumentMarshalInfo,
++            McgHashcodeVerifyEntry[] hashcodeVerifyData,
++            byte[] interfaceTypeInfo_Hashtable,
++            byte[] ccwTemplateData_Hashtable,
++            byte[] classData_Hashtable,
++            byte[] collectionData_Hashtable,
++            byte[] boxingData_Hashtable) : this(mcgDataModulePriority, interfaceData, 
++                ccwTemplateData, supportedInterfaceList, classData, boxingData, additionalClassData, collectionData, pinvokeDelegateData,
++                ccwFactories, structMarshalData, unsafeStructFieldOffsetData, genericArgumentMarshalInfo, hashcodeVerifyData)
++        {
++        }
+ 
+         /// <summary>
+         /// Construct McgModule
+diff --git a/src/System.Private.Interop/src/Shared/McgModuleManager.cs b/src/System.Private.Interop/src/Shared/McgModuleManager.cs
+index 4cea22a..1cb7ddf 100644
+--- a/src/System.Private.Interop/src/Shared/McgModuleManager.cs
++++ b/src/System.Private.Interop/src/Shared/McgModuleManager.cs
+@@ -53,6 +53,12 @@ namespace System.Runtime.InteropServices
+         private static System.Collections.Generic.Internal.Dictionary<RuntimeTypeHandle, int> s_runtimeTypeHandleToCollectionIndexMap;
+         private static System.Collections.Generic.Internal.Dictionary<RuntimeTypeHandle, int> s_runtimeTypeHandleToBoxingIndexMap;
+ 
++#if MONO
++        static McgModuleManager() {
++            Initialize();
++        }
++#endif
++
+         /// <summary>
+         /// Eager initialization code called from LibraryInitializer.
+         /// </summary>
+@@ -84,6 +90,9 @@ namespace System.Runtime.InteropServices
+             }
+ 
+             Add(module);
++#if MONO
++            LateInitialize();
++#endif
+         }
+ 
+         private static void Add(McgModule module)
+diff --git a/src/System.Private.Interop/src/Shared/StandardInterfaces.cs b/src/System.Private.Interop/src/Shared/StandardInterfaces.cs
+index e623091..7f1ce24 100644
+--- a/src/System.Private.Interop/src/Shared/StandardInterfaces.cs
++++ b/src/System.Private.Interop/src/Shared/StandardInterfaces.cs
+@@ -194,6 +194,9 @@ namespace System.Runtime.InteropServices
+ 
+         static __vtable_IUnknown()
+         {
++#if MONO
++            Initialize();
++#endif
+             ComCallableObject.InitRefCountedHandleCallback();
+         }
+ 
+@@ -1578,7 +1581,7 @@ namespace System.Runtime.InteropServices
+ 
+         static unsafe int GetIMarshal(void **ppIMarshal)
+         {
+-#if ENABLE_WINRT
++#if ENABLE_MIN_WINRT
+             void *pUnk = null;
+             int hr = ExternalInterop.CoCreateFreeThreadedMarshaler(null, (void **)&pUnk);
+             if (hr < 0) return hr;
+@@ -1800,7 +1803,7 @@ namespace System.Runtime.InteropServices
+         /// <returns>The IStream*</returns>
+         internal static unsafe IntPtr CreateMemStm(ulong lSize)
+         {
+-#if ENABLE_WINRT
++#if ENABLE_MIN_WINRT
+             __com_IStream* pIStream = (__com_IStream*)PInvokeMarshal.CoTaskMemAlloc(new UIntPtr((uint)sizeof(__com_IStream)));
+             pIStream->pVtable = (__vtable_IStream*)__vtable_IStream.GetVtable();
+             pIStream->m_cbCurrent = 0;

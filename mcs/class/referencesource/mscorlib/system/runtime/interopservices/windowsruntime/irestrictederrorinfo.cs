@@ -10,7 +10,7 @@ using System;
 
 namespace System.Runtime.InteropServices.WindowsRuntime
 {
-#if FEATURE_CORECLR
+#if FEATURE_CORECLR || MONO
     [System.Runtime.CompilerServices.FriendAccessAllowed]
 #endif
     [ComImport]

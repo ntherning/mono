@@ -141,7 +141,10 @@ monotouch_tv_runtime_dirs := $(monotouch_runtime_dirs)
 winaot_dirs := \
 	$(mobile_common_dirs)	\
 	System.Drawing			\
-	$(pcl_facade_dirs)
+	System.Private.CompilerServices.ICastable \
+	System.Private.Interop	\
+	$(pcl_facade_dirs) \
+	System.Runtime.WindowsRuntime
 
 unreal_dirs := \
 	$(mobile_common_dirs)	\
@@ -285,6 +288,12 @@ net_4_x_dirs := \
 	System.Web.Http \
 	System.Web.Http.SelfHost \
 	System.Web.Http.WebHost
+ifeq ($(HOST_PLATFORM), win32)
+net_4_x_dirs := \
+	$(net_4_x_dirs) \
+	System.Private.CompilerServices.ICastable \
+	System.Private.Interop
+endif
 
 # These are the subdirs which depends on libs in net_4_x_dirs
 # or have proper dependencies between each other
@@ -345,6 +354,11 @@ net_4_x_parallel_dirs := \
 	System.Runtime.CompilerServices.Unsafe \
 	legacy/Mono.Cecil \
 	$(pcl_facade_dirs)
+ifeq ($(HOST_PLATFORM), win32)
+net_4_x_parallel_dirs := \
+	$(net_4_x_parallel_dirs) \
+	System.Runtime.WindowsRuntime
+endif
 
 xbuild_2_0_dirs := \
 	Microsoft.Build.Framework	\

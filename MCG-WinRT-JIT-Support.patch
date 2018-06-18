@@ -1,0 +1,2280 @@
+diff --git a/mono/cil/opcode.def b/mono/cil/opcode.def
+index 91e8924..7f03afa 100644
+--- a/mono/cil/opcode.def
++++ b/mono/cil/opcode.def
+@@ -1,343 +1,344 @@
+-/* GENERATED FILE, DO NOT EDIT */
+-OPDEF(CEE_NOP, "nop", Pop0, Push0, InlineNone, X, 1, 0xFF, 0x00, NEXT)
+-OPDEF(CEE_BREAK, "break", Pop0, Push0, InlineNone, X, 1, 0xFF, 0x01, ERROR)
+-OPDEF(CEE_LDARG_0, "ldarg.0", Pop0, Push1, InlineNone, X, 1, 0xFF, 0x02, NEXT)
+-OPDEF(CEE_LDARG_1, "ldarg.1", Pop0, Push1, InlineNone, X, 1, 0xFF, 0x03, NEXT)
+-OPDEF(CEE_LDARG_2, "ldarg.2", Pop0, Push1, InlineNone, X, 1, 0xFF, 0x04, NEXT)
+-OPDEF(CEE_LDARG_3, "ldarg.3", Pop0, Push1, InlineNone, X, 1, 0xFF, 0x05, NEXT)
+-OPDEF(CEE_LDLOC_0, "ldloc.0", Pop0, Push1, InlineNone, X, 1, 0xFF, 0x06, NEXT)
+-OPDEF(CEE_LDLOC_1, "ldloc.1", Pop0, Push1, InlineNone, X, 1, 0xFF, 0x07, NEXT)
+-OPDEF(CEE_LDLOC_2, "ldloc.2", Pop0, Push1, InlineNone, X, 1, 0xFF, 0x08, NEXT)
+-OPDEF(CEE_LDLOC_3, "ldloc.3", Pop0, Push1, InlineNone, X, 1, 0xFF, 0x09, NEXT)
+-OPDEF(CEE_STLOC_0, "stloc.0", Pop1, Push0, InlineNone, X, 1, 0xFF, 0x0A, NEXT)
+-OPDEF(CEE_STLOC_1, "stloc.1", Pop1, Push0, InlineNone, X, 1, 0xFF, 0x0B, NEXT)
+-OPDEF(CEE_STLOC_2, "stloc.2", Pop1, Push0, InlineNone, X, 1, 0xFF, 0x0C, NEXT)
+-OPDEF(CEE_STLOC_3, "stloc.3", Pop1, Push0, InlineNone, X, 1, 0xFF, 0x0D, NEXT)
+-OPDEF(CEE_LDARG_S, "ldarg.s", Pop0, Push1, ShortInlineVar, X, 1, 0xFF, 0x0E, NEXT)
+-OPDEF(CEE_LDARGA_S, "ldarga.s", Pop0, PushI, ShortInlineVar, X, 1, 0xFF, 0x0F, NEXT)
+-OPDEF(CEE_STARG_S, "starg.s", Pop1, Push0, ShortInlineVar, X, 1, 0xFF, 0x10, NEXT)
+-OPDEF(CEE_LDLOC_S, "ldloc.s", Pop0, Push1, ShortInlineVar, X, 1, 0xFF, 0x11, NEXT)
+-OPDEF(CEE_LDLOCA_S, "ldloca.s", Pop0, PushI, ShortInlineVar, X, 1, 0xFF, 0x12, NEXT)
+-OPDEF(CEE_STLOC_S, "stloc.s", Pop1, Push0, ShortInlineVar, X, 1, 0xFF, 0x13, NEXT)
+-OPDEF(CEE_LDNULL, "ldnull", Pop0, PushRef, InlineNone, X, 1, 0xFF, 0x14, NEXT)
+-OPDEF(CEE_LDC_I4_M1, "ldc.i4.m1", Pop0, PushI, InlineNone, X, 1, 0xFF, 0x15, NEXT)
+-OPDEF(CEE_LDC_I4_0, "ldc.i4.0", Pop0, PushI, InlineNone, X, 1, 0xFF, 0x16, NEXT)
+-OPDEF(CEE_LDC_I4_1, "ldc.i4.1", Pop0, PushI, InlineNone, X, 1, 0xFF, 0x17, NEXT)
+-OPDEF(CEE_LDC_I4_2, "ldc.i4.2", Pop0, PushI, InlineNone, X, 1, 0xFF, 0x18, NEXT)
+-OPDEF(CEE_LDC_I4_3, "ldc.i4.3", Pop0, PushI, InlineNone, X, 1, 0xFF, 0x19, NEXT)
+-OPDEF(CEE_LDC_I4_4, "ldc.i4.4", Pop0, PushI, InlineNone, X, 1, 0xFF, 0x1A, NEXT)
+-OPDEF(CEE_LDC_I4_5, "ldc.i4.5", Pop0, PushI, InlineNone, X, 1, 0xFF, 0x1B, NEXT)
+-OPDEF(CEE_LDC_I4_6, "ldc.i4.6", Pop0, PushI, InlineNone, X, 1, 0xFF, 0x1C, NEXT)
+-OPDEF(CEE_LDC_I4_7, "ldc.i4.7", Pop0, PushI, InlineNone, X, 1, 0xFF, 0x1D, NEXT)
+-OPDEF(CEE_LDC_I4_8, "ldc.i4.8", Pop0, PushI, InlineNone, X, 1, 0xFF, 0x1E, NEXT)
+-OPDEF(CEE_LDC_I4_S, "ldc.i4.s", Pop0, PushI, ShortInlineI, X, 1, 0xFF, 0x1F, NEXT)
+-OPDEF(CEE_LDC_I4, "ldc.i4", Pop0, PushI, InlineI, X, 1, 0xFF, 0x20, NEXT)
+-OPDEF(CEE_LDC_I8, "ldc.i8", Pop0, PushI8, InlineI8, X, 1, 0xFF, 0x21, NEXT)
+-OPDEF(CEE_LDC_R4, "ldc.r4", Pop0, PushR4, ShortInlineR, X, 1, 0xFF, 0x22, NEXT)
+-OPDEF(CEE_LDC_R8, "ldc.r8", Pop0, PushR8, InlineR, X, 1, 0xFF, 0x23, NEXT)
+-OPDEF(CEE_UNUSED99, "unused99", Pop0, Push0, InlineNone, X, 1, 0xFF, 0x24, NEXT)
+-OPDEF(CEE_DUP, "dup", Pop1, Push1+Push1, InlineNone, X, 1, 0xFF, 0x25, NEXT)
+-OPDEF(CEE_POP, "pop", Pop1, Push0, InlineNone, X, 1, 0xFF, 0x26, NEXT)
+-OPDEF(CEE_JMP, "jmp", Pop0, Push0, InlineMethod, X, 1, 0xFF, 0x27, CALL)
+-OPDEF(CEE_CALL, "call", VarPop, VarPush, InlineMethod, X, 1, 0xFF, 0x28, CALL)
+-OPDEF(CEE_CALLI, "calli", VarPop, VarPush, InlineSig, X, 1, 0xFF, 0x29, CALL)
+-OPDEF(CEE_RET, "ret", VarPop, Push0, InlineNone, X, 1, 0xFF, 0x2A, RETURN)
+-OPDEF(CEE_BR_S, "br.s", Pop0, Push0, ShortInlineBrTarget, X, 1, 0xFF, 0x2B, BRANCH)
+-OPDEF(CEE_BRFALSE_S, "brfalse.s", PopI, Push0, ShortInlineBrTarget, X, 1, 0xFF, 0x2C, COND_BRANCH)
+-OPDEF(CEE_BRTRUE_S, "brtrue.s", PopI, Push0, ShortInlineBrTarget, X, 1, 0xFF, 0x2D, COND_BRANCH)
+-OPDEF(CEE_BEQ_S, "beq.s", Pop1+Pop1, Push0, ShortInlineBrTarget, X, 1, 0xFF, 0x2E, COND_BRANCH)
+-OPDEF(CEE_BGE_S, "bge.s", Pop1+Pop1, Push0, ShortInlineBrTarget, X, 1, 0xFF, 0x2F, COND_BRANCH)
+-OPDEF(CEE_BGT_S, "bgt.s", Pop1+Pop1, Push0, ShortInlineBrTarget, X, 1, 0xFF, 0x30, COND_BRANCH)
+-OPDEF(CEE_BLE_S, "ble.s", Pop1+Pop1, Push0, ShortInlineBrTarget, X, 1, 0xFF, 0x31, COND_BRANCH)
+-OPDEF(CEE_BLT_S, "blt.s", Pop1+Pop1, Push0, ShortInlineBrTarget, X, 1, 0xFF, 0x32, COND_BRANCH)
+-OPDEF(CEE_BNE_UN_S, "bne.un.s", Pop1+Pop1, Push0, ShortInlineBrTarget, X, 1, 0xFF, 0x33, COND_BRANCH)
+-OPDEF(CEE_BGE_UN_S, "bge.un.s", Pop1+Pop1, Push0, ShortInlineBrTarget, X, 1, 0xFF, 0x34, COND_BRANCH)
+-OPDEF(CEE_BGT_UN_S, "bgt.un.s", Pop1+Pop1, Push0, ShortInlineBrTarget, X, 1, 0xFF, 0x35, COND_BRANCH)
+-OPDEF(CEE_BLE_UN_S, "ble.un.s", Pop1+Pop1, Push0, ShortInlineBrTarget, X, 1, 0xFF, 0x36, COND_BRANCH)
+-OPDEF(CEE_BLT_UN_S, "blt.un.s", Pop1+Pop1, Push0, ShortInlineBrTarget, X, 1, 0xFF, 0x37, COND_BRANCH)
+-OPDEF(CEE_BR, "br", Pop0, Push0, InlineBrTarget, X, 1, 0xFF, 0x38, BRANCH)
+-OPDEF(CEE_BRFALSE, "brfalse", PopI, Push0, InlineBrTarget, X, 1, 0xFF, 0x39, COND_BRANCH)
+-OPDEF(CEE_BRTRUE, "brtrue", PopI, Push0, InlineBrTarget, X, 1, 0xFF, 0x3A, COND_BRANCH)
+-OPDEF(CEE_BEQ, "beq", Pop1+Pop1, Push0, InlineBrTarget, X, 1, 0xFF, 0x3B, COND_BRANCH)
+-OPDEF(CEE_BGE, "bge", Pop1+Pop1, Push0, InlineBrTarget, X, 1, 0xFF, 0x3C, COND_BRANCH)
+-OPDEF(CEE_BGT, "bgt", Pop1+Pop1, Push0, InlineBrTarget, X, 1, 0xFF, 0x3D, COND_BRANCH)
+-OPDEF(CEE_BLE, "ble", Pop1+Pop1, Push0, InlineBrTarget, X, 1, 0xFF, 0x3E, COND_BRANCH)
+-OPDEF(CEE_BLT, "blt", Pop1+Pop1, Push0, InlineBrTarget, X, 1, 0xFF, 0x3F, COND_BRANCH)
+-OPDEF(CEE_BNE_UN, "bne.un", Pop1+Pop1, Push0, InlineBrTarget, X, 1, 0xFF, 0x40, COND_BRANCH)
+-OPDEF(CEE_BGE_UN, "bge.un", Pop1+Pop1, Push0, InlineBrTarget, X, 1, 0xFF, 0x41, COND_BRANCH)
+-OPDEF(CEE_BGT_UN, "bgt.un", Pop1+Pop1, Push0, InlineBrTarget, X, 1, 0xFF, 0x42, COND_BRANCH)
+-OPDEF(CEE_BLE_UN, "ble.un", Pop1+Pop1, Push0, InlineBrTarget, X, 1, 0xFF, 0x43, COND_BRANCH)
+-OPDEF(CEE_BLT_UN, "blt.un", Pop1+Pop1, Push0, InlineBrTarget, X, 1, 0xFF, 0x44, COND_BRANCH)
+-OPDEF(CEE_SWITCH, "switch", PopI, Push0, InlineSwitch, X, 1, 0xFF, 0x45, COND_BRANCH)
+-OPDEF(CEE_LDIND_I1, "ldind.i1", PopI, PushI, InlineNone, X, 1, 0xFF, 0x46, NEXT)
+-OPDEF(CEE_LDIND_U1, "ldind.u1", PopI, PushI, InlineNone, X, 1, 0xFF, 0x47, NEXT)
+-OPDEF(CEE_LDIND_I2, "ldind.i2", PopI, PushI, InlineNone, X, 1, 0xFF, 0x48, NEXT)
+-OPDEF(CEE_LDIND_U2, "ldind.u2", PopI, PushI, InlineNone, X, 1, 0xFF, 0x49, NEXT)
+-OPDEF(CEE_LDIND_I4, "ldind.i4", PopI, PushI, InlineNone, X, 1, 0xFF, 0x4A, NEXT)
+-OPDEF(CEE_LDIND_U4, "ldind.u4", PopI, PushI, InlineNone, X, 1, 0xFF, 0x4B, NEXT)
+-OPDEF(CEE_LDIND_I8, "ldind.i8", PopI, PushI8, InlineNone, X, 1, 0xFF, 0x4C, NEXT)
+-OPDEF(CEE_LDIND_I, "ldind.i", PopI, PushI, InlineNone, X, 1, 0xFF, 0x4D, NEXT)
+-OPDEF(CEE_LDIND_R4, "ldind.r4", PopI, PushR4, InlineNone, X, 1, 0xFF, 0x4E, NEXT)
+-OPDEF(CEE_LDIND_R8, "ldind.r8", PopI, PushR8, InlineNone, X, 1, 0xFF, 0x4F, NEXT)
+-OPDEF(CEE_LDIND_REF, "ldind.ref", PopI, PushRef, InlineNone, X, 1, 0xFF, 0x50, NEXT)
+-OPDEF(CEE_STIND_REF, "stind.ref", PopI+PopI, Push0, InlineNone, X, 1, 0xFF, 0x51, NEXT)
+-OPDEF(CEE_STIND_I1, "stind.i1", PopI+PopI, Push0, InlineNone, X, 1, 0xFF, 0x52, NEXT)
+-OPDEF(CEE_STIND_I2, "stind.i2", PopI+PopI, Push0, InlineNone, X, 1, 0xFF, 0x53, NEXT)
+-OPDEF(CEE_STIND_I4, "stind.i4", PopI+PopI, Push0, InlineNone, X, 1, 0xFF, 0x54, NEXT)
+-OPDEF(CEE_STIND_I8, "stind.i8", PopI+PopI8, Push0, InlineNone, X, 1, 0xFF, 0x55, NEXT)
+-OPDEF(CEE_STIND_R4, "stind.r4", PopI+PopR4, Push0, InlineNone, X, 1, 0xFF, 0x56, NEXT)
+-OPDEF(CEE_STIND_R8, "stind.r8", PopI+PopR8, Push0, InlineNone, X, 1, 0xFF, 0x57, NEXT)
+-OPDEF(CEE_ADD, "add", Pop1+Pop1, Push1, InlineNone, X, 1, 0xFF, 0x58, NEXT)
+-OPDEF(CEE_SUB, "sub", Pop1+Pop1, Push1, InlineNone, X, 1, 0xFF, 0x59, NEXT)
+-OPDEF(CEE_MUL, "mul", Pop1+Pop1, Push1, InlineNone, X, 1, 0xFF, 0x5A, NEXT)
+-OPDEF(CEE_DIV, "div", Pop1+Pop1, Push1, InlineNone, X, 1, 0xFF, 0x5B, NEXT)
+-OPDEF(CEE_DIV_UN, "div.un", Pop1+Pop1, Push1, InlineNone, X, 1, 0xFF, 0x5C, NEXT)
+-OPDEF(CEE_REM, "rem", Pop1+Pop1, Push1, InlineNone, X, 1, 0xFF, 0x5D, NEXT)
+-OPDEF(CEE_REM_UN, "rem.un", Pop1+Pop1, Push1, InlineNone, X, 1, 0xFF, 0x5E, NEXT)
+-OPDEF(CEE_AND, "and", Pop1+Pop1, Push1, InlineNone, X, 1, 0xFF, 0x5F, NEXT)
+-OPDEF(CEE_OR, "or", Pop1+Pop1, Push1, InlineNone, X, 1, 0xFF, 0x60, NEXT)
+-OPDEF(CEE_XOR, "xor", Pop1+Pop1, Push1, InlineNone, X, 1, 0xFF, 0x61, NEXT)
+-OPDEF(CEE_SHL, "shl", Pop1+Pop1, Push1, InlineNone, X, 1, 0xFF, 0x62, NEXT)
+-OPDEF(CEE_SHR, "shr", Pop1+Pop1, Push1, InlineNone, X, 1, 0xFF, 0x63, NEXT)
+-OPDEF(CEE_SHR_UN, "shr.un", Pop1+Pop1, Push1, InlineNone, X, 1, 0xFF, 0x64, NEXT)
+-OPDEF(CEE_NEG, "neg", Pop1, Push1, InlineNone, X, 1, 0xFF, 0x65, NEXT)
+-OPDEF(CEE_NOT, "not", Pop1, Push1, InlineNone, X, 1, 0xFF, 0x66, NEXT)
+-OPDEF(CEE_CONV_I1, "conv.i1", Pop1, PushI, InlineNone, X, 1, 0xFF, 0x67, NEXT)
+-OPDEF(CEE_CONV_I2, "conv.i2", Pop1, PushI, InlineNone, X, 1, 0xFF, 0x68, NEXT)
+-OPDEF(CEE_CONV_I4, "conv.i4", Pop1, PushI, InlineNone, X, 1, 0xFF, 0x69, NEXT)
+-OPDEF(CEE_CONV_I8, "conv.i8", Pop1, PushI8, InlineNone, X, 1, 0xFF, 0x6A, NEXT)
+-OPDEF(CEE_CONV_R4, "conv.r4", Pop1, PushR4, InlineNone, X, 1, 0xFF, 0x6B, NEXT)
+-OPDEF(CEE_CONV_R8, "conv.r8", Pop1, PushR8, InlineNone, X, 1, 0xFF, 0x6C, NEXT)
+-OPDEF(CEE_CONV_U4, "conv.u4", Pop1, PushI, InlineNone, X, 1, 0xFF, 0x6D, NEXT)
+-OPDEF(CEE_CONV_U8, "conv.u8", Pop1, PushI8, InlineNone, X, 1, 0xFF, 0x6E, NEXT)
+-OPDEF(CEE_CALLVIRT, "callvirt", VarPop, VarPush, InlineMethod, X, 1, 0xFF, 0x6F, CALL)
+-OPDEF(CEE_CPOBJ, "cpobj", PopI+PopI, Push0, InlineType, X, 1, 0xFF, 0x70, NEXT)
+-OPDEF(CEE_LDOBJ, "ldobj", PopI, Push1, InlineType, X, 1, 0xFF, 0x71, NEXT)
+-OPDEF(CEE_LDSTR, "ldstr", Pop0, PushRef, InlineString, X, 1, 0xFF, 0x72, NEXT)
+-OPDEF(CEE_NEWOBJ, "newobj", VarPop, PushRef, InlineMethod, X, 1, 0xFF, 0x73, CALL)
+-OPDEF(CEE_CASTCLASS, "castclass", PopRef, PushRef, InlineType, X, 1, 0xFF, 0x74, NEXT)
+-OPDEF(CEE_ISINST, "isinst", PopRef, PushI, InlineType, X, 1, 0xFF, 0x75, NEXT)
+-OPDEF(CEE_CONV_R_UN, "conv.r.un", Pop1, PushR8, InlineNone, X, 1, 0xFF, 0x76, NEXT)
+-OPDEF(CEE_UNUSED58, "unused58", Pop0, Push0, InlineNone, X, 1, 0xFF, 0x77, NEXT)
+-OPDEF(CEE_UNUSED1, "unused1", Pop0, Push0, InlineNone, X, 1, 0xFF, 0x78, NEXT)
+-OPDEF(CEE_UNBOX, "unbox", PopRef, PushI, InlineType, X, 1, 0xFF, 0x79, NEXT)
+-OPDEF(CEE_THROW, "throw", PopRef, Push0, InlineNone, X, 1, 0xFF, 0x7A, ERROR)
+-OPDEF(CEE_LDFLD, "ldfld", PopRef, Push1, InlineField, X, 1, 0xFF, 0x7B, NEXT)
+-OPDEF(CEE_LDFLDA, "ldflda", PopRef, PushI, InlineField, X, 1, 0xFF, 0x7C, NEXT)
+-OPDEF(CEE_STFLD, "stfld", PopRef+Pop1, Push0, InlineField, X, 1, 0xFF, 0x7D, NEXT)
+-OPDEF(CEE_LDSFLD, "ldsfld", Pop0, Push1, InlineField, X, 1, 0xFF, 0x7E, NEXT)
+-OPDEF(CEE_LDSFLDA, "ldsflda", Pop0, PushI, InlineField, X, 1, 0xFF, 0x7F, NEXT)
+-OPDEF(CEE_STSFLD, "stsfld", Pop1, Push0, InlineField, X, 1, 0xFF, 0x80, NEXT)
+-OPDEF(CEE_STOBJ, "stobj", PopI+Pop1, Push0, InlineType, X, 1, 0xFF, 0x81, NEXT)
+-OPDEF(CEE_CONV_OVF_I1_UN, "conv.ovf.i1.un", Pop1, PushI, InlineNone, X, 1, 0xFF, 0x82, NEXT)
+-OPDEF(CEE_CONV_OVF_I2_UN, "conv.ovf.i2.un", Pop1, PushI, InlineNone, X, 1, 0xFF, 0x83, NEXT)
+-OPDEF(CEE_CONV_OVF_I4_UN, "conv.ovf.i4.un", Pop1, PushI, InlineNone, X, 1, 0xFF, 0x84, NEXT)
+-OPDEF(CEE_CONV_OVF_I8_UN, "conv.ovf.i8.un", Pop1, PushI8, InlineNone, X, 1, 0xFF, 0x85, NEXT)
+-OPDEF(CEE_CONV_OVF_U1_UN, "conv.ovf.u1.un", Pop1, PushI, InlineNone, X, 1, 0xFF, 0x86, NEXT)
+-OPDEF(CEE_CONV_OVF_U2_UN, "conv.ovf.u2.un", Pop1, PushI, InlineNone, X, 1, 0xFF, 0x87, NEXT)
+-OPDEF(CEE_CONV_OVF_U4_UN, "conv.ovf.u4.un", Pop1, PushI, InlineNone, X, 1, 0xFF, 0x88, NEXT)
+-OPDEF(CEE_CONV_OVF_U8_UN, "conv.ovf.u8.un", Pop1, PushI8, InlineNone, X, 1, 0xFF, 0x89, NEXT)
+-OPDEF(CEE_CONV_OVF_I_UN, "conv.ovf.i.un", Pop1, PushI, InlineNone, X, 1, 0xFF, 0x8A, NEXT)
+-OPDEF(CEE_CONV_OVF_U_UN, "conv.ovf.u.un", Pop1, PushI, InlineNone, X, 1, 0xFF, 0x8B, NEXT)
+-OPDEF(CEE_BOX, "box", Pop1, PushRef, InlineType, X, 1, 0xFF, 0x8C, NEXT)
+-OPDEF(CEE_NEWARR, "newarr", PopI, PushRef, InlineType, X, 1, 0xFF, 0x8D, NEXT)
+-OPDEF(CEE_LDLEN, "ldlen", PopRef, PushI, InlineNone, X, 1, 0xFF, 0x8E, NEXT)
+-OPDEF(CEE_LDELEMA, "ldelema", PopRef+PopI, PushI, InlineType, X, 1, 0xFF, 0x8F, NEXT)
+-OPDEF(CEE_LDELEM_I1, "ldelem.i1", PopRef+PopI, PushI, InlineNone, X, 1, 0xFF, 0x90, NEXT)
+-OPDEF(CEE_LDELEM_U1, "ldelem.u1", PopRef+PopI, PushI, InlineNone, X, 1, 0xFF, 0x91, NEXT)
+-OPDEF(CEE_LDELEM_I2, "ldelem.i2", PopRef+PopI, PushI, InlineNone, X, 1, 0xFF, 0x92, NEXT)
+-OPDEF(CEE_LDELEM_U2, "ldelem.u2", PopRef+PopI, PushI, InlineNone, X, 1, 0xFF, 0x93, NEXT)
+-OPDEF(CEE_LDELEM_I4, "ldelem.i4", PopRef+PopI, PushI, InlineNone, X, 1, 0xFF, 0x94, NEXT)
+-OPDEF(CEE_LDELEM_U4, "ldelem.u4", PopRef+PopI, PushI, InlineNone, X, 1, 0xFF, 0x95, NEXT)
+-OPDEF(CEE_LDELEM_I8, "ldelem.i8", PopRef+PopI, PushI8, InlineNone, X, 1, 0xFF, 0x96, NEXT)
+-OPDEF(CEE_LDELEM_I, "ldelem.i", PopRef+PopI, PushI, InlineNone, X, 1, 0xFF, 0x97, NEXT)
+-OPDEF(CEE_LDELEM_R4, "ldelem.r4", PopRef+PopI, PushR4, InlineNone, X, 1, 0xFF, 0x98, NEXT)
+-OPDEF(CEE_LDELEM_R8, "ldelem.r8", PopRef+PopI, PushR8, InlineNone, X, 1, 0xFF, 0x99, NEXT)
+-OPDEF(CEE_LDELEM_REF, "ldelem.ref", PopRef+PopI, PushRef, InlineNone, X, 1, 0xFF, 0x9A, NEXT)
+-OPDEF(CEE_STELEM_I, "stelem.i", PopRef+PopI+PopI, Push0, InlineNone, X, 1, 0xFF, 0x9B, NEXT)
+-OPDEF(CEE_STELEM_I1, "stelem.i1", PopRef+PopI+PopI, Push0, InlineNone, X, 1, 0xFF, 0x9C, NEXT)
+-OPDEF(CEE_STELEM_I2, "stelem.i2", PopRef+PopI+PopI, Push0, InlineNone, X, 1, 0xFF, 0x9D, NEXT)
+-OPDEF(CEE_STELEM_I4, "stelem.i4", PopRef+PopI+PopI, Push0, InlineNone, X, 1, 0xFF, 0x9E, NEXT)
+-OPDEF(CEE_STELEM_I8, "stelem.i8", PopRef+PopI+PopI8, Push0, InlineNone, X, 1, 0xFF, 0x9F, NEXT)
+-OPDEF(CEE_STELEM_R4, "stelem.r4", PopRef+PopI+PopR4, Push0, InlineNone, X, 1, 0xFF, 0xA0, NEXT)
+-OPDEF(CEE_STELEM_R8, "stelem.r8", PopRef+PopI+PopR8, Push0, InlineNone, X, 1, 0xFF, 0xA1, NEXT)
+-OPDEF(CEE_STELEM_REF, "stelem.ref", PopRef+PopI+PopRef, Push0, InlineNone, X, 1, 0xFF, 0xA2, NEXT)
+-OPDEF(CEE_LDELEM, "ldelem", PopRef+PopI, Push1, InlineType, X, 1, 0xFF, 0xA3, NEXT)
+-OPDEF(CEE_STELEM, "stelem", PopRef+PopI+Pop1, Push0, InlineType, X, 1, 0xFF, 0xA4, NEXT)
+-OPDEF(CEE_UNBOX_ANY, "unbox.any", PopRef, Push1, InlineType, X, 1, 0xFF, 0xA5, NEXT)
+-OPDEF(CEE_UNUSED5, "unused5", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xA6, NEXT)
+-OPDEF(CEE_UNUSED6, "unused6", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xA7, NEXT)
+-OPDEF(CEE_UNUSED7, "unused7", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xA8, NEXT)
+-OPDEF(CEE_UNUSED8, "unused8", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xA9, NEXT)
+-OPDEF(CEE_UNUSED9, "unused9", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xAA, NEXT)
+-OPDEF(CEE_UNUSED10, "unused10", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xAB, NEXT)
+-OPDEF(CEE_UNUSED11, "unused11", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xAC, NEXT)
+-OPDEF(CEE_UNUSED12, "unused12", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xAD, NEXT)
+-OPDEF(CEE_UNUSED13, "unused13", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xAE, NEXT)
+-OPDEF(CEE_UNUSED14, "unused14", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xAF, NEXT)
+-OPDEF(CEE_UNUSED15, "unused15", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xB0, NEXT)
+-OPDEF(CEE_UNUSED16, "unused16", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xB1, NEXT)
+-OPDEF(CEE_UNUSED17, "unused17", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xB2, NEXT)
+-OPDEF(CEE_CONV_OVF_I1, "conv.ovf.i1", Pop1, PushI, InlineNone, X, 1, 0xFF, 0xB3, NEXT)
+-OPDEF(CEE_CONV_OVF_U1, "conv.ovf.u1", Pop1, PushI, InlineNone, X, 1, 0xFF, 0xB4, NEXT)
+-OPDEF(CEE_CONV_OVF_I2, "conv.ovf.i2", Pop1, PushI, InlineNone, X, 1, 0xFF, 0xB5, NEXT)
+-OPDEF(CEE_CONV_OVF_U2, "conv.ovf.u2", Pop1, PushI, InlineNone, X, 1, 0xFF, 0xB6, NEXT)
+-OPDEF(CEE_CONV_OVF_I4, "conv.ovf.i4", Pop1, PushI, InlineNone, X, 1, 0xFF, 0xB7, NEXT)
+-OPDEF(CEE_CONV_OVF_U4, "conv.ovf.u4", Pop1, PushI, InlineNone, X, 1, 0xFF, 0xB8, NEXT)
+-OPDEF(CEE_CONV_OVF_I8, "conv.ovf.i8", Pop1, PushI8, InlineNone, X, 1, 0xFF, 0xB9, NEXT)
+-OPDEF(CEE_CONV_OVF_U8, "conv.ovf.u8", Pop1, PushI8, InlineNone, X, 1, 0xFF, 0xBA, NEXT)
+-OPDEF(CEE_UNUSED50, "unused50", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xBB, NEXT)
+-OPDEF(CEE_UNUSED18, "unused18", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xBC, NEXT)
+-OPDEF(CEE_UNUSED19, "unused19", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xBD, NEXT)
+-OPDEF(CEE_UNUSED20, "unused20", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xBE, NEXT)
+-OPDEF(CEE_UNUSED21, "unused21", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xBF, NEXT)
+-OPDEF(CEE_UNUSED22, "unused22", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xC0, NEXT)
+-OPDEF(CEE_UNUSED23, "unused23", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xC1, NEXT)
+-OPDEF(CEE_REFANYVAL, "refanyval", Pop1, PushI, InlineType, X, 1, 0xFF, 0xC2, NEXT)
+-OPDEF(CEE_CKFINITE, "ckfinite", Pop1, PushR8, InlineNone, X, 1, 0xFF, 0xC3, NEXT)
+-OPDEF(CEE_UNUSED24, "unused24", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xC4, NEXT)
+-OPDEF(CEE_UNUSED25, "unused25", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xC5, NEXT)
+-OPDEF(CEE_MKREFANY, "mkrefany", PopI, Push1, InlineType, X, 1, 0xFF, 0xC6, NEXT)
+-OPDEF(CEE_UNUSED59, "unused59", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xC7, NEXT)
+-OPDEF(CEE_UNUSED60, "unused60", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xC8, NEXT)
+-OPDEF(CEE_UNUSED61, "unused61", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xC9, NEXT)
+-OPDEF(CEE_UNUSED62, "unused62", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xCA, NEXT)
+-OPDEF(CEE_UNUSED63, "unused63", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xCB, NEXT)
+-OPDEF(CEE_UNUSED64, "unused64", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xCC, NEXT)
+-OPDEF(CEE_UNUSED65, "unused65", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xCD, NEXT)
+-OPDEF(CEE_UNUSED66, "unused66", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xCE, NEXT)
+-OPDEF(CEE_UNUSED67, "unused67", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xCF, NEXT)
+-OPDEF(CEE_LDTOKEN, "ldtoken", Pop0, PushI, InlineTok, X, 1, 0xFF, 0xD0, NEXT)
+-OPDEF(CEE_CONV_U2, "conv.u2", Pop1, PushI, InlineNone, X, 1, 0xFF, 0xD1, NEXT)
+-OPDEF(CEE_CONV_U1, "conv.u1", Pop1, PushI, InlineNone, X, 1, 0xFF, 0xD2, NEXT)
+-OPDEF(CEE_CONV_I, "conv.i", Pop1, PushI, InlineNone, X, 1, 0xFF, 0xD3, NEXT)
+-OPDEF(CEE_CONV_OVF_I, "conv.ovf.i", Pop1, PushI, InlineNone, X, 1, 0xFF, 0xD4, NEXT)
+-OPDEF(CEE_CONV_OVF_U, "conv.ovf.u", Pop1, PushI, InlineNone, X, 1, 0xFF, 0xD5, NEXT)
+-OPDEF(CEE_ADD_OVF, "add.ovf", Pop1+Pop1, Push1, InlineNone, X, 1, 0xFF, 0xD6, NEXT)
+-OPDEF(CEE_ADD_OVF_UN, "add.ovf.un", Pop1+Pop1, Push1, InlineNone, X, 1, 0xFF, 0xD7, NEXT)
+-OPDEF(CEE_MUL_OVF, "mul.ovf", Pop1+Pop1, Push1, InlineNone, X, 1, 0xFF, 0xD8, NEXT)
+-OPDEF(CEE_MUL_OVF_UN, "mul.ovf.un", Pop1+Pop1, Push1, InlineNone, X, 1, 0xFF, 0xD9, NEXT)
+-OPDEF(CEE_SUB_OVF, "sub.ovf", Pop1+Pop1, Push1, InlineNone, X, 1, 0xFF, 0xDA, NEXT)
+-OPDEF(CEE_SUB_OVF_UN, "sub.ovf.un", Pop1+Pop1, Push1, InlineNone, X, 1, 0xFF, 0xDB, NEXT)
+-OPDEF(CEE_ENDFINALLY, "endfinally", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xDC, RETURN)
+-OPDEF(CEE_LEAVE, "leave", Pop0, Push0, InlineBrTarget, X, 1, 0xFF, 0xDD, BRANCH)
+-OPDEF(CEE_LEAVE_S, "leave.s", Pop0, Push0, ShortInlineBrTarget, X, 1, 0xFF, 0xDE, BRANCH)
+-OPDEF(CEE_STIND_I, "stind.i", PopI+PopI, Push0, InlineNone, X, 1, 0xFF, 0xDF, NEXT)
+-OPDEF(CEE_CONV_U, "conv.u", Pop1, PushI, InlineNone, X, 1, 0xFF, 0xE0, NEXT)
+-OPDEF(CEE_UNUSED26, "unused26", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xE1, NEXT)
+-OPDEF(CEE_UNUSED27, "unused27", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xE2, NEXT)
+-OPDEF(CEE_UNUSED28, "unused28", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xE3, NEXT)
+-OPDEF(CEE_UNUSED29, "unused29", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xE4, NEXT)
+-OPDEF(CEE_UNUSED30, "unused30", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xE5, NEXT)
+-OPDEF(CEE_UNUSED31, "unused31", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xE6, NEXT)
+-OPDEF(CEE_UNUSED32, "unused32", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xE7, NEXT)
+-OPDEF(CEE_UNUSED33, "unused33", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xE8, NEXT)
+-OPDEF(CEE_UNUSED34, "unused34", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xE9, NEXT)
+-OPDEF(CEE_UNUSED35, "unused35", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xEA, NEXT)
+-OPDEF(CEE_UNUSED36, "unused36", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xEB, NEXT)
+-OPDEF(CEE_UNUSED37, "unused37", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xEC, NEXT)
+-OPDEF(CEE_UNUSED38, "unused38", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xED, NEXT)
+-OPDEF(CEE_UNUSED39, "unused39", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xEE, NEXT)
+-OPDEF(CEE_UNUSED40, "unused40", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xEF, NEXT)
+-OPDEF(CEE_UNUSED41, "unused41", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xF0, NEXT)
+-OPDEF(CEE_UNUSED42, "unused42", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xF1, NEXT)
+-OPDEF(CEE_UNUSED43, "unused43", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xF2, NEXT)
+-OPDEF(CEE_UNUSED44, "unused44", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xF3, NEXT)
+-OPDEF(CEE_UNUSED45, "unused45", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xF4, NEXT)
+-OPDEF(CEE_UNUSED46, "unused46", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xF5, NEXT)
+-OPDEF(CEE_UNUSED47, "unused47", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xF6, NEXT)
+-OPDEF(CEE_UNUSED48, "unused48", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xF7, NEXT)
+-OPDEF(CEE_PREFIX7, "prefix7", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xF8, META)
+-OPDEF(CEE_PREFIX6, "prefix6", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xF9, META)
+-OPDEF(CEE_PREFIX5, "prefix5", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xFA, META)
+-OPDEF(CEE_PREFIX4, "prefix4", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xFB, META)
+-OPDEF(CEE_PREFIX3, "prefix3", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xFC, META)
+-OPDEF(CEE_PREFIX2, "prefix2", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xFD, META)
+-OPDEF(CEE_PREFIX1, "prefix1", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xFE, META)
+-OPDEF(CEE_PREFIXREF, "prefixref", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xFF, META)
+-OPDEF(CEE_ARGLIST, "arglist", Pop0, PushI, InlineNone, X, 2, 0xFE, 0x00, NEXT)
+-OPDEF(CEE_CEQ, "ceq", Pop1+Pop1, PushI, InlineNone, X, 2, 0xFE, 0x01, NEXT)
+-OPDEF(CEE_CGT, "cgt", Pop1+Pop1, PushI, InlineNone, X, 2, 0xFE, 0x02, NEXT)
+-OPDEF(CEE_CGT_UN, "cgt.un", Pop1+Pop1, PushI, InlineNone, X, 2, 0xFE, 0x03, NEXT)
+-OPDEF(CEE_CLT, "clt", Pop1+Pop1, PushI, InlineNone, X, 2, 0xFE, 0x04, NEXT)
+-OPDEF(CEE_CLT_UN, "clt.un", Pop1+Pop1, PushI, InlineNone, X, 2, 0xFE, 0x05, NEXT)
+-OPDEF(CEE_LDFTN, "ldftn", Pop0, PushI, InlineMethod, X, 2, 0xFE, 0x06, NEXT)
+-OPDEF(CEE_LDVIRTFTN, "ldvirtftn", PopRef, PushI, InlineMethod, X, 2, 0xFE, 0x07, NEXT)
+-OPDEF(CEE_UNUSED56, "unused56", Pop0, Push0, InlineNone, X, 2, 0xFE, 0x08, NEXT)
+-OPDEF(CEE_LDARG, "ldarg", Pop0, Push1, InlineVar, X, 2, 0xFE, 0x09, NEXT)
+-OPDEF(CEE_LDARGA, "ldarga", Pop0, PushI, InlineVar, X, 2, 0xFE, 0x0A, NEXT)
+-OPDEF(CEE_STARG, "starg", Pop1, Push0, InlineVar, X, 2, 0xFE, 0x0B, NEXT)
+-OPDEF(CEE_LDLOC, "ldloc", Pop0, Push1, InlineVar, X, 2, 0xFE, 0x0C, NEXT)
+-OPDEF(CEE_LDLOCA, "ldloca", Pop0, PushI, InlineVar, X, 2, 0xFE, 0x0D, NEXT)
+-OPDEF(CEE_STLOC, "stloc", Pop1, Push0, InlineVar, X, 2, 0xFE, 0x0E, NEXT)
+-OPDEF(CEE_LOCALLOC, "localloc", PopI, PushI, InlineNone, X, 2, 0xFE, 0x0F, NEXT)
+-OPDEF(CEE_UNUSED57, "unused57", Pop0, Push0, InlineNone, X, 2, 0xFE, 0x10, NEXT)
+-OPDEF(CEE_ENDFILTER, "endfilter", PopI, Push0, InlineNone, X, 2, 0xFE, 0x11, RETURN)
+-OPDEF(CEE_UNALIGNED_, "unaligned.", Pop0, Push0, ShortInlineI, X, 2, 0xFE, 0x12, META)
+-OPDEF(CEE_VOLATILE_, "volatile.", Pop0, Push0, InlineNone, X, 2, 0xFE, 0x13, META)
+-OPDEF(CEE_TAIL_, "tail.", Pop0, Push0, InlineNone, X, 2, 0xFE, 0x14, META)
+-OPDEF(CEE_INITOBJ, "initobj", PopI, Push0, InlineType, X, 2, 0xFE, 0x15, NEXT)
+-OPDEF(CEE_CONSTRAINED_, "constrained.", Pop0, Push0, InlineType, X, 2, 0xFE, 0x16, META)
+-OPDEF(CEE_CPBLK, "cpblk", PopI+PopI+PopI, Push0, InlineNone, X, 2, 0xFE, 0x17, NEXT)
+-OPDEF(CEE_INITBLK, "initblk", PopI+PopI+PopI, Push0, InlineNone, X, 2, 0xFE, 0x18, NEXT)
+-OPDEF(CEE_NO_, "no.", Pop0, Push0, ShortInlineI, X, 2, 0xFE, 0x19, NEXT)
+-OPDEF(CEE_RETHROW, "rethrow", Pop0, Push0, InlineNone, X, 2, 0xFE, 0x1A, ERROR)
+-OPDEF(CEE_UNUSED, "unused", Pop0, Push0, InlineNone, X, 2, 0xFE, 0x1B, NEXT)
+-OPDEF(CEE_SIZEOF, "sizeof", Pop0, PushI, InlineType, X, 2, 0xFE, 0x1C, NEXT)
+-OPDEF(CEE_REFANYTYPE, "refanytype", Pop1, PushI, InlineNone, X, 2, 0xFE, 0x1D, NEXT)
+-OPDEF(CEE_READONLY_, "readonly.", Pop0, Push0, InlineNone, X, 2, 0xFE, 0x1E, META)
+-OPDEF(CEE_UNUSED53, "unused53", Pop0, Push0, InlineNone, X, 2, 0xFE, 0x1F, NEXT)
+-OPDEF(CEE_UNUSED54, "unused54", Pop0, Push0, InlineNone, X, 2, 0xFE, 0x20, NEXT)
+-OPDEF(CEE_UNUSED55, "unused55", Pop0, Push0, InlineNone, X, 2, 0xFE, 0x21, NEXT)
+-OPDEF(CEE_UNUSED70, "unused70", Pop0, Push0, InlineNone, X, 2, 0xFE, 0x22, NEXT)
+-OPDEF(CEE_ILLEGAL, "illegal", Pop0, Push0, InlineNone, X, 2, 0x00, 0x00, META)
+-OPDEF(CEE_ENDMAC, "endmac", Pop0, Push0, InlineNone, X, 2, 0x00, 0x00, META)
+-OPDEF(CEE_MONO_ICALL, "mono_icall", VarPop, VarPush, ShortInlineI, X, 2, 0xF0, 0x00, NEXT)
+-OPDEF(CEE_MONO_OBJADDR, "mono_objaddr", Pop1, PushI, InlineNone, X, 2, 0xF0, 0x01, NEXT)
+-OPDEF(CEE_MONO_LDPTR, "mono_ldptr", Pop0, PushI, InlineI, X, 2, 0xF0, 0x02, NEXT)
+-OPDEF(CEE_MONO_VTADDR, "mono_vtaddr", Pop1, PushI, InlineNone, X, 2, 0xF0, 0x03, NEXT)
+-OPDEF(CEE_MONO_NEWOBJ, "mono_newobj", Pop0, PushRef, InlineType, X, 2, 0xF0, 0x04, NEXT)
+-OPDEF(CEE_MONO_RETOBJ, "mono_retobj", PopI, Push0, InlineType, X, 2, 0xF0, 0x05, RETURN)
+-OPDEF(CEE_MONO_LDNATIVEOBJ, "mono_ldnativeobj", PopI, Push1, InlineType, X, 2, 0xF0, 0x06, RETURN)
+-OPDEF(CEE_MONO_CISINST, "mono_cisinst", PopRef, Push1, InlineType, X, 2, 0xF0, 0x07, NEXT)
+-OPDEF(CEE_MONO_CCASTCLASS, "mono_ccastclass", PopRef, Push1, InlineType, X, 2, 0xF0, 0x08, NEXT)
+-OPDEF(CEE_MONO_SAVE_LMF, "mono_save_lmf", Pop0, Push0, InlineNone, X, 2, 0xF0, 0x09, NEXT)
+-OPDEF(CEE_MONO_RESTORE_LMF, "mono_restore_lmf", Pop0, Push0, InlineNone, X, 2, 0xF0, 0x0A, NEXT)
+-OPDEF(CEE_MONO_CLASSCONST, "mono_classconst", Pop0, PushI, InlineI, X, 2, 0xF0, 0x0B, NEXT)
+-OPDEF(CEE_MONO_NOT_TAKEN, "mono_not_taken", Pop0, Push0, InlineNone, X, 2, 0xF0, 0x0C, NEXT)
+-OPDEF(CEE_MONO_TLS, "mono_tls", Pop0, PushI, InlineI, X, 2, 0xF0, 0x0D, NEXT)
+-OPDEF(CEE_MONO_ICALL_ADDR, "mono_icall_addr", Pop0, PushI, InlineI, X, 2, 0xF0, 0x0E, NEXT)
+-OPDEF(CEE_MONO_DYN_CALL, "mono_dyn_call", Pop0, PushI, InlineI, X, 2, 0xF0, 0x0F, NEXT)
+-OPDEF(CEE_MONO_MEMORY_BARRIER, "mono_memory_barrier", Pop0, Push0, InlineI, X, 2, 0xF0, 0x10, NEXT)
+-OPDEF(CEE_MONO_JIT_ATTACH, "mono_jit_attach", Pop0, Push0, InlineNone, X, 2, 0xF0, 0x11, NEXT)
+-OPDEF(CEE_MONO_JIT_DETACH, "mono_jit_detach", Pop0, Push0, InlineNone, X, 2, 0xF0, 0x12, NEXT)
+-OPDEF(CEE_MONO_JIT_ICALL_ADDR, "mono_jit_icall_addr", Pop0, PushI, InlineI, X, 2, 0xF0, 0x13, NEXT)
+-OPDEF(CEE_MONO_LDPTR_INT_REQ_FLAG, "mono_ldptr_int_req_flag", Pop0, PushI, InlineNone, X, 2, 0xF0, 0x14, NEXT)
+-OPDEF(CEE_MONO_LDPTR_CARD_TABLE, "mono_ldptr_card_table", Pop0, PushI, InlineNone, X, 2, 0xF0, 0x15, NEXT)
+-OPDEF(CEE_MONO_LDPTR_NURSERY_START, "mono_ldptr_nursery_start", Pop0, PushI, InlineNone, X, 2, 0xF0, 0x16, NEXT)
+-OPDEF(CEE_MONO_LDPTR_NURSERY_BITS, "mono_ldptr_nursery_bits", Pop0, PushI, InlineNone, X, 2, 0xF0, 0x17, NEXT)
+-OPDEF(CEE_MONO_CALLI_EXTRA_ARG, "mono_calli_extra_arg", VarPop, VarPush, InlineSig, X, 2, 0xF0, 0x18, CALL)
+-OPDEF(CEE_MONO_LDDOMAIN, "mono_lddomain", Pop0, PushI, InlineNone, X, 2, 0xF0, 0x19, NEXT)
+-OPDEF(CEE_MONO_ATOMIC_STORE_I4, "mono_atomic_store_i4", PopI+PopI, Push0, InlineI, X, 2, 0xF0, 0x1A, NEXT)
+-OPDEF(CEE_MONO_GET_LAST_ERROR, "mono_get_last_error", Pop0, PushI, InlineNone, X, 2, 0xF0, 0x1B, NEXT)
+-OPDEF(CEE_MONO_GET_RGCTX_ARG, "mono_get_rgctx_arg", Pop0, PushI, InlineNone, X, 2, 0xF0, 0x1C, NEXT)
+-#ifndef OPALIAS
+-#define _MONO_CIL_OPALIAS_DEFINED_
+-#define OPALIAS(a,s,r)
+-#endif
+-
+-OPALIAS(CEE_BRNULL,     "brnull",    CEE_BRFALSE)
+-OPALIAS(CEE_BRNULL_S,   "brnull.s",  CEE_BRFALSE_S)
+-OPALIAS(CEE_BRZERO,     "brzero",    CEE_BRFALSE)
+-OPALIAS(CEE_BRZERO_S,   "brzero.s",  CEE_BRFALSE_S)
+-OPALIAS(CEE_BRINST,     "brinst",    CEE_BRTRUE)
+-OPALIAS(CEE_BRINST_S,   "brinst.s",  CEE_BRTRUE_S)
+-OPALIAS(CEE_LDIND_U8,   "ldind.u8",  CEE_LDIND_I8)
+-OPALIAS(CEE_LDELEM_U8,  "ldelem.u8", CEE_LDELEM_I8)
+-OPALIAS(CEE_LDX_I4_MIX, "ldc.i4.M1", CEE_LDC_I4_M1)
+-OPALIAS(CEE_ENDFAULT,   "endfault",  CEE_ENDFINALLY)
+-
+-#ifdef _MONO_CIL_OPALIAS_DEFINED_
+-#undef OPALIAS
+-#undef _MONO_CIL_OPALIAS_DEFINED_
+-#endif
++/* GENERATED FILE, DO NOT EDIT */
++OPDEF(CEE_NOP, "nop", Pop0, Push0, InlineNone, X, 1, 0xFF, 0x00, NEXT)
++OPDEF(CEE_BREAK, "break", Pop0, Push0, InlineNone, X, 1, 0xFF, 0x01, ERROR)
++OPDEF(CEE_LDARG_0, "ldarg.0", Pop0, Push1, InlineNone, X, 1, 0xFF, 0x02, NEXT)
++OPDEF(CEE_LDARG_1, "ldarg.1", Pop0, Push1, InlineNone, X, 1, 0xFF, 0x03, NEXT)
++OPDEF(CEE_LDARG_2, "ldarg.2", Pop0, Push1, InlineNone, X, 1, 0xFF, 0x04, NEXT)
++OPDEF(CEE_LDARG_3, "ldarg.3", Pop0, Push1, InlineNone, X, 1, 0xFF, 0x05, NEXT)
++OPDEF(CEE_LDLOC_0, "ldloc.0", Pop0, Push1, InlineNone, X, 1, 0xFF, 0x06, NEXT)
++OPDEF(CEE_LDLOC_1, "ldloc.1", Pop0, Push1, InlineNone, X, 1, 0xFF, 0x07, NEXT)
++OPDEF(CEE_LDLOC_2, "ldloc.2", Pop0, Push1, InlineNone, X, 1, 0xFF, 0x08, NEXT)
++OPDEF(CEE_LDLOC_3, "ldloc.3", Pop0, Push1, InlineNone, X, 1, 0xFF, 0x09, NEXT)
++OPDEF(CEE_STLOC_0, "stloc.0", Pop1, Push0, InlineNone, X, 1, 0xFF, 0x0A, NEXT)
++OPDEF(CEE_STLOC_1, "stloc.1", Pop1, Push0, InlineNone, X, 1, 0xFF, 0x0B, NEXT)
++OPDEF(CEE_STLOC_2, "stloc.2", Pop1, Push0, InlineNone, X, 1, 0xFF, 0x0C, NEXT)
++OPDEF(CEE_STLOC_3, "stloc.3", Pop1, Push0, InlineNone, X, 1, 0xFF, 0x0D, NEXT)
++OPDEF(CEE_LDARG_S, "ldarg.s", Pop0, Push1, ShortInlineVar, X, 1, 0xFF, 0x0E, NEXT)
++OPDEF(CEE_LDARGA_S, "ldarga.s", Pop0, PushI, ShortInlineVar, X, 1, 0xFF, 0x0F, NEXT)
++OPDEF(CEE_STARG_S, "starg.s", Pop1, Push0, ShortInlineVar, X, 1, 0xFF, 0x10, NEXT)
++OPDEF(CEE_LDLOC_S, "ldloc.s", Pop0, Push1, ShortInlineVar, X, 1, 0xFF, 0x11, NEXT)
++OPDEF(CEE_LDLOCA_S, "ldloca.s", Pop0, PushI, ShortInlineVar, X, 1, 0xFF, 0x12, NEXT)
++OPDEF(CEE_STLOC_S, "stloc.s", Pop1, Push0, ShortInlineVar, X, 1, 0xFF, 0x13, NEXT)
++OPDEF(CEE_LDNULL, "ldnull", Pop0, PushRef, InlineNone, X, 1, 0xFF, 0x14, NEXT)
++OPDEF(CEE_LDC_I4_M1, "ldc.i4.m1", Pop0, PushI, InlineNone, X, 1, 0xFF, 0x15, NEXT)
++OPDEF(CEE_LDC_I4_0, "ldc.i4.0", Pop0, PushI, InlineNone, X, 1, 0xFF, 0x16, NEXT)
++OPDEF(CEE_LDC_I4_1, "ldc.i4.1", Pop0, PushI, InlineNone, X, 1, 0xFF, 0x17, NEXT)
++OPDEF(CEE_LDC_I4_2, "ldc.i4.2", Pop0, PushI, InlineNone, X, 1, 0xFF, 0x18, NEXT)
++OPDEF(CEE_LDC_I4_3, "ldc.i4.3", Pop0, PushI, InlineNone, X, 1, 0xFF, 0x19, NEXT)
++OPDEF(CEE_LDC_I4_4, "ldc.i4.4", Pop0, PushI, InlineNone, X, 1, 0xFF, 0x1A, NEXT)
++OPDEF(CEE_LDC_I4_5, "ldc.i4.5", Pop0, PushI, InlineNone, X, 1, 0xFF, 0x1B, NEXT)
++OPDEF(CEE_LDC_I4_6, "ldc.i4.6", Pop0, PushI, InlineNone, X, 1, 0xFF, 0x1C, NEXT)
++OPDEF(CEE_LDC_I4_7, "ldc.i4.7", Pop0, PushI, InlineNone, X, 1, 0xFF, 0x1D, NEXT)
++OPDEF(CEE_LDC_I4_8, "ldc.i4.8", Pop0, PushI, InlineNone, X, 1, 0xFF, 0x1E, NEXT)
++OPDEF(CEE_LDC_I4_S, "ldc.i4.s", Pop0, PushI, ShortInlineI, X, 1, 0xFF, 0x1F, NEXT)
++OPDEF(CEE_LDC_I4, "ldc.i4", Pop0, PushI, InlineI, X, 1, 0xFF, 0x20, NEXT)
++OPDEF(CEE_LDC_I8, "ldc.i8", Pop0, PushI8, InlineI8, X, 1, 0xFF, 0x21, NEXT)
++OPDEF(CEE_LDC_R4, "ldc.r4", Pop0, PushR4, ShortInlineR, X, 1, 0xFF, 0x22, NEXT)
++OPDEF(CEE_LDC_R8, "ldc.r8", Pop0, PushR8, InlineR, X, 1, 0xFF, 0x23, NEXT)
++OPDEF(CEE_UNUSED99, "unused99", Pop0, Push0, InlineNone, X, 1, 0xFF, 0x24, NEXT)
++OPDEF(CEE_DUP, "dup", Pop1, Push1+Push1, InlineNone, X, 1, 0xFF, 0x25, NEXT)
++OPDEF(CEE_POP, "pop", Pop1, Push0, InlineNone, X, 1, 0xFF, 0x26, NEXT)
++OPDEF(CEE_JMP, "jmp", Pop0, Push0, InlineMethod, X, 1, 0xFF, 0x27, CALL)
++OPDEF(CEE_CALL, "call", VarPop, VarPush, InlineMethod, X, 1, 0xFF, 0x28, CALL)
++OPDEF(CEE_CALLI, "calli", VarPop, VarPush, InlineSig, X, 1, 0xFF, 0x29, CALL)
++OPDEF(CEE_RET, "ret", VarPop, Push0, InlineNone, X, 1, 0xFF, 0x2A, RETURN)
++OPDEF(CEE_BR_S, "br.s", Pop0, Push0, ShortInlineBrTarget, X, 1, 0xFF, 0x2B, BRANCH)
++OPDEF(CEE_BRFALSE_S, "brfalse.s", PopI, Push0, ShortInlineBrTarget, X, 1, 0xFF, 0x2C, COND_BRANCH)
++OPDEF(CEE_BRTRUE_S, "brtrue.s", PopI, Push0, ShortInlineBrTarget, X, 1, 0xFF, 0x2D, COND_BRANCH)
++OPDEF(CEE_BEQ_S, "beq.s", Pop1+Pop1, Push0, ShortInlineBrTarget, X, 1, 0xFF, 0x2E, COND_BRANCH)
++OPDEF(CEE_BGE_S, "bge.s", Pop1+Pop1, Push0, ShortInlineBrTarget, X, 1, 0xFF, 0x2F, COND_BRANCH)
++OPDEF(CEE_BGT_S, "bgt.s", Pop1+Pop1, Push0, ShortInlineBrTarget, X, 1, 0xFF, 0x30, COND_BRANCH)
++OPDEF(CEE_BLE_S, "ble.s", Pop1+Pop1, Push0, ShortInlineBrTarget, X, 1, 0xFF, 0x31, COND_BRANCH)
++OPDEF(CEE_BLT_S, "blt.s", Pop1+Pop1, Push0, ShortInlineBrTarget, X, 1, 0xFF, 0x32, COND_BRANCH)
++OPDEF(CEE_BNE_UN_S, "bne.un.s", Pop1+Pop1, Push0, ShortInlineBrTarget, X, 1, 0xFF, 0x33, COND_BRANCH)
++OPDEF(CEE_BGE_UN_S, "bge.un.s", Pop1+Pop1, Push0, ShortInlineBrTarget, X, 1, 0xFF, 0x34, COND_BRANCH)
++OPDEF(CEE_BGT_UN_S, "bgt.un.s", Pop1+Pop1, Push0, ShortInlineBrTarget, X, 1, 0xFF, 0x35, COND_BRANCH)
++OPDEF(CEE_BLE_UN_S, "ble.un.s", Pop1+Pop1, Push0, ShortInlineBrTarget, X, 1, 0xFF, 0x36, COND_BRANCH)
++OPDEF(CEE_BLT_UN_S, "blt.un.s", Pop1+Pop1, Push0, ShortInlineBrTarget, X, 1, 0xFF, 0x37, COND_BRANCH)
++OPDEF(CEE_BR, "br", Pop0, Push0, InlineBrTarget, X, 1, 0xFF, 0x38, BRANCH)
++OPDEF(CEE_BRFALSE, "brfalse", PopI, Push0, InlineBrTarget, X, 1, 0xFF, 0x39, COND_BRANCH)
++OPDEF(CEE_BRTRUE, "brtrue", PopI, Push0, InlineBrTarget, X, 1, 0xFF, 0x3A, COND_BRANCH)
++OPDEF(CEE_BEQ, "beq", Pop1+Pop1, Push0, InlineBrTarget, X, 1, 0xFF, 0x3B, COND_BRANCH)
++OPDEF(CEE_BGE, "bge", Pop1+Pop1, Push0, InlineBrTarget, X, 1, 0xFF, 0x3C, COND_BRANCH)
++OPDEF(CEE_BGT, "bgt", Pop1+Pop1, Push0, InlineBrTarget, X, 1, 0xFF, 0x3D, COND_BRANCH)
++OPDEF(CEE_BLE, "ble", Pop1+Pop1, Push0, InlineBrTarget, X, 1, 0xFF, 0x3E, COND_BRANCH)
++OPDEF(CEE_BLT, "blt", Pop1+Pop1, Push0, InlineBrTarget, X, 1, 0xFF, 0x3F, COND_BRANCH)
++OPDEF(CEE_BNE_UN, "bne.un", Pop1+Pop1, Push0, InlineBrTarget, X, 1, 0xFF, 0x40, COND_BRANCH)
++OPDEF(CEE_BGE_UN, "bge.un", Pop1+Pop1, Push0, InlineBrTarget, X, 1, 0xFF, 0x41, COND_BRANCH)
++OPDEF(CEE_BGT_UN, "bgt.un", Pop1+Pop1, Push0, InlineBrTarget, X, 1, 0xFF, 0x42, COND_BRANCH)
++OPDEF(CEE_BLE_UN, "ble.un", Pop1+Pop1, Push0, InlineBrTarget, X, 1, 0xFF, 0x43, COND_BRANCH)
++OPDEF(CEE_BLT_UN, "blt.un", Pop1+Pop1, Push0, InlineBrTarget, X, 1, 0xFF, 0x44, COND_BRANCH)
++OPDEF(CEE_SWITCH, "switch", PopI, Push0, InlineSwitch, X, 1, 0xFF, 0x45, COND_BRANCH)
++OPDEF(CEE_LDIND_I1, "ldind.i1", PopI, PushI, InlineNone, X, 1, 0xFF, 0x46, NEXT)
++OPDEF(CEE_LDIND_U1, "ldind.u1", PopI, PushI, InlineNone, X, 1, 0xFF, 0x47, NEXT)
++OPDEF(CEE_LDIND_I2, "ldind.i2", PopI, PushI, InlineNone, X, 1, 0xFF, 0x48, NEXT)
++OPDEF(CEE_LDIND_U2, "ldind.u2", PopI, PushI, InlineNone, X, 1, 0xFF, 0x49, NEXT)
++OPDEF(CEE_LDIND_I4, "ldind.i4", PopI, PushI, InlineNone, X, 1, 0xFF, 0x4A, NEXT)
++OPDEF(CEE_LDIND_U4, "ldind.u4", PopI, PushI, InlineNone, X, 1, 0xFF, 0x4B, NEXT)
++OPDEF(CEE_LDIND_I8, "ldind.i8", PopI, PushI8, InlineNone, X, 1, 0xFF, 0x4C, NEXT)
++OPDEF(CEE_LDIND_I, "ldind.i", PopI, PushI, InlineNone, X, 1, 0xFF, 0x4D, NEXT)
++OPDEF(CEE_LDIND_R4, "ldind.r4", PopI, PushR4, InlineNone, X, 1, 0xFF, 0x4E, NEXT)
++OPDEF(CEE_LDIND_R8, "ldind.r8", PopI, PushR8, InlineNone, X, 1, 0xFF, 0x4F, NEXT)
++OPDEF(CEE_LDIND_REF, "ldind.ref", PopI, PushRef, InlineNone, X, 1, 0xFF, 0x50, NEXT)
++OPDEF(CEE_STIND_REF, "stind.ref", PopI+PopI, Push0, InlineNone, X, 1, 0xFF, 0x51, NEXT)
++OPDEF(CEE_STIND_I1, "stind.i1", PopI+PopI, Push0, InlineNone, X, 1, 0xFF, 0x52, NEXT)
++OPDEF(CEE_STIND_I2, "stind.i2", PopI+PopI, Push0, InlineNone, X, 1, 0xFF, 0x53, NEXT)
++OPDEF(CEE_STIND_I4, "stind.i4", PopI+PopI, Push0, InlineNone, X, 1, 0xFF, 0x54, NEXT)
++OPDEF(CEE_STIND_I8, "stind.i8", PopI+PopI8, Push0, InlineNone, X, 1, 0xFF, 0x55, NEXT)
++OPDEF(CEE_STIND_R4, "stind.r4", PopI+PopR4, Push0, InlineNone, X, 1, 0xFF, 0x56, NEXT)
++OPDEF(CEE_STIND_R8, "stind.r8", PopI+PopR8, Push0, InlineNone, X, 1, 0xFF, 0x57, NEXT)
++OPDEF(CEE_ADD, "add", Pop1+Pop1, Push1, InlineNone, X, 1, 0xFF, 0x58, NEXT)
++OPDEF(CEE_SUB, "sub", Pop1+Pop1, Push1, InlineNone, X, 1, 0xFF, 0x59, NEXT)
++OPDEF(CEE_MUL, "mul", Pop1+Pop1, Push1, InlineNone, X, 1, 0xFF, 0x5A, NEXT)
++OPDEF(CEE_DIV, "div", Pop1+Pop1, Push1, InlineNone, X, 1, 0xFF, 0x5B, NEXT)
++OPDEF(CEE_DIV_UN, "div.un", Pop1+Pop1, Push1, InlineNone, X, 1, 0xFF, 0x5C, NEXT)
++OPDEF(CEE_REM, "rem", Pop1+Pop1, Push1, InlineNone, X, 1, 0xFF, 0x5D, NEXT)
++OPDEF(CEE_REM_UN, "rem.un", Pop1+Pop1, Push1, InlineNone, X, 1, 0xFF, 0x5E, NEXT)
++OPDEF(CEE_AND, "and", Pop1+Pop1, Push1, InlineNone, X, 1, 0xFF, 0x5F, NEXT)
++OPDEF(CEE_OR, "or", Pop1+Pop1, Push1, InlineNone, X, 1, 0xFF, 0x60, NEXT)
++OPDEF(CEE_XOR, "xor", Pop1+Pop1, Push1, InlineNone, X, 1, 0xFF, 0x61, NEXT)
++OPDEF(CEE_SHL, "shl", Pop1+Pop1, Push1, InlineNone, X, 1, 0xFF, 0x62, NEXT)
++OPDEF(CEE_SHR, "shr", Pop1+Pop1, Push1, InlineNone, X, 1, 0xFF, 0x63, NEXT)
++OPDEF(CEE_SHR_UN, "shr.un", Pop1+Pop1, Push1, InlineNone, X, 1, 0xFF, 0x64, NEXT)
++OPDEF(CEE_NEG, "neg", Pop1, Push1, InlineNone, X, 1, 0xFF, 0x65, NEXT)
++OPDEF(CEE_NOT, "not", Pop1, Push1, InlineNone, X, 1, 0xFF, 0x66, NEXT)
++OPDEF(CEE_CONV_I1, "conv.i1", Pop1, PushI, InlineNone, X, 1, 0xFF, 0x67, NEXT)
++OPDEF(CEE_CONV_I2, "conv.i2", Pop1, PushI, InlineNone, X, 1, 0xFF, 0x68, NEXT)
++OPDEF(CEE_CONV_I4, "conv.i4", Pop1, PushI, InlineNone, X, 1, 0xFF, 0x69, NEXT)
++OPDEF(CEE_CONV_I8, "conv.i8", Pop1, PushI8, InlineNone, X, 1, 0xFF, 0x6A, NEXT)
++OPDEF(CEE_CONV_R4, "conv.r4", Pop1, PushR4, InlineNone, X, 1, 0xFF, 0x6B, NEXT)
++OPDEF(CEE_CONV_R8, "conv.r8", Pop1, PushR8, InlineNone, X, 1, 0xFF, 0x6C, NEXT)
++OPDEF(CEE_CONV_U4, "conv.u4", Pop1, PushI, InlineNone, X, 1, 0xFF, 0x6D, NEXT)
++OPDEF(CEE_CONV_U8, "conv.u8", Pop1, PushI8, InlineNone, X, 1, 0xFF, 0x6E, NEXT)
++OPDEF(CEE_CALLVIRT, "callvirt", VarPop, VarPush, InlineMethod, X, 1, 0xFF, 0x6F, CALL)
++OPDEF(CEE_CPOBJ, "cpobj", PopI+PopI, Push0, InlineType, X, 1, 0xFF, 0x70, NEXT)
++OPDEF(CEE_LDOBJ, "ldobj", PopI, Push1, InlineType, X, 1, 0xFF, 0x71, NEXT)
++OPDEF(CEE_LDSTR, "ldstr", Pop0, PushRef, InlineString, X, 1, 0xFF, 0x72, NEXT)
++OPDEF(CEE_NEWOBJ, "newobj", VarPop, PushRef, InlineMethod, X, 1, 0xFF, 0x73, CALL)
++OPDEF(CEE_CASTCLASS, "castclass", PopRef, PushRef, InlineType, X, 1, 0xFF, 0x74, NEXT)
++OPDEF(CEE_ISINST, "isinst", PopRef, PushI, InlineType, X, 1, 0xFF, 0x75, NEXT)
++OPDEF(CEE_CONV_R_UN, "conv.r.un", Pop1, PushR8, InlineNone, X, 1, 0xFF, 0x76, NEXT)
++OPDEF(CEE_UNUSED58, "unused58", Pop0, Push0, InlineNone, X, 1, 0xFF, 0x77, NEXT)
++OPDEF(CEE_UNUSED1, "unused1", Pop0, Push0, InlineNone, X, 1, 0xFF, 0x78, NEXT)
++OPDEF(CEE_UNBOX, "unbox", PopRef, PushI, InlineType, X, 1, 0xFF, 0x79, NEXT)
++OPDEF(CEE_THROW, "throw", PopRef, Push0, InlineNone, X, 1, 0xFF, 0x7A, ERROR)
++OPDEF(CEE_LDFLD, "ldfld", PopRef, Push1, InlineField, X, 1, 0xFF, 0x7B, NEXT)
++OPDEF(CEE_LDFLDA, "ldflda", PopRef, PushI, InlineField, X, 1, 0xFF, 0x7C, NEXT)
++OPDEF(CEE_STFLD, "stfld", PopRef+Pop1, Push0, InlineField, X, 1, 0xFF, 0x7D, NEXT)
++OPDEF(CEE_LDSFLD, "ldsfld", Pop0, Push1, InlineField, X, 1, 0xFF, 0x7E, NEXT)
++OPDEF(CEE_LDSFLDA, "ldsflda", Pop0, PushI, InlineField, X, 1, 0xFF, 0x7F, NEXT)
++OPDEF(CEE_STSFLD, "stsfld", Pop1, Push0, InlineField, X, 1, 0xFF, 0x80, NEXT)
++OPDEF(CEE_STOBJ, "stobj", PopI+Pop1, Push0, InlineType, X, 1, 0xFF, 0x81, NEXT)
++OPDEF(CEE_CONV_OVF_I1_UN, "conv.ovf.i1.un", Pop1, PushI, InlineNone, X, 1, 0xFF, 0x82, NEXT)
++OPDEF(CEE_CONV_OVF_I2_UN, "conv.ovf.i2.un", Pop1, PushI, InlineNone, X, 1, 0xFF, 0x83, NEXT)
++OPDEF(CEE_CONV_OVF_I4_UN, "conv.ovf.i4.un", Pop1, PushI, InlineNone, X, 1, 0xFF, 0x84, NEXT)
++OPDEF(CEE_CONV_OVF_I8_UN, "conv.ovf.i8.un", Pop1, PushI8, InlineNone, X, 1, 0xFF, 0x85, NEXT)
++OPDEF(CEE_CONV_OVF_U1_UN, "conv.ovf.u1.un", Pop1, PushI, InlineNone, X, 1, 0xFF, 0x86, NEXT)
++OPDEF(CEE_CONV_OVF_U2_UN, "conv.ovf.u2.un", Pop1, PushI, InlineNone, X, 1, 0xFF, 0x87, NEXT)
++OPDEF(CEE_CONV_OVF_U4_UN, "conv.ovf.u4.un", Pop1, PushI, InlineNone, X, 1, 0xFF, 0x88, NEXT)
++OPDEF(CEE_CONV_OVF_U8_UN, "conv.ovf.u8.un", Pop1, PushI8, InlineNone, X, 1, 0xFF, 0x89, NEXT)
++OPDEF(CEE_CONV_OVF_I_UN, "conv.ovf.i.un", Pop1, PushI, InlineNone, X, 1, 0xFF, 0x8A, NEXT)
++OPDEF(CEE_CONV_OVF_U_UN, "conv.ovf.u.un", Pop1, PushI, InlineNone, X, 1, 0xFF, 0x8B, NEXT)
++OPDEF(CEE_BOX, "box", Pop1, PushRef, InlineType, X, 1, 0xFF, 0x8C, NEXT)
++OPDEF(CEE_NEWARR, "newarr", PopI, PushRef, InlineType, X, 1, 0xFF, 0x8D, NEXT)
++OPDEF(CEE_LDLEN, "ldlen", PopRef, PushI, InlineNone, X, 1, 0xFF, 0x8E, NEXT)
++OPDEF(CEE_LDELEMA, "ldelema", PopRef+PopI, PushI, InlineType, X, 1, 0xFF, 0x8F, NEXT)
++OPDEF(CEE_LDELEM_I1, "ldelem.i1", PopRef+PopI, PushI, InlineNone, X, 1, 0xFF, 0x90, NEXT)
++OPDEF(CEE_LDELEM_U1, "ldelem.u1", PopRef+PopI, PushI, InlineNone, X, 1, 0xFF, 0x91, NEXT)
++OPDEF(CEE_LDELEM_I2, "ldelem.i2", PopRef+PopI, PushI, InlineNone, X, 1, 0xFF, 0x92, NEXT)
++OPDEF(CEE_LDELEM_U2, "ldelem.u2", PopRef+PopI, PushI, InlineNone, X, 1, 0xFF, 0x93, NEXT)
++OPDEF(CEE_LDELEM_I4, "ldelem.i4", PopRef+PopI, PushI, InlineNone, X, 1, 0xFF, 0x94, NEXT)
++OPDEF(CEE_LDELEM_U4, "ldelem.u4", PopRef+PopI, PushI, InlineNone, X, 1, 0xFF, 0x95, NEXT)
++OPDEF(CEE_LDELEM_I8, "ldelem.i8", PopRef+PopI, PushI8, InlineNone, X, 1, 0xFF, 0x96, NEXT)
++OPDEF(CEE_LDELEM_I, "ldelem.i", PopRef+PopI, PushI, InlineNone, X, 1, 0xFF, 0x97, NEXT)
++OPDEF(CEE_LDELEM_R4, "ldelem.r4", PopRef+PopI, PushR4, InlineNone, X, 1, 0xFF, 0x98, NEXT)
++OPDEF(CEE_LDELEM_R8, "ldelem.r8", PopRef+PopI, PushR8, InlineNone, X, 1, 0xFF, 0x99, NEXT)
++OPDEF(CEE_LDELEM_REF, "ldelem.ref", PopRef+PopI, PushRef, InlineNone, X, 1, 0xFF, 0x9A, NEXT)
++OPDEF(CEE_STELEM_I, "stelem.i", PopRef+PopI+PopI, Push0, InlineNone, X, 1, 0xFF, 0x9B, NEXT)
++OPDEF(CEE_STELEM_I1, "stelem.i1", PopRef+PopI+PopI, Push0, InlineNone, X, 1, 0xFF, 0x9C, NEXT)
++OPDEF(CEE_STELEM_I2, "stelem.i2", PopRef+PopI+PopI, Push0, InlineNone, X, 1, 0xFF, 0x9D, NEXT)
++OPDEF(CEE_STELEM_I4, "stelem.i4", PopRef+PopI+PopI, Push0, InlineNone, X, 1, 0xFF, 0x9E, NEXT)
++OPDEF(CEE_STELEM_I8, "stelem.i8", PopRef+PopI+PopI8, Push0, InlineNone, X, 1, 0xFF, 0x9F, NEXT)
++OPDEF(CEE_STELEM_R4, "stelem.r4", PopRef+PopI+PopR4, Push0, InlineNone, X, 1, 0xFF, 0xA0, NEXT)
++OPDEF(CEE_STELEM_R8, "stelem.r8", PopRef+PopI+PopR8, Push0, InlineNone, X, 1, 0xFF, 0xA1, NEXT)
++OPDEF(CEE_STELEM_REF, "stelem.ref", PopRef+PopI+PopRef, Push0, InlineNone, X, 1, 0xFF, 0xA2, NEXT)
++OPDEF(CEE_LDELEM, "ldelem", PopRef+PopI, Push1, InlineType, X, 1, 0xFF, 0xA3, NEXT)
++OPDEF(CEE_STELEM, "stelem", PopRef+PopI+Pop1, Push0, InlineType, X, 1, 0xFF, 0xA4, NEXT)
++OPDEF(CEE_UNBOX_ANY, "unbox.any", PopRef, Push1, InlineType, X, 1, 0xFF, 0xA5, NEXT)
++OPDEF(CEE_UNUSED5, "unused5", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xA6, NEXT)
++OPDEF(CEE_UNUSED6, "unused6", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xA7, NEXT)
++OPDEF(CEE_UNUSED7, "unused7", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xA8, NEXT)
++OPDEF(CEE_UNUSED8, "unused8", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xA9, NEXT)
++OPDEF(CEE_UNUSED9, "unused9", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xAA, NEXT)
++OPDEF(CEE_UNUSED10, "unused10", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xAB, NEXT)
++OPDEF(CEE_UNUSED11, "unused11", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xAC, NEXT)
++OPDEF(CEE_UNUSED12, "unused12", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xAD, NEXT)
++OPDEF(CEE_UNUSED13, "unused13", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xAE, NEXT)
++OPDEF(CEE_UNUSED14, "unused14", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xAF, NEXT)
++OPDEF(CEE_UNUSED15, "unused15", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xB0, NEXT)
++OPDEF(CEE_UNUSED16, "unused16", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xB1, NEXT)
++OPDEF(CEE_UNUSED17, "unused17", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xB2, NEXT)
++OPDEF(CEE_CONV_OVF_I1, "conv.ovf.i1", Pop1, PushI, InlineNone, X, 1, 0xFF, 0xB3, NEXT)
++OPDEF(CEE_CONV_OVF_U1, "conv.ovf.u1", Pop1, PushI, InlineNone, X, 1, 0xFF, 0xB4, NEXT)
++OPDEF(CEE_CONV_OVF_I2, "conv.ovf.i2", Pop1, PushI, InlineNone, X, 1, 0xFF, 0xB5, NEXT)
++OPDEF(CEE_CONV_OVF_U2, "conv.ovf.u2", Pop1, PushI, InlineNone, X, 1, 0xFF, 0xB6, NEXT)
++OPDEF(CEE_CONV_OVF_I4, "conv.ovf.i4", Pop1, PushI, InlineNone, X, 1, 0xFF, 0xB7, NEXT)
++OPDEF(CEE_CONV_OVF_U4, "conv.ovf.u4", Pop1, PushI, InlineNone, X, 1, 0xFF, 0xB8, NEXT)
++OPDEF(CEE_CONV_OVF_I8, "conv.ovf.i8", Pop1, PushI8, InlineNone, X, 1, 0xFF, 0xB9, NEXT)
++OPDEF(CEE_CONV_OVF_U8, "conv.ovf.u8", Pop1, PushI8, InlineNone, X, 1, 0xFF, 0xBA, NEXT)
++OPDEF(CEE_UNUSED50, "unused50", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xBB, NEXT)
++OPDEF(CEE_UNUSED18, "unused18", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xBC, NEXT)
++OPDEF(CEE_UNUSED19, "unused19", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xBD, NEXT)
++OPDEF(CEE_UNUSED20, "unused20", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xBE, NEXT)
++OPDEF(CEE_UNUSED21, "unused21", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xBF, NEXT)
++OPDEF(CEE_UNUSED22, "unused22", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xC0, NEXT)
++OPDEF(CEE_UNUSED23, "unused23", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xC1, NEXT)
++OPDEF(CEE_REFANYVAL, "refanyval", Pop1, PushI, InlineType, X, 1, 0xFF, 0xC2, NEXT)
++OPDEF(CEE_CKFINITE, "ckfinite", Pop1, PushR8, InlineNone, X, 1, 0xFF, 0xC3, NEXT)
++OPDEF(CEE_UNUSED24, "unused24", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xC4, NEXT)
++OPDEF(CEE_UNUSED25, "unused25", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xC5, NEXT)
++OPDEF(CEE_MKREFANY, "mkrefany", PopI, Push1, InlineType, X, 1, 0xFF, 0xC6, NEXT)
++OPDEF(CEE_UNUSED59, "unused59", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xC7, NEXT)
++OPDEF(CEE_UNUSED60, "unused60", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xC8, NEXT)
++OPDEF(CEE_UNUSED61, "unused61", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xC9, NEXT)
++OPDEF(CEE_UNUSED62, "unused62", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xCA, NEXT)
++OPDEF(CEE_UNUSED63, "unused63", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xCB, NEXT)
++OPDEF(CEE_UNUSED64, "unused64", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xCC, NEXT)
++OPDEF(CEE_UNUSED65, "unused65", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xCD, NEXT)
++OPDEF(CEE_UNUSED66, "unused66", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xCE, NEXT)
++OPDEF(CEE_UNUSED67, "unused67", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xCF, NEXT)
++OPDEF(CEE_LDTOKEN, "ldtoken", Pop0, PushI, InlineTok, X, 1, 0xFF, 0xD0, NEXT)
++OPDEF(CEE_CONV_U2, "conv.u2", Pop1, PushI, InlineNone, X, 1, 0xFF, 0xD1, NEXT)
++OPDEF(CEE_CONV_U1, "conv.u1", Pop1, PushI, InlineNone, X, 1, 0xFF, 0xD2, NEXT)
++OPDEF(CEE_CONV_I, "conv.i", Pop1, PushI, InlineNone, X, 1, 0xFF, 0xD3, NEXT)
++OPDEF(CEE_CONV_OVF_I, "conv.ovf.i", Pop1, PushI, InlineNone, X, 1, 0xFF, 0xD4, NEXT)
++OPDEF(CEE_CONV_OVF_U, "conv.ovf.u", Pop1, PushI, InlineNone, X, 1, 0xFF, 0xD5, NEXT)
++OPDEF(CEE_ADD_OVF, "add.ovf", Pop1+Pop1, Push1, InlineNone, X, 1, 0xFF, 0xD6, NEXT)
++OPDEF(CEE_ADD_OVF_UN, "add.ovf.un", Pop1+Pop1, Push1, InlineNone, X, 1, 0xFF, 0xD7, NEXT)
++OPDEF(CEE_MUL_OVF, "mul.ovf", Pop1+Pop1, Push1, InlineNone, X, 1, 0xFF, 0xD8, NEXT)
++OPDEF(CEE_MUL_OVF_UN, "mul.ovf.un", Pop1+Pop1, Push1, InlineNone, X, 1, 0xFF, 0xD9, NEXT)
++OPDEF(CEE_SUB_OVF, "sub.ovf", Pop1+Pop1, Push1, InlineNone, X, 1, 0xFF, 0xDA, NEXT)
++OPDEF(CEE_SUB_OVF_UN, "sub.ovf.un", Pop1+Pop1, Push1, InlineNone, X, 1, 0xFF, 0xDB, NEXT)
++OPDEF(CEE_ENDFINALLY, "endfinally", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xDC, RETURN)
++OPDEF(CEE_LEAVE, "leave", Pop0, Push0, InlineBrTarget, X, 1, 0xFF, 0xDD, BRANCH)
++OPDEF(CEE_LEAVE_S, "leave.s", Pop0, Push0, ShortInlineBrTarget, X, 1, 0xFF, 0xDE, BRANCH)
++OPDEF(CEE_STIND_I, "stind.i", PopI+PopI, Push0, InlineNone, X, 1, 0xFF, 0xDF, NEXT)
++OPDEF(CEE_CONV_U, "conv.u", Pop1, PushI, InlineNone, X, 1, 0xFF, 0xE0, NEXT)
++OPDEF(CEE_UNUSED26, "unused26", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xE1, NEXT)
++OPDEF(CEE_UNUSED27, "unused27", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xE2, NEXT)
++OPDEF(CEE_UNUSED28, "unused28", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xE3, NEXT)
++OPDEF(CEE_UNUSED29, "unused29", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xE4, NEXT)
++OPDEF(CEE_UNUSED30, "unused30", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xE5, NEXT)
++OPDEF(CEE_UNUSED31, "unused31", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xE6, NEXT)
++OPDEF(CEE_UNUSED32, "unused32", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xE7, NEXT)
++OPDEF(CEE_UNUSED33, "unused33", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xE8, NEXT)
++OPDEF(CEE_UNUSED34, "unused34", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xE9, NEXT)
++OPDEF(CEE_UNUSED35, "unused35", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xEA, NEXT)
++OPDEF(CEE_UNUSED36, "unused36", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xEB, NEXT)
++OPDEF(CEE_UNUSED37, "unused37", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xEC, NEXT)
++OPDEF(CEE_UNUSED38, "unused38", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xED, NEXT)
++OPDEF(CEE_UNUSED39, "unused39", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xEE, NEXT)
++OPDEF(CEE_UNUSED40, "unused40", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xEF, NEXT)
++OPDEF(CEE_UNUSED41, "unused41", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xF0, NEXT)
++OPDEF(CEE_UNUSED42, "unused42", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xF1, NEXT)
++OPDEF(CEE_UNUSED43, "unused43", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xF2, NEXT)
++OPDEF(CEE_UNUSED44, "unused44", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xF3, NEXT)
++OPDEF(CEE_UNUSED45, "unused45", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xF4, NEXT)
++OPDEF(CEE_UNUSED46, "unused46", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xF5, NEXT)
++OPDEF(CEE_UNUSED47, "unused47", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xF6, NEXT)
++OPDEF(CEE_UNUSED48, "unused48", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xF7, NEXT)
++OPDEF(CEE_PREFIX7, "prefix7", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xF8, META)
++OPDEF(CEE_PREFIX6, "prefix6", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xF9, META)
++OPDEF(CEE_PREFIX5, "prefix5", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xFA, META)
++OPDEF(CEE_PREFIX4, "prefix4", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xFB, META)
++OPDEF(CEE_PREFIX3, "prefix3", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xFC, META)
++OPDEF(CEE_PREFIX2, "prefix2", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xFD, META)
++OPDEF(CEE_PREFIX1, "prefix1", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xFE, META)
++OPDEF(CEE_PREFIXREF, "prefixref", Pop0, Push0, InlineNone, X, 1, 0xFF, 0xFF, META)
++OPDEF(CEE_ARGLIST, "arglist", Pop0, PushI, InlineNone, X, 2, 0xFE, 0x00, NEXT)
++OPDEF(CEE_CEQ, "ceq", Pop1+Pop1, PushI, InlineNone, X, 2, 0xFE, 0x01, NEXT)
++OPDEF(CEE_CGT, "cgt", Pop1+Pop1, PushI, InlineNone, X, 2, 0xFE, 0x02, NEXT)
++OPDEF(CEE_CGT_UN, "cgt.un", Pop1+Pop1, PushI, InlineNone, X, 2, 0xFE, 0x03, NEXT)
++OPDEF(CEE_CLT, "clt", Pop1+Pop1, PushI, InlineNone, X, 2, 0xFE, 0x04, NEXT)
++OPDEF(CEE_CLT_UN, "clt.un", Pop1+Pop1, PushI, InlineNone, X, 2, 0xFE, 0x05, NEXT)
++OPDEF(CEE_LDFTN, "ldftn", Pop0, PushI, InlineMethod, X, 2, 0xFE, 0x06, NEXT)
++OPDEF(CEE_LDVIRTFTN, "ldvirtftn", PopRef, PushI, InlineMethod, X, 2, 0xFE, 0x07, NEXT)
++OPDEF(CEE_UNUSED56, "unused56", Pop0, Push0, InlineNone, X, 2, 0xFE, 0x08, NEXT)
++OPDEF(CEE_LDARG, "ldarg", Pop0, Push1, InlineVar, X, 2, 0xFE, 0x09, NEXT)
++OPDEF(CEE_LDARGA, "ldarga", Pop0, PushI, InlineVar, X, 2, 0xFE, 0x0A, NEXT)
++OPDEF(CEE_STARG, "starg", Pop1, Push0, InlineVar, X, 2, 0xFE, 0x0B, NEXT)
++OPDEF(CEE_LDLOC, "ldloc", Pop0, Push1, InlineVar, X, 2, 0xFE, 0x0C, NEXT)
++OPDEF(CEE_LDLOCA, "ldloca", Pop0, PushI, InlineVar, X, 2, 0xFE, 0x0D, NEXT)
++OPDEF(CEE_STLOC, "stloc", Pop1, Push0, InlineVar, X, 2, 0xFE, 0x0E, NEXT)
++OPDEF(CEE_LOCALLOC, "localloc", PopI, PushI, InlineNone, X, 2, 0xFE, 0x0F, NEXT)
++OPDEF(CEE_UNUSED57, "unused57", Pop0, Push0, InlineNone, X, 2, 0xFE, 0x10, NEXT)
++OPDEF(CEE_ENDFILTER, "endfilter", PopI, Push0, InlineNone, X, 2, 0xFE, 0x11, RETURN)
++OPDEF(CEE_UNALIGNED_, "unaligned.", Pop0, Push0, ShortInlineI, X, 2, 0xFE, 0x12, META)
++OPDEF(CEE_VOLATILE_, "volatile.", Pop0, Push0, InlineNone, X, 2, 0xFE, 0x13, META)
++OPDEF(CEE_TAIL_, "tail.", Pop0, Push0, InlineNone, X, 2, 0xFE, 0x14, META)
++OPDEF(CEE_INITOBJ, "initobj", PopI, Push0, InlineType, X, 2, 0xFE, 0x15, NEXT)
++OPDEF(CEE_CONSTRAINED_, "constrained.", Pop0, Push0, InlineType, X, 2, 0xFE, 0x16, META)
++OPDEF(CEE_CPBLK, "cpblk", PopI+PopI+PopI, Push0, InlineNone, X, 2, 0xFE, 0x17, NEXT)
++OPDEF(CEE_INITBLK, "initblk", PopI+PopI+PopI, Push0, InlineNone, X, 2, 0xFE, 0x18, NEXT)
++OPDEF(CEE_NO_, "no.", Pop0, Push0, ShortInlineI, X, 2, 0xFE, 0x19, NEXT)
++OPDEF(CEE_RETHROW, "rethrow", Pop0, Push0, InlineNone, X, 2, 0xFE, 0x1A, ERROR)
++OPDEF(CEE_UNUSED, "unused", Pop0, Push0, InlineNone, X, 2, 0xFE, 0x1B, NEXT)
++OPDEF(CEE_SIZEOF, "sizeof", Pop0, PushI, InlineType, X, 2, 0xFE, 0x1C, NEXT)
++OPDEF(CEE_REFANYTYPE, "refanytype", Pop1, PushI, InlineNone, X, 2, 0xFE, 0x1D, NEXT)
++OPDEF(CEE_READONLY_, "readonly.", Pop0, Push0, InlineNone, X, 2, 0xFE, 0x1E, META)
++OPDEF(CEE_UNUSED53, "unused53", Pop0, Push0, InlineNone, X, 2, 0xFE, 0x1F, NEXT)
++OPDEF(CEE_UNUSED54, "unused54", Pop0, Push0, InlineNone, X, 2, 0xFE, 0x20, NEXT)
++OPDEF(CEE_UNUSED55, "unused55", Pop0, Push0, InlineNone, X, 2, 0xFE, 0x21, NEXT)
++OPDEF(CEE_UNUSED70, "unused70", Pop0, Push0, InlineNone, X, 2, 0xFE, 0x22, NEXT)
++OPDEF(CEE_ILLEGAL, "illegal", Pop0, Push0, InlineNone, X, 2, 0x00, 0x00, META)
++OPDEF(CEE_ENDMAC, "endmac", Pop0, Push0, InlineNone, X, 2, 0x00, 0x00, META)
++OPDEF(CEE_MONO_ICALL, "mono_icall", VarPop, VarPush, ShortInlineI, X, 2, 0xF0, 0x00, NEXT)
++OPDEF(CEE_MONO_OBJADDR, "mono_objaddr", Pop1, PushI, InlineNone, X, 2, 0xF0, 0x01, NEXT)
++OPDEF(CEE_MONO_LDPTR, "mono_ldptr", Pop0, PushI, InlineI, X, 2, 0xF0, 0x02, NEXT)
++OPDEF(CEE_MONO_VTADDR, "mono_vtaddr", Pop1, PushI, InlineNone, X, 2, 0xF0, 0x03, NEXT)
++OPDEF(CEE_MONO_NEWOBJ, "mono_newobj", Pop0, PushRef, InlineType, X, 2, 0xF0, 0x04, NEXT)
++OPDEF(CEE_MONO_RETOBJ, "mono_retobj", PopI, Push0, InlineType, X, 2, 0xF0, 0x05, RETURN)
++OPDEF(CEE_MONO_LDNATIVEOBJ, "mono_ldnativeobj", PopI, Push1, InlineType, X, 2, 0xF0, 0x06, RETURN)
++OPDEF(CEE_MONO_CISINST, "mono_cisinst", PopRef, Push1, InlineType, X, 2, 0xF0, 0x07, NEXT)
++OPDEF(CEE_MONO_CCASTCLASS, "mono_ccastclass", PopRef, Push1, InlineType, X, 2, 0xF0, 0x08, NEXT)
++OPDEF(CEE_MONO_SAVE_LMF, "mono_save_lmf", Pop0, Push0, InlineNone, X, 2, 0xF0, 0x09, NEXT)
++OPDEF(CEE_MONO_RESTORE_LMF, "mono_restore_lmf", Pop0, Push0, InlineNone, X, 2, 0xF0, 0x0A, NEXT)
++OPDEF(CEE_MONO_CLASSCONST, "mono_classconst", Pop0, PushI, InlineI, X, 2, 0xF0, 0x0B, NEXT)
++OPDEF(CEE_MONO_NOT_TAKEN, "mono_not_taken", Pop0, Push0, InlineNone, X, 2, 0xF0, 0x0C, NEXT)
++OPDEF(CEE_MONO_TLS, "mono_tls", Pop0, PushI, InlineI, X, 2, 0xF0, 0x0D, NEXT)
++OPDEF(CEE_MONO_ICALL_ADDR, "mono_icall_addr", Pop0, PushI, InlineI, X, 2, 0xF0, 0x0E, NEXT)
++OPDEF(CEE_MONO_DYN_CALL, "mono_dyn_call", Pop0, PushI, InlineI, X, 2, 0xF0, 0x0F, NEXT)
++OPDEF(CEE_MONO_MEMORY_BARRIER, "mono_memory_barrier", Pop0, Push0, InlineI, X, 2, 0xF0, 0x10, NEXT)
++OPDEF(CEE_MONO_JIT_ATTACH, "mono_jit_attach", Pop0, Push0, InlineNone, X, 2, 0xF0, 0x11, NEXT)
++OPDEF(CEE_MONO_JIT_DETACH, "mono_jit_detach", Pop0, Push0, InlineNone, X, 2, 0xF0, 0x12, NEXT)
++OPDEF(CEE_MONO_JIT_ICALL_ADDR, "mono_jit_icall_addr", Pop0, PushI, InlineI, X, 2, 0xF0, 0x13, NEXT)
++OPDEF(CEE_MONO_LDPTR_INT_REQ_FLAG, "mono_ldptr_int_req_flag", Pop0, PushI, InlineNone, X, 2, 0xF0, 0x14, NEXT)
++OPDEF(CEE_MONO_LDPTR_CARD_TABLE, "mono_ldptr_card_table", Pop0, PushI, InlineNone, X, 2, 0xF0, 0x15, NEXT)
++OPDEF(CEE_MONO_LDPTR_NURSERY_START, "mono_ldptr_nursery_start", Pop0, PushI, InlineNone, X, 2, 0xF0, 0x16, NEXT)
++OPDEF(CEE_MONO_LDPTR_NURSERY_BITS, "mono_ldptr_nursery_bits", Pop0, PushI, InlineNone, X, 2, 0xF0, 0x17, NEXT)
++OPDEF(CEE_MONO_CALLI_EXTRA_ARG, "mono_calli_extra_arg", VarPop, VarPush, InlineSig, X, 2, 0xF0, 0x18, CALL)
++OPDEF(CEE_MONO_LDDOMAIN, "mono_lddomain", Pop0, PushI, InlineNone, X, 2, 0xF0, 0x19, NEXT)
++OPDEF(CEE_MONO_ATOMIC_STORE_I4, "mono_atomic_store_i4", PopI+PopI, Push0, InlineI, X, 2, 0xF0, 0x1A, NEXT)
++OPDEF(CEE_MONO_GET_LAST_ERROR, "mono_get_last_error", Pop0, PushI, InlineNone, X, 2, 0xF0, 0x1B, NEXT)
++OPDEF(CEE_MONO_GET_RGCTX_ARG, "mono_get_rgctx_arg", Pop0, PushI, InlineNone, X, 2, 0xF0, 0x1C, NEXT)
++OPDEF(CEE_MONO_JIT_ATTACH_EX, "mono_jit_attach_ex", Pop0, Push0, InlineNone, X, 2, 0xF0, 0x1D, NEXT)
++#ifndef OPALIAS
++#define _MONO_CIL_OPALIAS_DEFINED_
++#define OPALIAS(a,s,r)
++#endif
++
++OPALIAS(CEE_BRNULL,     "brnull",    CEE_BRFALSE)
++OPALIAS(CEE_BRNULL_S,   "brnull.s",  CEE_BRFALSE_S)
++OPALIAS(CEE_BRZERO,     "brzero",    CEE_BRFALSE)
++OPALIAS(CEE_BRZERO_S,   "brzero.s",  CEE_BRFALSE_S)
++OPALIAS(CEE_BRINST,     "brinst",    CEE_BRTRUE)
++OPALIAS(CEE_BRINST_S,   "brinst.s",  CEE_BRTRUE_S)
++OPALIAS(CEE_LDIND_U8,   "ldind.u8",  CEE_LDIND_I8)
++OPALIAS(CEE_LDELEM_U8,  "ldelem.u8", CEE_LDELEM_I8)
++OPALIAS(CEE_LDX_I4_MIX, "ldc.i4.M1", CEE_LDC_I4_M1)
++OPALIAS(CEE_ENDFAULT,   "endfault",  CEE_ENDFINALLY)
++
++#ifdef _MONO_CIL_OPALIAS_DEFINED_
++#undef OPALIAS
++#undef _MONO_CIL_OPALIAS_DEFINED_
++#endif
+diff --git a/mono/metadata/class-internals.h b/mono/metadata/class-internals.h
+index 39061bd..ab5863f 100644
+--- a/mono/metadata/class-internals.h
++++ b/mono/metadata/class-internals.h
+@@ -463,6 +463,7 @@ struct MonoVTable {
+ 	guint8      rank;
+ 	/* Keep this a guint8, the jit depends on it */
+ 	guint8      initialized; /* cctor has been run */
++	guint8		icastable; /* class implements ICastable */
+ 	guint remote          : 1; /* class is remotely activated */
+ 	guint init_failed     : 1; /* cctor execution failed */
+ 	guint has_static_fields : 1; /* pointer to the data stored at the end of the vtable array */
+@@ -1113,6 +1114,8 @@ typedef struct {
+ 	MonoClass *critical_finalizer_object; /* MAYBE NULL */
+ 	MonoClass *generic_ireadonlylist_class;
+ 	MonoClass *threadpool_wait_callback_class;
++	MonoClass *icastable_class;
++	MonoClass *icastablehelpers_class;
+ 	MonoMethod *threadpool_perform_wait_callback_method;
+ } MonoDefaults;
+ 
+@@ -1126,6 +1129,7 @@ typedef struct {
+ 
+ #define mono_object_is_transparent_proxy(object) (mono_class_is_transparent_proxy (mono_object_class (object)))
+ 
++#define mono_vtable_is_icastable(vtable) (vtable->icastable != 0)
+ 
+ #define GENERATE_GET_CLASS_WITH_CACHE_DECL(shortname) \
+ MonoClass* mono_class_get_##shortname##_class (void);
+diff --git a/mono/metadata/domain.c b/mono/metadata/domain.c
+index 1d353b1..99f3eb2 100644
+--- a/mono/metadata/domain.c
++++ b/mono/metadata/domain.c
+@@ -757,6 +757,12 @@ mono_init_internal (const char *filename, const char *exe_filename, const char *
+ 	mono_defaults.threadpool_wait_callback_class = mono_class_load_from_name (
+ 		mono_defaults.corlib, "System.Threading", "_ThreadPoolWaitCallback");
+ 
++	mono_defaults.icastable_class = mono_class_load_from_name (
++		mono_defaults.corlib, "System.Runtime.CompilerServices", "ICastable");
++
++	mono_defaults.icastablehelpers_class = mono_class_load_from_name (
++		mono_defaults.corlib, "System.Runtime.CompilerServices", "ICastableHelpers");
++
+ 	mono_defaults.threadpool_perform_wait_callback_method = mono_class_get_method_from_name (
+ 		mono_defaults.threadpool_wait_callback_class, "PerformWaitCallback", 0);
+ 
+diff --git a/mono/metadata/marshal.c b/mono/metadata/marshal.c
+index 46c34f7..656ab8c 100644
+--- a/mono/metadata/marshal.c
++++ b/mono/metadata/marshal.c
+@@ -153,6 +153,9 @@ mono_marshal_set_last_error_windows (int error);
+ static MonoObject *
+ mono_marshal_isinst_with_cache (MonoObject *obj, MonoClass *klass, uintptr_t *cache);
+ 
++static MonoObject *
++mono_marshal_castclass_with_cache (MonoObject *obj, MonoClass *klass, uintptr_t *cache);
++
+ static void init_safe_handle (void);
+ 
+ static void*
+@@ -393,10 +396,12 @@ mono_marshal_init (void)
+ 		register_icall (mono_gchandle_get_target, "mono_gchandle_get_target", "object int32", TRUE);
+ 		register_icall (mono_gchandle_new, "mono_gchandle_new", "uint32 object bool", TRUE);
+ 		register_icall (mono_marshal_isinst_with_cache, "mono_marshal_isinst_with_cache", "object object ptr ptr", FALSE);
++		register_icall (mono_marshal_castclass_with_cache, "mono_marshal_castclass_with_cache", "object object ptr ptr", FALSE);
+ 		register_icall (mono_marshal_ftnptr_eh_callback, "mono_marshal_ftnptr_eh_callback", "void uint32", TRUE);
+ 		register_icall (mono_threads_enter_gc_safe_region_unbalanced, "mono_threads_enter_gc_safe_region_unbalanced", "ptr ptr", TRUE);
+ 		register_icall (mono_threads_exit_gc_safe_region_unbalanced, "mono_threads_exit_gc_safe_region_unbalanced", "void ptr ptr", TRUE);
+ 		register_icall (mono_threads_attach_coop, "mono_threads_attach_coop", "ptr ptr ptr", TRUE);
++		register_icall (mono_threads_attach_coop, "mono_threads_attach_coop_ex", "ptr ptr ptr", TRUE);
+ 		register_icall (mono_threads_detach_coop, "mono_threads_detach_coop", "void ptr ptr", TRUE);
+ 		register_icall (mono_icall_start, "mono_icall_start", "ptr ptr ptr", TRUE);
+ 		register_icall (mono_icall_end, "mono_icall_end", "void ptr ptr ptr", TRUE);
+@@ -8462,16 +8467,29 @@ mono_marshal_get_native_func_wrapper_aot (MonoClass *klass)
+ 	return res;
+ }
+ 
+-/*
+- * mono_marshal_emit_managed_wrapper:
+- *
+- *   Emit the body of a native-to-managed wrapper. INVOKE_SIG is the signature of
+- * the delegate which wraps the managed method to be called. For closed delegates,
+- * it could have fewer parameters than the method it wraps.
+- * THIS_LOC is the memory location where the target of the delegate is stored.
+- */
+-void
+-mono_marshal_emit_managed_wrapper (MonoMethodBuilder *mb, MonoMethodSignature *invoke_sig, MonoMarshalSpec **mspecs, EmitMarshalContext* m, MonoMethod *method, uint32_t target_handle)
++gboolean
++mono_is_native_callable_method (MonoMethod *method)
++{
++	gboolean result = FALSE;
++
++	if (method->flags & METHOD_ATTRIBUTE_STATIC) {
++		MonoError error;
++		MonoCustomAttrInfo *info = mono_custom_attrs_from_method_checked (method, &error);
++		if (info != NULL && info->num_attrs != 0) {
++			for (int i = 0; i < info->num_attrs; i++) {
++				if (!strcmp (info->attrs[i].ctor->klass->name, "NativeCallableAttribute")) {
++					result = TRUE;
++					break;
++				}
++			}
++		}
++	}
++
++	return result;
++}
++
++static void
++marshal_emit_managd_wrapper (MonoMethodBuilder *mb, MonoMethodSignature *invoke_sig, MonoMarshalSpec **mspecs, EmitMarshalContext* m, MonoMethod *method, uint32_t target_handle, gboolean native_callable_method)
+ {
+ #ifndef ENABLE_ILGEN
+ 	MonoMethodSignature *sig, *csig;
+@@ -8589,13 +8607,19 @@ mono_marshal_emit_managed_wrapper (MonoMethodBuilder *mb, MonoMethodSignature *i
+ 
+ 	if (!mono_threads_is_coop_enabled ()) {
+ 		mono_mb_emit_byte (mb, MONO_CUSTOM_PREFIX);
+-		mono_mb_emit_byte (mb, CEE_MONO_JIT_ATTACH);
++		if (!native_callable_method)
++			mono_mb_emit_byte (mb, CEE_MONO_JIT_ATTACH);
++		else
++			mono_mb_emit_byte (mb, CEE_MONO_JIT_ATTACH_EX);
+ 	} else {
+ 		/* mono_threads_attach_coop (); */
+ 		mono_mb_emit_byte (mb, MONO_CUSTOM_PREFIX);
+ 		mono_mb_emit_byte (mb, CEE_MONO_LDDOMAIN);
+ 		mono_mb_emit_ldloc_addr (mb, attach_dummy_local);
+-		mono_mb_emit_icall (mb, mono_threads_attach_coop);
++		if (!native_callable_method)
++			mono_mb_emit_icall (mb, mono_threads_attach_coop);
++		else
++			mono_mb_emit_icall (mb, mono_threads_attach_coop_ex);
+ 		mono_mb_emit_stloc (mb, attach_cookie_local);
+ 	}
+ 
+@@ -8815,6 +8839,26 @@ mono_marshal_emit_managed_wrapper (MonoMethodBuilder *mb, MonoMethodSignature *i
+ #endif
+ }
+ 
++/*
++ * mono_marshal_emit_managed_wrapper:
++ *
++ *   Emit the body of a native-to-managed wrapper. INVOKE_SIG is the signature of
++ * the delegate which wraps the managed method to be called. For closed delegates,
++ * it could have fewer parameters than the method it wraps.
++ * THIS_LOC is the memory location where the target of the delegate is stored.
++ */
++void
++mono_marshal_emit_managed_wrapper (MonoMethodBuilder *mb, MonoMethodSignature *invoke_sig, MonoMarshalSpec **mspecs, EmitMarshalContext* m, MonoMethod *method, uint32_t target_handle)
++{
++	marshal_emit_managd_wrapper (mb, invoke_sig, mspecs, m, method, target_handle, FALSE);
++}
++
++void
++mono_marshal_emit_managed_wrapper_ex (MonoMethodBuilder *mb, MonoMethodSignature *invoke_sig, MonoMarshalSpec **mspecs, EmitMarshalContext* m, MonoMethod *method, uint32_t target_handle, gboolean native_callable_method)
++{
++	marshal_emit_managd_wrapper (mb, invoke_sig, mspecs, m, method, target_handle, native_callable_method);
++}
++
+ static void 
+ mono_marshal_set_callconv_from_modopt (MonoMethod *method, MonoMethodSignature *csig)
+ {
+@@ -8852,17 +8896,12 @@ mono_marshal_set_callconv_from_modopt (MonoMethod *method, MonoMethodSignature *
+ 	}
+ }
+ 
+-/**
+- * mono_marshal_get_managed_wrapper:
+- * Generates IL code to call managed methods from unmanaged code 
+- * If \p target_handle is \c 0, the wrapper info will be a \c WrapperInfo structure.
+- */
+-MonoMethod *
+-mono_marshal_get_managed_wrapper (MonoMethod *method, MonoClass *delegate_klass, uint32_t target_handle, MonoError *error)
++static MonoMethod *
++marshal_get_managed_wrapper (MonoMethod *method, MonoMethod *delegate_method, MonoClass *delegate_klass, uint32_t target_handle, gboolean native_callable_method, MonoError *error)
+ {
+-	MonoMethodSignature *sig, *csig, *invoke_sig;
++	MonoMethodSignature *sig, *delegate_csig, *delegate_sig;
+ 	MonoMethodBuilder *mb;
+-	MonoMethod *res, *invoke;
++	MonoMethod *res;
+ 	MonoMarshalSpec **mspecs;
+ 	MonoMethodPInvoke piinfo;
+ 	GHashTable *cache;
+@@ -8879,7 +8918,7 @@ mono_marshal_get_managed_wrapper (MonoMethod *method, MonoClass *delegate_klass,
+ 
+ 	/* 
+ 	 * FIXME: Should cache the method+delegate type pair, since the same method
+-	 * could be called with different delegates, thus different marshalling
++	 * could be called with different subjects, thus different marshalling
+ 	 * options.
+ 	 */
+ 	cache = get_cache (&mono_method_get_wrapper_cache (method)->managed_wrapper_cache, mono_aligned_addr_hash, NULL);
+@@ -8887,11 +8926,10 @@ mono_marshal_get_managed_wrapper (MonoMethod *method, MonoClass *delegate_klass,
+ 	if (!target_handle && (res = mono_marshal_find_in_cache (cache, method)))
+ 		return res;
+ 
+-	invoke = mono_get_delegate_invoke (delegate_klass);
+-	invoke_sig = mono_method_signature (invoke);
++	delegate_sig = mono_method_signature (delegate_method);
+ 
+-	mspecs = g_new0 (MonoMarshalSpec*, mono_method_signature (invoke)->param_count + 1);
+-	mono_method_get_marshal_info (invoke, mspecs);
++	mspecs = g_new0 (MonoMarshalSpec*, mono_method_signature (delegate_method)->param_count + 1);
++	mono_method_get_marshal_info (delegate_method, mspecs);
+ 
+ 	sig = mono_method_signature (method);
+ 
+@@ -8903,21 +8941,21 @@ mono_marshal_get_managed_wrapper (MonoMethod *method, MonoClass *delegate_klass,
+ 	/* we copy the signature, so that we can modify it */
+ 	if (target_handle)
+ 		/* Need to free this later */
+-		csig = mono_metadata_signature_dup (invoke_sig);
++		delegate_csig = mono_metadata_signature_dup (delegate_sig);
+ 	else
+-		csig = mono_metadata_signature_dup_full (method->klass->image, invoke_sig);
+-	csig->hasthis = 0;
+-	csig->pinvoke = 1;
++		delegate_csig = mono_metadata_signature_dup_full (method->klass->image, delegate_sig);
++	delegate_csig->hasthis = 0;
++	delegate_csig->pinvoke = 1;
+ 
+ 	memset (&m, 0, sizeof (m));
+ 	m.mb = mb;
+ 	m.sig = sig;
+ 	m.piinfo = NULL;
+ 	m.retobj_var = 0;
+-	m.csig = csig;
++	m.csig = delegate_csig;
+ 	m.image = method->klass->image;
+ 
+-	mono_marshal_set_callconv_from_modopt (invoke, csig);
++	mono_marshal_set_callconv_from_modopt (delegate_method, delegate_csig);
+ 
+ 	/* The attribute is only available in Net 2.0 */
+ 	if (mono_class_try_get_unmanaged_function_pointer_attribute_class ()) {
+@@ -8984,14 +9022,14 @@ mono_marshal_get_managed_wrapper (MonoMethod *method, MonoClass *delegate_klass,
+ 			m.piinfo = &piinfo;
+ 			piinfo.piflags = (call_conv << 8) | (charset ? (charset - 1) * 2 : 1) | set_last_error;
+ 
+-			csig->call_convention = call_conv - 1;
++			delegate_csig->call_convention = call_conv - 1;
+ 		}
+ 
+ 		if (cinfo && !cinfo->cached)
+ 			mono_custom_attrs_free (cinfo);
+ 	}
+ 
+-	mono_marshal_emit_managed_wrapper (mb, invoke_sig, mspecs, &m, method, target_handle);
++	mono_marshal_emit_managed_wrapper_ex (mb, delegate_sig, mspecs, &m, method, target_handle, native_callable_method);
+ 
+ 	if (!target_handle) {
+ 		WrapperInfo *info;
+@@ -9002,17 +9040,17 @@ mono_marshal_get_managed_wrapper (MonoMethod *method, MonoClass *delegate_klass,
+ 		info->d.native_to_managed.klass = delegate_klass;
+ 
+ 		res = mono_mb_create_and_cache_full (cache, method,
+-											 mb, csig, sig->param_count + 16,
++											 mb, delegate_csig, sig->param_count + 16,
+ 											 info, NULL);
+ 	} else {
+ #ifdef ENABLE_ILGEN
+ 		mb->dynamic = TRUE;
+ #endif
+-		res = mono_mb_create (mb, csig, sig->param_count + 16, NULL);
++		res = mono_mb_create (mb, delegate_csig, sig->param_count + 16, NULL);
+ 	}
+ 	mono_mb_free (mb);
+ 
+-	for (i = mono_method_signature (invoke)->param_count; i >= 0; i--)
++	for (i = mono_method_signature (delegate_method)->param_count; i >= 0; i--)
+ 		if (mspecs [i])
+ 			mono_metadata_free_marshal_spec (mspecs [i]);
+ 	g_free (mspecs);
+@@ -9022,6 +9060,23 @@ mono_marshal_get_managed_wrapper (MonoMethod *method, MonoClass *delegate_klass,
+ 	return res;
+ }
+ 
++/**
++ * mono_marshal_get_managed_wrapper:
++ * Generates IL code to call managed methods from unmanaged code
++ * If \p target_handle is \c 0, the wrapper info will be a \c WrapperInfo structure.
++ */
++MonoMethod *
++mono_marshal_get_managed_wrapper (MonoMethod *method, MonoClass *delegate_klass, uint32_t target_handle, MonoError *error)
++{
++	return marshal_get_managed_wrapper (method, mono_get_delegate_invoke (delegate_klass), delegate_klass, target_handle, FALSE, error);
++}
++
++MonoMethod *
++mono_marshal_get_managed_wrapper_ex (MonoMethod *method, MonoMethod *delegate_method, MonoClass *delegate_klass, uint32_t target_handle, gboolean native_callable_method, MonoError *error)
++{
++	return marshal_get_managed_wrapper (method, delegate_method, delegate_klass, target_handle, native_callable_method, error);
++}
++
+ gpointer
+ mono_marshal_get_vtfixup_ftnptr (MonoImage *image, guint32 token, guint16 type)
+ {
+@@ -9119,7 +9174,7 @@ mono_marshal_get_vtfixup_ftnptr (MonoImage *image, guint32 token, guint16 type)
+  * on the stack after a cache miss
+  */
+ static void
+-generate_check_cache (int obj_arg_position, int class_arg_position, int cache_arg_position, // In-parameters
++generate_check_cache (int obj_arg_position, int class_arg_position, int cache_arg_position, gpointer check_cache_icall, // In-parameters
+ 											int *null_obj, int *cache_hit_neg, int *cache_hit_pos, // Out-parameters
+ 											MonoMethodBuilder *mb)
+ {
+@@ -9165,15 +9220,54 @@ generate_check_cache (int obj_arg_position, int class_arg_position, int cache_ar
+ 	// slow path
+ 	mono_mb_patch_branch (mb, cache_miss_pos);
+ 
+-	// if isinst
++	// if isinst/castclass
+ 	mono_mb_emit_ldarg (mb, obj_arg_position);
+ 	mono_mb_emit_ldarg (mb, class_arg_position);
+ 	mono_mb_emit_ldarg (mb, cache_arg_position);
+-	mono_mb_emit_icall (mb, mono_marshal_isinst_with_cache);
++	mono_mb_emit_icall (mb, check_cache_icall);
+ }
+ 
+ #endif /* ENABLE_ILGEN */
+ 
++static MonoObject *
++mono_marshal_isinst_castclass_with_cache (MonoObject *obj, MonoClass *klass, uintptr_t *cache, gboolean throw_exception)
++{
++	MonoError error;
++	MonoObject *isinst = mono_object_isinst_checked (obj, klass, &error);
++
++	if (throw_exception && mono_error_set_pending_exception (&error)) {
++		return NULL;
++	} else if (!is_ok (&error)) {
++		mono_error_cleanup (&error);
++		return NULL;
++	}
++
++	if (mono_object_is_transparent_proxy (obj))
++		return isinst;
++
++	uintptr_t cache_update = (uintptr_t)obj->vtable;
++	if (!isinst)
++		cache_update = cache_update | 0x1;
++
++	*cache = cache_update;
++
++	return isinst;
++}
++
++/* this is an icall */
++static MonoObject *
++mono_marshal_isinst_with_cache (MonoObject *obj, MonoClass *klass, uintptr_t *cache)
++{
++	return mono_marshal_isinst_castclass_with_cache (obj, klass, cache, FALSE);
++}
++
++/* this is an icall */
++static MonoObject *
++mono_marshal_castclass_with_cache (MonoObject *obj, MonoClass *klass, uintptr_t *cache)
++{
++	return mono_marshal_isinst_castclass_with_cache (obj, klass, cache, TRUE);
++}
++
+ /**
+  * mono_marshal_get_castclass_with_cache:
+  * This does the equivalent of \c mono_object_castclass_with_cache.
+@@ -9204,7 +9298,7 @@ mono_marshal_get_castclass_with_cache (void)
+ 	sig->pinvoke = 0;
+ 
+ #ifdef ENABLE_ILGEN
+-	generate_check_cache (obj_arg_position, class_arg_position, cache_arg_position, 
++	generate_check_cache (obj_arg_position, class_arg_position, cache_arg_position, mono_marshal_castclass_with_cache,
+ 												&return_null_pos, &negative_cache_hit_pos, &positive_cache_hit_pos, mb);
+ 	invalid_cast_pos = mono_mb_emit_branch (mb, CEE_BRFALSE);
+ 
+@@ -9237,27 +9331,6 @@ mono_marshal_get_castclass_with_cache (void)
+ 	return cached;
+ }
+ 
+-/* this is an icall */
+-static MonoObject *
+-mono_marshal_isinst_with_cache (MonoObject *obj, MonoClass *klass, uintptr_t *cache)
+-{
+-	MonoError error;
+-	MonoObject *isinst = mono_object_isinst_checked (obj, klass, &error);
+-	if (mono_error_set_pending_exception (&error))
+-		return NULL;
+-
+-	if (mono_object_is_transparent_proxy (obj))
+-		return isinst;
+-
+-	uintptr_t cache_update = (uintptr_t)obj->vtable;
+-	if (!isinst)
+-		cache_update = cache_update | 0x1;
+-
+-	*cache = cache_update;
+-
+-	return isinst;
+-}
+-
+ /**
+  * mono_marshal_get_isinst_with_cache:
+  * This does the equivalent of \c mono_marshal_isinst_with_cache.
+@@ -9291,7 +9364,7 @@ mono_marshal_get_isinst_with_cache (void)
+ 	sig->pinvoke = 0;
+ 
+ #ifdef ENABLE_ILGEN
+-	generate_check_cache (obj_arg_position, class_arg_position, cache_arg_position, 
++	generate_check_cache (obj_arg_position, class_arg_position, cache_arg_position, mono_marshal_isinst_with_cache,
+ 		&return_null_pos, &negative_cache_hit_pos, &positive_cache_hit_pos, mb);
+ 	// Return the object gotten via the slow path.
+ 	mono_mb_emit_byte (mb, CEE_RET);
+diff --git a/mono/metadata/marshal.h b/mono/metadata/marshal.h
+index 12f224d..7f64916 100644
+--- a/mono/metadata/marshal.h
++++ b/mono/metadata/marshal.h
+@@ -339,8 +339,14 @@ mono_marshal_get_runtime_invoke_for_sig (MonoMethodSignature *sig);
+ MonoMethodSignature*
+ mono_marshal_get_string_ctor_signature (MonoMethod *method);
+ 
++gboolean
++mono_is_native_callable_method (MonoMethod *method);
++
++MonoMethod *
++mono_marshal_get_managed_wrapper (MonoMethod *method, MonoClass *delegate_klass, uint32_t this_loc, MonoError *external_error);
++
+ MonoMethod *
+-mono_marshal_get_managed_wrapper (MonoMethod *method, MonoClass *delegate_klass, uint32_t this_loc, MonoError *exernal_error);
++mono_marshal_get_managed_wrapper_ex (MonoMethod *method, MonoMethod *delegate_method, MonoClass *delegate_klass, uint32_t this_loc, gboolean native_callable_method, MonoError *external_error);
+ 
+ gpointer
+ mono_marshal_get_vtfixup_ftnptr (MonoImage *image, guint32 token, guint16 type);
+@@ -591,6 +597,9 @@ mono_marshal_emit_native_wrapper (MonoImage *image, MonoMethodBuilder *mb, MonoM
+ void
+ mono_marshal_emit_managed_wrapper (MonoMethodBuilder *mb, MonoMethodSignature *invoke_sig, MonoMarshalSpec **mspecs, EmitMarshalContext* m, MonoMethod *method, uint32_t target_handle);
+ 
++void
++mono_marshal_emit_managed_wrapper_ex (MonoMethodBuilder *mb, MonoMethodSignature *invoke_sig, MonoMarshalSpec **mspecs, EmitMarshalContext* m, MonoMethod *method, uint32_t target_handle, gboolean native_callable_method);
++
+ GHashTable*
+ mono_marshal_get_cache (GHashTable **var, GHashFunc hash_func, GCompareFunc equal_func);
+ 
+diff --git a/mono/metadata/monitor.c b/mono/metadata/monitor.c
+index beb96a4..10e905d 100644
+--- a/mono/metadata/monitor.c
++++ b/mono/metadata/monitor.c
+@@ -33,6 +33,10 @@
+ #include <mono/utils/atomic.h>
+ #include <mono/utils/w32api.h>
+ 
++#if defined(HOST_WIN32) && defined(HAVE_CLASSIC_WINAPI_SUPPORT)
++#include <combaseapi.h>
++#endif
++
+ /*
+  * Pull the list of opcodes
+  */
+@@ -1323,6 +1327,70 @@ ves_icall_System_Threading_Monitor_Monitor_pulse_all (MonoObject *obj)
+ 	}
+ }
+ 
++#ifdef HOST_WIN32
++#if G_HAVE_API_SUPPORT(HAVE_CLASSIC_WINAPI_SUPPORT)
++static MonoW32HandleWaitRet
++mono_icall_monitor_wait (HANDLE wait_handle, guint32 ms, gboolean alertable)
++{
++	MonoW32HandleWaitRet result = MONO_W32HANDLE_WAIT_RET_FAILED;
++	MonoInternalThread *thread = mono_thread_internal_current ();
++
++	// We can't risk blocking the STA message pump for cross STA COM/WinRT interop.
++	if (thread && thread->apartment_state == ThreadApartmentState_STA) {
++		DWORD flags = COWAIT_DISPATCH_CALLS | COWAIT_DISPATCH_WINDOW_MESSAGES;
++		HANDLE wait_handles[] = { wait_handle };
++		DWORD index = 0;
++
++		// Instability when doing aleratble wait, https://msdn.microsoft.com/en-us/library/windows/desktop/ms680732(v=vs.85).aspx.
++		// Workaround is to reset last error to success before doing call to CoWaitForMultipleHandles.
++		if (alertable)  {
++			flags |= COWAIT_ALERTABLE;
++			SetLastError(ERROR_SUCCESS);
++		}
++
++		HRESULT hr;
++
++		MONO_ENTER_GC_SAFE;
++		hr = CoWaitForMultipleHandles (flags, ms, G_N_ELEMENTS (wait_handles), wait_handles, &index);
++		MONO_EXIT_GC_SAFE;
++
++		if (hr == S_OK) {
++			result = mono_w32handle_convert_wait_ret (index, 1);
++		} else {
++			result = mono_w32handle_convert_wait_ret (result == RPC_S_CALLPENDING ? WAIT_TIMEOUT : WAIT_FAILED, 1);
++		}
++	} else {
++		MONO_ENTER_GC_SAFE;
++		result = mono_w32handle_convert_wait_ret (WaitForSingleObjectEx (wait_handle, ms, alertable), 1);
++		MONO_EXIT_GC_SAFE;
++	}
++
++	return result;
++}
++#else
++static inline MonoW32HandleWaitRet
++mono_icall_monitor_wait (HANDLE wait_handle, guint32 ms, gboolean alertable)
++{
++	MonoW32HandleWaitRet result = MONO_W32HANDLE_WAIT_RET_FAILED;
++	MONO_ENTER_GC_SAFE;
++	result = mono_w32handle_convert_wait_ret (WaitForSingleObjectEx (wait_handle, ms, alertable), 1);
++	MONO_EXIT_GC_SAFE;
++
++	return result;
++}
++#endif
++#else
++static inline MonoW32HandleWaitRet
++mono_icall_monitor_wait (HANDLE wait_handle, guint32 ms, gboolean alertable)
++{
++	MONO_ENTER_GC_SAFE;
++	MonoW32HandleWaitRet result = mono_w32handle_wait_one (event, ms, alertable);
++	MONO_EXIT_GC_SAFE;
++
++	return result;
++}
++#endif
++
+ MonoBoolean
+ ves_icall_System_Threading_Monitor_Monitor_wait (MonoObject *obj, guint32 ms)
+ {
+@@ -1385,13 +1453,7 @@ ves_icall_System_Threading_Monitor_Monitor_wait (MonoObject *obj, guint32 ms)
+ 	 * is private to this thread.  Therefore even if the event was
+ 	 * signalled before we wait, we still succeed.
+ 	 */
+-	MONO_ENTER_GC_SAFE;
+-#ifdef HOST_WIN32
+-	ret = mono_w32handle_convert_wait_ret (WaitForSingleObjectEx (event, ms, TRUE), 1);
+-#else
+-	ret = mono_w32handle_wait_one (event, ms, TRUE);
+-#endif /* HOST_WIN32 */
+-	MONO_EXIT_GC_SAFE;
++	ret = mono_icall_monitor_wait (event, ms, TRUE);
+ 
+ 	/* Reset the thread state fairly early, so we don't have to worry
+ 	 * about the monitor error checking
+@@ -1414,13 +1476,7 @@ ves_icall_System_Threading_Monitor_Monitor_wait (MonoObject *obj, guint32 ms)
+ 		/* Poll the event again, just in case it was signalled
+ 		 * while we were trying to regain the monitor lock
+ 		 */
+-		MONO_ENTER_GC_SAFE;
+-#ifdef HOST_WIN32
+-		ret = mono_w32handle_convert_wait_ret (WaitForSingleObjectEx (event, 0, FALSE), 1);
+-#else
+-		ret = mono_w32handle_wait_one (event, 0, FALSE);
+-#endif /* HOST_WIN32 */
+-		MONO_EXIT_GC_SAFE;
++		ret = mono_icall_monitor_wait (event, 0, FALSE);
+ 	}
+ 
+ 	/* Pulse will have popped our event from the queue if it signalled
+diff --git a/mono/metadata/object.c b/mono/metadata/object.c
+index d30f041..66cfac5 100644
+--- a/mono/metadata/object.c
++++ b/mono/metadata/object.c
+@@ -80,6 +80,7 @@ static GENERATE_GET_CLASS_WITH_CACHE (activation_services, "System.Runtime.Remot
+ #define ldstr_unlock() mono_os_mutex_unlock (&ldstr_section)
+ static mono_mutex_t ldstr_section;
+ 
++static MonoMethod *icastable_helper_isinstanceofinterface;
+ 
+ /**
+  * mono_runtime_object_init:
+@@ -1380,7 +1381,7 @@ build_imt_slots (MonoClass *klass, MonoVTable *vt, MonoDomain *domain, gpointer*
+ 	MonoImtBuilderEntry **imt_builder = (MonoImtBuilderEntry **)calloc (MONO_IMT_SIZE, sizeof (MonoImtBuilderEntry*));
+ 	int method_count = 0;
+ 	gboolean record_method_count_for_max_collisions = FALSE;
+-	gboolean has_generic_virtual = FALSE, has_variant_iface = FALSE;
++	gboolean has_generic_virtual = FALSE, has_variant_iface = FALSE, has_icastable = mono_vtable_is_icastable (vt);
+ 
+ #if DEBUG_IMT
+ 	printf ("Building IMT for class %s.%s slot %d\n", klass->name_space, klass->name, slot_num);
+@@ -1468,7 +1469,7 @@ build_imt_slots (MonoClass *klass, MonoVTable *vt, MonoDomain *domain, gpointer*
+ 				imt_builder [i] = entries;
+ 			}
+ 
+-			if (has_generic_virtual || has_variant_iface) {
++			if (has_generic_virtual || has_variant_iface || has_icastable) {
+ 				/*
+ 				 * There might be collisions later when the the trampoline is expanded.
+ 				 */
+@@ -2099,6 +2100,9 @@ mono_class_create_runtime_vtable (MonoDomain *domain, MonoClass *klass, MonoErro
+ 
+ 	mono_vtable_set_is_remote (vt, mono_class_is_contextbound (klass));
+ 
++	if (MONO_VTABLE_IMPLEMENTS_INTERFACE (vt, mono_defaults.icastable_class->interface_id))
++		vt->icastable = 1;
++
+ 	/*  class_vtable_array keeps an array of created vtables
+ 	 */
+ 	g_ptr_array_add (domain->class_vtable_array, vt);
+@@ -6543,6 +6547,48 @@ mono_object_isinst_mbyref (MonoObject *obj_raw, MonoClass *klass)
+ 	HANDLE_FUNCTION_RETURN_OBJ (result);
+ }
+ 
++static gboolean
++icastable_isinst_mbyref (MonoObjectHandle obj, MonoClass *klass, MonoError *error)
++{
++	// ICastable only suport interfaces.
++	g_assert (mono_class_is_interface (klass));
++
++	MonoObject *obj_instance = MONO_HANDLE_RAW (obj);
++	MonoDomain *domain = obj_instance->vtable->domain;
++
++	// Get interface type handle passed to IsInstanceOfInterface.
++	MonoReflectionTypeHandle ref_type = mono_type_get_object_handle (domain, &klass->byval_arg, error);
++	if (!is_ok (error))
++		return FALSE;
++
++	MonoException *cast_exception = NULL;
++	gpointer args[3];
++	args[0] = obj_instance;
++	args[1] = MONO_HANDLE_RAW (ref_type);
++	args[2] = &cast_exception;
++
++	if (!icastable_helper_isinstanceofinterface) {
++		mono_loader_lock ();
++		if (!icastable_helper_isinstanceofinterface) {
++			icastable_helper_isinstanceofinterface = mono_class_get_method_from_name (mono_defaults.icastablehelpers_class, "IsInstanceOfInterface", 3);
++		}
++		mono_loader_unlock ();
++	}
++
++	g_assert (icastable_helper_isinstanceofinterface);
++
++	// Call ICastable::IsInstanceOfInterface to check for support of requested interface type.
++	MonoObject *isinst_res_obj = mono_runtime_invoke_checked (icastable_helper_isinstanceofinterface, NULL, args, error);
++	gboolean isinst_of = (isinst_res_obj != NULL) ? *((MonoBoolean*)mono_object_unbox (isinst_res_obj)) : FALSE;
++	if (!is_ok (error) || !isinst_of) {
++		if (cast_exception != NULL)
++			mono_error_set_exception_instance (error, cast_exception);
++		return FALSE;
++	}
++
++	return TRUE;
++}
++
+ MonoObjectHandle
+ mono_object_handle_isinst_mbyref (MonoObjectHandle obj, MonoClass *klass, MonoError *error)
+ {
+@@ -6569,8 +6615,15 @@ mono_object_handle_isinst_mbyref (MonoObjectHandle obj, MonoClass *klass, MonoEr
+ 			}
+ 		}
+ 
++		if (mono_vtable_is_icastable (vt)) {
++			if (icastable_isinst_mbyref (obj, klass, error)) {
++				MONO_HANDLE_ASSIGN (result, obj);
++				goto leave;
++			}
++		}
++
+ 		/*If the above check fails we are in the slow path of possibly raising an exception. So it's ok to it this way.*/
+-		else if (mono_class_has_variant_generic_params (klass) && mono_class_is_assignable_from (klass, mono_handle_class (obj))) {
++		if (mono_class_has_variant_generic_params (klass) && mono_class_is_assignable_from (klass, mono_handle_class (obj))) {
+ 			MONO_HANDLE_ASSIGN (result, obj);
+ 			goto leave;
+ 		}
+diff --git a/mono/metadata/threads-types.h b/mono/metadata/threads-types.h
+index 257266e..3c68ed5 100644
+--- a/mono/metadata/threads-types.h
++++ b/mono/metadata/threads-types.h
+@@ -252,6 +252,9 @@ void ves_icall_System_Threading_Thread_GetStackTraces (MonoArray **out_threads,
+ MONO_API gpointer
+ mono_threads_attach_coop (MonoDomain *domain, gpointer *dummy);
+ 
++gpointer
++mono_threads_attach_coop_ex (MonoDomain *domain, gpointer *dummy);
++
+ MONO_API void
+ mono_threads_detach_coop (gpointer cookie, gpointer *dummy);
+ 
+diff --git a/mono/metadata/threads.c b/mono/metadata/threads.c
+index da85ec6..eb57d0c 100644
+--- a/mono/metadata/threads.c
++++ b/mono/metadata/threads.c
+@@ -45,6 +45,7 @@
+ #include <mono/utils/mono-error-internals.h>
+ #include <mono/utils/os-event.h>
+ #include <mono/utils/mono-threads-debug.h>
++#include <mono/utils/mono-lazy-init.h>
+ #include <mono/metadata/w32handle.h>
+ #include <mono/metadata/w32event.h>
+ #include <mono/metadata/w32mutex.h>
+@@ -201,6 +202,25 @@ static gint32 managed_thread_id_counter = 0;
+ /* Class lazy loading functions */
+ static GENERATE_GET_CLASS_WITH_CACHE (appdomain_unloaded_exception, "System", "AppDomainUnloadedException")
+ 
++#if defined(HOST_WIN32)
++typedef enum RO_INIT_TYPE
++{
++#if G_HAVE_API_SUPPORT(HAVE_CLASSIC_WINAPI_SUPPORT)
++	// Single-threaded application
++	RO_INIT_SINGLETHREADED = 0,
++#endif
++	// COM calls objects on any thread.
++	RO_INIT_MULTITHREADED = 1
++} RO_INIT_TYPE;
++
++typedef HRESULT (WINAPI *RoInitializePtr) (RO_INIT_TYPE initType);
++typedef VOID (WINAPI *RoUninitializePtr) (VOID);
++
++static mono_lazy_init_t g_winrt_lazy_init = MONO_LAZY_INIT_STATUS_NOT_INITIALIZED;
++static RoInitializePtr g_roinitialize;
++static RoUninitializePtr g_rouninitialize;
++#endif
++
+ static void
+ mono_threads_lock (void)
+ {
+@@ -4533,11 +4553,31 @@ gint32* mono_thread_interruption_request_flag ()
+ 	return &thread_interruption_requested;
+ }
+ 
++#if defined(HOST_WIN32)
++static void
++init_winrt_api (void)
++{
++	// We need module loaded, so keep handle around.
++	HMODULE comdll_module = NULL;
++
++	g_assert (g_roinitialize == NULL);
++	g_assert (g_rouninitialize == NULL);
++
++	// Load functions available on Win8/Win2012Server or later. If running on earlier
++	// systems the below GetProceAddress will fail, this is expected behavior.
++	if (GetModuleHandleEx (0, TEXT("combase.dll"), &comdll_module) == TRUE) {
++		g_roinitialize = (RoInitializePtr)GetProcAddress (comdll_module, "RoInitialize");
++		g_rouninitialize = (RoUninitializePtr)GetProcAddress (comdll_module, "RoUninitialize");
++	}
++}
++#endif
++
+ void 
+ mono_thread_init_apartment_state (void)
+ {
+ #ifdef HOST_WIN32
+ 	MonoInternalThread* thread = mono_thread_internal_current ();
++	MonoThreadApartmentState req_apartment_state = thread->apartment_state;
+ 
+ 	/* Positive return value indicates success, either
+ 	 * S_OK if this is first CoInitialize call, or
+@@ -4545,11 +4585,23 @@ mono_thread_init_apartment_state (void)
+ 	 * threading model. A negative value indicates failure,
+ 	 * probably due to trying to change the threading model.
+ 	 */
+-	if (CoInitializeEx(NULL, (thread->apartment_state == ThreadApartmentState_STA) 
++	if (CoInitializeEx(NULL, (req_apartment_state == ThreadApartmentState_STA)
+ 			? COINIT_APARTMENTTHREADED 
+ 			: COINIT_MULTITHREADED) < 0) {
+ 		thread->apartment_state = ThreadApartmentState_Unknown;
+ 	}
++
++	mono_lazy_initialize (&g_winrt_lazy_init, init_winrt_api);
++	if (g_roinitialize) {
++		RO_INIT_TYPE init_type = RO_INIT_MULTITHREADED;
++#if G_HAVE_API_SUPPORT(HAVE_CLASSIC_WINAPI_SUPPORT)
++		init_type = (req_apartment_state == ThreadApartmentState_STA) ? RO_INIT_SINGLETHREADED : init_type;
++#endif
++		if (g_roinitialize (init_type) < 0) {
++			// RoInitialize needs to follow the threading model setup and used by CoInitialize.
++			g_error ("%s: RoInitialize failed, missmatched threading model.", __func__);
++		}
++	}
+ #endif
+ }
+ 
+@@ -4561,6 +4613,9 @@ mono_thread_cleanup_apartment_state (void)
+ 
+ 	if (thread && thread->apartment_state != ThreadApartmentState_Unknown) {
+ 		CoUninitialize ();
++		mono_lazy_initialize (&g_winrt_lazy_init, init_winrt_api);
++		if (g_rouninitialize)
++			g_rouninitialize ();
+ 	}
+ #endif
+ }
+@@ -5015,19 +5070,8 @@ ves_icall_System_Threading_Thread_GetStackTraces (MonoArray **out_threads, MonoA
+ 	mono_error_set_pending_exception (&error);
+ }
+ 
+-/*
+- * mono_threads_attach_coop: called by native->managed wrappers
+- *
+- * In non-coop mode:
+- *  - @dummy: is NULL
+- *  - @return: the original domain which needs to be restored, or NULL.
+- *
+- * In coop mode:
+- *  - @dummy: contains the original domain
+- *  - @return: a cookie containing current MonoThreadInfo*.
+- */
+-gpointer
+-mono_threads_attach_coop (MonoDomain *domain, gpointer *dummy)
++static gpointer
++threads_attach_coop (MonoDomain *domain, gpointer *dummy, gboolean native_callable)
+ {
+ 	MonoDomain *orig;
+ 	gboolean fresh_thread = FALSE;
+@@ -5048,11 +5092,19 @@ mono_threads_attach_coop (MonoDomain *domain, gpointer *dummy)
+ 		fresh_thread = !info || !mono_thread_info_is_live (info);
+ 	}
+ 
+-	if (!mono_thread_internal_current ()) {
++	MonoInternalThread *internal_thread = mono_thread_internal_current ();
++	if (!internal_thread) {
+ 		mono_thread_attach_full (domain, FALSE);
+ 
+ 		// #678164
+-		mono_thread_set_state (mono_thread_internal_current (), ThreadState_Background);
++		mono_thread_set_state (internal_thread, ThreadState_Background);
++
++		// If thread attach call has beem marked as native callable, the calling
++		// thread is most likely out of our control (like callback from unmanaged thread pool).
++		// Since the life time of this thread can't be controlled, the attached thread can't
++		// be managed by runtime.
++		if (native_callable)
++			internal_thread->flags |= MONO_THREAD_FLAG_DONT_MANAGE;
+ 	}
+ 
+ 	orig = mono_domain_get ();
+@@ -5075,6 +5127,29 @@ mono_threads_attach_coop (MonoDomain *domain, gpointer *dummy)
+ }
+ 
+ /*
++ * mono_threads_attach_coop: called by native->managed wrappers
++ *
++ * In non-coop mode:
++ *  - @dummy: is NULL
++ *  - @return: the original domain which needs to be restored, or NULL.
++ *
++ * In coop mode:
++ *  - @dummy: contains the original domain
++ *  - @return: a cookie containing current MonoThreadInfo*.
++ */
++gpointer
++mono_threads_attach_coop (MonoDomain *domain, gpointer *dummy)
++{
++	return threads_attach_coop (domain, dummy, FALSE);
++}
++
++gpointer
++mono_threads_attach_coop_ex (MonoDomain *domain, gpointer *dummy)
++{
++	return threads_attach_coop (domain, dummy, TRUE);
++}
++
++/*
+  * mono_threads_detach_coop: called by native->managed wrappers
+  *
+  * In non-coop mode:
+diff --git a/mono/mini/aot-compiler.c b/mono/mini/aot-compiler.c
+index 61991b5..b13aaa3 100644
+--- a/mono/mini/aot-compiler.c
++++ b/mono/mini/aot-compiler.c
+@@ -4236,6 +4236,8 @@ add_wrappers (MonoAotCompile *acfg)
+ 		guint32 token = MONO_TOKEN_METHOD_DEF | (i + 1);
+ 		MonoCustomAttrInfo *cattr;
+ 		int j;
++		gboolean pinvoke_callback = FALSE;
++		gboolean native_callable = FALSE;
+ 
+ 		method = mono_get_method_checked (acfg->image, token, NULL, NULL, &error);
+ 		report_loader_error (acfg, &error, "Failed to load method token 0x%x due to %s\n", i, mono_error_get_message (&error));
+@@ -4253,10 +4255,17 @@ add_wrappers (MonoAotCompile *acfg)
+ 		}
+ 
+ 		if (cattr) {
+-			for (j = 0; j < cattr->num_attrs; ++j)
+-				if (cattr->attrs [j].ctor && !strcmp (cattr->attrs [j].ctor->klass->name, "MonoPInvokeCallbackAttribute"))
++			for (j = 0; j < cattr->num_attrs; ++j) {
++				if (cattr->attrs [j].ctor && !strcmp (cattr->attrs [j].ctor->klass->name, "MonoPInvokeCallbackAttribute")) {
++					pinvoke_callback = TRUE;
+ 					break;
+-			if (j < cattr->num_attrs) {
++				} else if (cattr->attrs [j].ctor && !strcmp (cattr->attrs [j].ctor->klass->name, "NativeCallableAttribute")) {
++					native_callable = TRUE;
++					break;
++				}
++			}
++
++			if (pinvoke_callback) {
+ 				MonoCustomAttrEntry *e = &cattr->attrs [j];
+ 				MonoMethodSignature *sig = mono_method_signature (e->ctor);
+ 				const char *p = (const char*)e->data;
+@@ -4339,6 +4348,10 @@ add_wrappers (MonoAotCompile *acfg)
+ 				add_method (acfg, wrapper);
+ 				if (export_name)
+ 					g_hash_table_insert (acfg->export_names, wrapper, export_name);
++			} else if (native_callable) {
++				MonoMethod *wrapper = mono_marshal_get_managed_wrapper_ex (method, method, method->klass, 0, TRUE, &error);
++				mono_error_assert_ok (&error);
++				add_method (acfg, wrapper);
+ 			}
+ 			g_free (cattr);
+ 		}
+@@ -5900,6 +5913,7 @@ encode_patch (MonoAotCompile *acfg, MonoJumpInfo *patch_info, guint8 *buf, guint
+ 		break;
+ 	case MONO_PATCH_INFO_GC_SAFE_POINT_FLAG:
+ 	case MONO_PATCH_INFO_JIT_THREAD_ATTACH:
++	case MONO_PATCH_INFO_JIT_THREAD_ATTACH_EX:
+ 		break;
+ 	default:
+ 		g_warning ("unable to handle jump info %d", patch_info->type);
+@@ -11373,6 +11387,11 @@ add_preinit_got_slots (MonoAotCompile *acfg)
+ 	get_got_offset (acfg, FALSE, ji);
+ 	get_got_offset (acfg, TRUE, ji);
+ 
++	ji = (MonoJumpInfo *)mono_mempool_alloc0 (acfg->mempool, sizeof (MonoJumpInfo));
++	ji->type = MONO_PATCH_INFO_JIT_THREAD_ATTACH_EX;
++	get_got_offset (acfg, FALSE, ji);
++	get_got_offset (acfg, TRUE, ji);
++
+ 	for (i = 0; i < sizeof (preinited_jit_icalls) / sizeof (char*); ++i) {
+ 		ji = (MonoJumpInfo *)mono_mempool_alloc0 (acfg->mempool, sizeof (MonoAotCompile));
+ 		ji->type = MONO_PATCH_INFO_INTERNAL_METHOD;
+diff --git a/mono/mini/aot-runtime.c b/mono/mini/aot-runtime.c
+index a93776d..bcf6f15 100644
+--- a/mono/mini/aot-runtime.c
++++ b/mono/mini/aot-runtime.c
+@@ -1218,7 +1218,10 @@ decode_method_ref_with_target (MonoAotModule *module, MethodRef *ref, MonoMethod
+ 			klass = decode_klass_ref (module, p, &p, error);
+ 			if (!klass)
+ 				return FALSE;
+-			ref->method = mono_marshal_get_managed_wrapper (m, klass, 0, error);
++			if (!mono_is_native_callable_method (m))
++				ref->method = mono_marshal_get_managed_wrapper (m, klass, 0, error);
++			else
++				ref->method = mono_marshal_get_managed_wrapper_ex (m, m, klass, 0, TRUE, error);
+ 			if (!mono_error_ok (error))
+ 				return FALSE;
+ 			break;
+@@ -3768,6 +3771,7 @@ decode_patch (MonoAotModule *aot_module, MonoMemPool *mp, MonoJumpInfo *ji, guin
+ 	}
+ 	case MONO_PATCH_INFO_GC_SAFE_POINT_FLAG:
+ 	case MONO_PATCH_INFO_JIT_THREAD_ATTACH:
++	case MONO_PATCH_INFO_JIT_THREAD_ATTACH_EX:
+ 		break;
+ 	case MONO_PATCH_INFO_GET_TLS_TRAMP:
+ 	case MONO_PATCH_INFO_SET_TLS_TRAMP:
+diff --git a/mono/mini/jit-icalls.c b/mono/mini/jit-icalls.c
+index 2b66be2..881f440 100644
+--- a/mono/mini/jit-icalls.c
++++ b/mono/mini/jit-icalls.c
+@@ -49,11 +49,22 @@ mono_ldftn (MonoMethod *method)
+ 		return addr;
+ 	}
+ 
+-	addr = mono_create_jump_trampoline (mono_domain_get (), method, FALSE, &error);
+-	if (!mono_error_ok (&error)) {
+-		mono_error_set_pending_exception (&error);
+-		return NULL;
++	MonoMethod *wrapper;
++	if (mono_is_native_callable_method (method)) {
++		wrapper = mono_marshal_get_managed_wrapper_ex (method, method, method->klass, 0, TRUE, &error);
++		addr = mono_compile_method_checked (wrapper, &error);
++		if (!mono_error_ok (&error)) {
++			mono_error_set_pending_exception (&error);
++			return NULL;
++		}
++	} else {
++		addr = mono_create_jump_trampoline (mono_domain_get (), method, FALSE, &error);
++		if (!mono_error_ok (&error)) {
++			mono_error_set_pending_exception (&error);
++			return NULL;
++		}
+ 	}
++
+ 	return mono_create_ftnptr (mono_domain_get (), addr);
+ }
+ 
+diff --git a/mono/mini/method-to-ir.c b/mono/mini/method-to-ir.c
+index 0c37dc1..52ee89e 100644
+--- a/mono/mini/method-to-ir.c
++++ b/mono/mini/method-to-ir.c
+@@ -152,7 +152,7 @@ emit_llvmonly_virtual_call (MonoCompile *cfg, MonoMethod *cmethod, MonoMethodSig
+ static MonoMethodSignature *helper_sig_domain_get;
+ static MonoMethodSignature *helper_sig_rgctx_lazy_fetch_trampoline;
+ static MonoMethodSignature *helper_sig_llvmonly_imt_trampoline;
+-static MonoMethodSignature *helper_sig_jit_thread_attach;
++static MonoMethodSignature *helper_sig_jit_thread_attach_ex;
+ static MonoMethodSignature *helper_sig_get_tls_tramp;
+ static MonoMethodSignature *helper_sig_set_tls_tramp;
+ 
+@@ -365,7 +365,7 @@ mono_create_helper_signatures (void)
+ 	helper_sig_domain_get = mono_create_icall_signature ("ptr");
+ 	helper_sig_rgctx_lazy_fetch_trampoline = mono_create_icall_signature ("ptr ptr");
+ 	helper_sig_llvmonly_imt_trampoline = mono_create_icall_signature ("ptr ptr ptr");
+-	helper_sig_jit_thread_attach = mono_create_icall_signature ("ptr ptr");
++	helper_sig_jit_thread_attach_ex = mono_create_icall_signature ("ptr ptr bool");
+ 	helper_sig_get_tls_tramp = mono_create_icall_signature ("ptr");
+ 	helper_sig_set_tls_tramp = mono_create_icall_signature ("void ptr");
+ }
+@@ -7114,6 +7114,67 @@ emit_setret (MonoCompile *cfg, MonoInst *val)
+ 	}
+ }
+ 
++static void
++emit_jit_attach_thread (MonoCompile *cfg, MonoInst *ins, gboolean native_callable)
++{
++	MonoInst *args [16], *domain_ins;
++	MonoInst *ad_ins, *jit_tls_ins;
++	MonoBasicBlock *next_bb = NULL, *call_bb = NULL;
++
++	g_assert (!mono_threads_is_coop_enabled ());
++
++	cfg->orig_domain_var = mono_compile_create_var (cfg, &mono_defaults.int_class->byval_arg, OP_LOCAL);
++
++	EMIT_NEW_PCONST (cfg, ins, NULL);
++	MONO_EMIT_NEW_UNALU (cfg, OP_MOVE, cfg->orig_domain_var->dreg, ins->dreg);
++
++	ad_ins = mono_create_tls_get (cfg, TLS_KEY_DOMAIN);
++	jit_tls_ins = mono_create_tls_get (cfg, TLS_KEY_JIT_TLS);
++
++	if (ad_ins && jit_tls_ins) {
++		NEW_BBLOCK (cfg, next_bb);
++		NEW_BBLOCK (cfg, call_bb);
++
++		if (cfg->compile_aot) {
++			/* AOT code is only used in the root domain */
++			EMIT_NEW_PCONST (cfg, domain_ins, NULL);
++		} else {
++			EMIT_NEW_PCONST (cfg, domain_ins, cfg->domain);
++		}
++		MONO_EMIT_NEW_BIALU (cfg, OP_COMPARE, -1, ad_ins->dreg, domain_ins->dreg);
++		MONO_EMIT_NEW_BRANCH_BLOCK (cfg, OP_PBNE_UN, call_bb);
++
++		MONO_EMIT_NEW_BIALU_IMM (cfg, OP_COMPARE_IMM, -1, jit_tls_ins->dreg, 0);
++		MONO_EMIT_NEW_BRANCH_BLOCK (cfg, OP_PBEQ, call_bb);
++
++		MONO_EMIT_NEW_BRANCH_BLOCK (cfg, OP_BR, next_bb);
++		MONO_START_BB (cfg, call_bb);
++	}
++
++	/* AOT code is only used in the root domain */
++	EMIT_NEW_PCONST (cfg, args [0], cfg->compile_aot ? NULL : cfg->domain);
++	EMIT_NEW_I8CONST (cfg, args[1], native_callable);
++	if (cfg->compile_aot) {
++		MonoInst *addr;
++
++		/*
++			* This is called on unattached threads, so it cannot go through the trampoline
++			* infrastructure. Use an indirect call through a got slot initialized at load time
++			* instead.
++			*/
++		EMIT_NEW_AOTCONST (cfg, addr, MONO_PATCH_INFO_JIT_THREAD_ATTACH_EX, NULL);
++		ins = mini_emit_calli (cfg, helper_sig_jit_thread_attach_ex, args, addr, NULL, NULL);
++	} else {
++		ins = mono_emit_jit_icall (cfg, mono_jit_thread_attach_ex, args);
++	}
++	MONO_EMIT_NEW_UNALU (cfg, OP_MOVE, cfg->orig_domain_var->dreg, ins->dreg);
++
++	if (next_bb)
++		MONO_START_BB (cfg, next_bb);
++
++	return;
++}
++
+ /*
+  * mono_method_to_ir:
+  *
+@@ -11745,60 +11806,7 @@ mono_method_to_ir (MonoCompile *cfg, MonoMethod *method, MonoBasicBlock *start_b
+ 				break;
+ 			}
+ 			case CEE_MONO_JIT_ATTACH: {
+-				MonoInst *args [16], *domain_ins;
+-				MonoInst *ad_ins, *jit_tls_ins;
+-				MonoBasicBlock *next_bb = NULL, *call_bb = NULL;
+-
+-				g_assert (!mono_threads_is_coop_enabled ());
+-
+-				cfg->orig_domain_var = mono_compile_create_var (cfg, &mono_defaults.int_class->byval_arg, OP_LOCAL);
+-
+-				EMIT_NEW_PCONST (cfg, ins, NULL);
+-				MONO_EMIT_NEW_UNALU (cfg, OP_MOVE, cfg->orig_domain_var->dreg, ins->dreg);
+-
+-				ad_ins = mono_create_tls_get (cfg, TLS_KEY_DOMAIN);
+-				jit_tls_ins = mono_create_tls_get (cfg, TLS_KEY_JIT_TLS);
+-
+-				if (ad_ins && jit_tls_ins) {
+-					NEW_BBLOCK (cfg, next_bb);
+-					NEW_BBLOCK (cfg, call_bb);
+-
+-					if (cfg->compile_aot) {
+-						/* AOT code is only used in the root domain */
+-						EMIT_NEW_PCONST (cfg, domain_ins, NULL);
+-					} else {
+-						EMIT_NEW_PCONST (cfg, domain_ins, cfg->domain);
+-					}
+-					MONO_EMIT_NEW_BIALU (cfg, OP_COMPARE, -1, ad_ins->dreg, domain_ins->dreg);
+-					MONO_EMIT_NEW_BRANCH_BLOCK (cfg, OP_PBNE_UN, call_bb);
+-
+-					MONO_EMIT_NEW_BIALU_IMM (cfg, OP_COMPARE_IMM, -1, jit_tls_ins->dreg, 0);
+-					MONO_EMIT_NEW_BRANCH_BLOCK (cfg, OP_PBEQ, call_bb);
+-
+-					MONO_EMIT_NEW_BRANCH_BLOCK (cfg, OP_BR, next_bb);
+-					MONO_START_BB (cfg, call_bb);
+-				}
+-
+-				/* AOT code is only used in the root domain */
+-				EMIT_NEW_PCONST (cfg, args [0], cfg->compile_aot ? NULL : cfg->domain);
+-				if (cfg->compile_aot) {
+-					MonoInst *addr;
+-
+-					/*
+-					 * This is called on unattached threads, so it cannot go through the trampoline
+-					 * infrastructure. Use an indirect call through a got slot initialized at load time
+-					 * instead.
+-					 */
+-					EMIT_NEW_AOTCONST (cfg, addr, MONO_PATCH_INFO_JIT_THREAD_ATTACH, NULL);
+-					ins = mini_emit_calli (cfg, helper_sig_jit_thread_attach, args, addr, NULL, NULL);
+-				} else {
+-					ins = mono_emit_jit_icall (cfg, mono_jit_thread_attach, args);
+-				}
+-				MONO_EMIT_NEW_UNALU (cfg, OP_MOVE, cfg->orig_domain_var->dreg, ins->dreg);
+-
+-				if (next_bb)
+-					MONO_START_BB (cfg, next_bb);
+-
++				emit_jit_attach_thread (cfg, ins, FALSE);
+ 				ip += 2;
+ 				break;
+ 			}
+@@ -11990,6 +11998,10 @@ mono_method_to_ir (MonoCompile *cfg, MonoMethod *method, MonoBasicBlock *start_b
+ 				ip += 2;
+ 				*sp++ = ins;
+ 				break;
++			case CEE_MONO_JIT_ATTACH_EX:
++				emit_jit_attach_thread (cfg, ins, TRUE);
++				ip += 2;
++				break;
+ 			default:
+ 				g_error ("opcode 0x%02x 0x%02x not handled", MONO_CUSTOM_PREFIX, ip [1]);
+ 				break;
+diff --git a/mono/mini/mini-runtime.c b/mono/mini/mini-runtime.c
+index f67497d..ffd76b3 100644
+--- a/mono/mini/mini-runtime.c
++++ b/mono/mini/mini-runtime.c
+@@ -826,16 +826,8 @@ mono_pop_lmf (MonoLMF *lmf)
+ 	mono_set_lmf ((MonoLMF *)(((gssize)lmf->previous_lmf) & ~3));
+ }
+ 
+-/*
+- * mono_jit_thread_attach:
+- *
+- * Called by Xamarin.Mac and other products. Attach thread to runtime if
+- * needed and switch to @domain.
+- *
+- * @return the original domain which needs to be restored, or NULL.
+- */
+-MonoDomain*
+-mono_jit_thread_attach (MonoDomain *domain)
++static MonoDomain*
++jit_thread_attach_ex (MonoDomain *domain, MonoBoolean native_callable)
+ {
+ 	MonoDomain *orig;
+ 	gboolean attached;
+@@ -854,8 +846,17 @@ mono_jit_thread_attach (MonoDomain *domain)
+ 	if (!attached) {
+ 		mono_thread_attach (domain);
+ 
++		MonoInternalThread *internal_thread = mono_thread_internal_current ();
++
+ 		// #678164
+-		mono_thread_set_state (mono_thread_internal_current (), ThreadState_Background);
++		mono_thread_set_state (internal_thread, ThreadState_Background);
++
++		// If thread attach call has beem marked as native callable, the calling
++		// thread is most likely out of our control (like callback from unmanaged thread pool).
++		// Since the life time of this thread can't be controlled, the attached thread can't
++		// be managed by runtime.
++		if (native_callable)
++			internal_thread->flags |= MONO_THREAD_FLAG_DONT_MANAGE;
+ 	}
+ 
+ 	orig = mono_domain_get ();
+@@ -866,6 +867,26 @@ mono_jit_thread_attach (MonoDomain *domain)
+ }
+ 
+ /*
++ * mono_jit_thread_attach:
++ *
++ * Called by Xamarin.Mac and other products. Attach thread to runtime if
++ * needed and switch to @domain.
++ *
++ * @return the original domain which needs to be restored, or NULL.
++ */
++MonoDomain*
++mono_jit_thread_attach (MonoDomain *domain)
++{
++	return jit_thread_attach_ex (domain, FALSE);
++}
++
++MonoDomain*
++mono_jit_thread_attach_ex (MonoDomain *domain, MonoBoolean native_callable)
++{
++	return jit_thread_attach_ex (domain, native_callable);
++}
++
++/*
+  * mono_jit_set_domain:
+  *
+  * Set domain to @domain if @domain is not null
+@@ -1217,6 +1238,7 @@ mono_patch_info_hash (gconstpointer data)
+ 	case MONO_PATCH_INFO_GC_SAFE_POINT_FLAG:
+ 	case MONO_PATCH_INFO_AOT_MODULE:
+ 	case MONO_PATCH_INFO_JIT_THREAD_ATTACH:
++	case MONO_PATCH_INFO_JIT_THREAD_ATTACH_EX:
+ 		return (ji->type << 8);
+ 	case MONO_PATCH_INFO_CASTCLASS_CACHE:
+ 		return (ji->type << 8) | (ji->data.index);
+@@ -1644,6 +1666,12 @@ mono_resolve_patch_target (MonoMethod *method, MonoDomain *domain, guint8 *code,
+ 		target = mi->func;
+ 		break;
+ 	}
++	case MONO_PATCH_INFO_JIT_THREAD_ATTACH_EX: {
++		MonoJitICallInfo *mi = mono_find_jit_icall_by_name ("mono_jit_thread_attach_ex");
++		g_assert (mi);
++		target = mi->func;
++		break;
++	}
+ 	default:
+ 		g_assert_not_reached ();
+ 	}
+@@ -4055,6 +4083,7 @@ register_icalls (void)
+ 	register_icall (mono_trace_leave_method, "mono_trace_leave_method", NULL, TRUE);
+ 	register_icall (mono_get_lmf_addr, "mono_get_lmf_addr", "ptr", TRUE);
+ 	register_icall (mono_jit_thread_attach, "mono_jit_thread_attach", "ptr ptr", TRUE);
++	register_icall (mono_jit_thread_attach_ex, "mono_jit_thread_attach_ex", "ptr ptr bool", TRUE);
+ 	register_icall (mono_jit_set_domain, "mono_jit_set_domain", "void ptr", TRUE);
+ 	register_icall (mono_domain_get, "mono_domain_get", "ptr", TRUE);
+ 
+diff --git a/mono/mini/mini-trampolines.c b/mono/mini/mini-trampolines.c
+index 3ef3020..c7d09f7 100644
+--- a/mono/mini/mini-trampolines.c
++++ b/mono/mini/mini-trampolines.c
+@@ -10,6 +10,7 @@
+ 
+ #include <mono/metadata/appdomain.h>
+ #include <mono/metadata/metadata-internals.h>
++#include <mono/metadata/reflection-internals.h>
+ #include <mono/metadata/marshal.h>
+ #include <mono/metadata/tabledefs.h>
+ #include <mono/utils/mono-counters.h>
+@@ -39,6 +40,8 @@ static guint32 trampoline_calls, jit_trampolines, unbox_trampolines, static_rgct
+ #define mono_trampolines_unlock() mono_os_mutex_unlock (&trampolines_mutex)
+ static mono_mutex_t trampolines_mutex;
+ 
++static MonoMethod *icastable_helper_getimpltype;
++
+ #ifdef MONO_ARCH_GSHARED_SUPPORTED
+ 
+ typedef struct {
+@@ -841,6 +844,130 @@ mono_magic_trampoline (mgreg_t *regs, guint8 *code, gpointer arg, guint8* tramp)
+ 	return res;
+ }
+ 
++static gpointer
++resolve_vtable_slot (MonoVTable *vt, int slot, gpointer **vtable_slot_out, MonoMethod **m_out, MonoError *error)
++{
++	gpointer *vtable_slot = NULL;
++	MonoMethod *m = NULL;
++	gpointer addr = NULL;
++	gpointer ftnptr = NULL;
++
++	if (slot >= 0) {
++		/* Normal virtual call */
++		vtable_slot = &(vt->vtable [slot]);
++
++		/* Avoid loading metadata or creating a generic vtable if possible */
++		addr = mono_aot_get_method_from_vt_slot (mono_domain_get (), vt, slot, error);
++		if (is_ok (error)) {
++			if (addr && !vt->klass->valuetype) {
++				if (mono_domain_owns_vtable_slot (mono_domain_get (), vtable_slot))
++					*vtable_slot = addr;
++
++				ftnptr = mono_create_ftnptr (mono_domain_get (), addr);
++			} else {
++				/*
++				 * Bug #616463 (see
++				 * is_generic_method_definition() above) also
++				 * goes away if we do a
++				 * mono_class_setup_vtable (vt->klass) here,
++				 * because we then inflate the method
++				 * correctly, put it in the cache, and the
++				 * "wrong" inflation invocation still looks up
++				 * the correctly inflated method.
++				 *
++				 * The hack above seems more stable and
++				 * trustworthy.
++				 */
++				m = mono_class_get_vtable_entry (vt->klass, slot);
++			}
++		}
++	} else {
++		/* IMT call */
++		vtable_slot = &(((gpointer*)vt) [slot]);
++
++		m = NULL;
++	}
++
++	*vtable_slot_out = vtable_slot;
++	*m_out  = m;
++
++	return ftnptr;
++}
++
++static gpointer
++icastable_resolve_vtable_slot (mgreg_t *regs, guint8 *code, int slot, MonoObject *this_arg, MonoVTable *vt, MonoError *error)
++{
++	gpointer res = NULL;
++
++	g_assert (mono_vtable_is_icastable (vt));
++
++	MonoMethod *method = mono_arch_find_imt_method (regs, code);
++	g_assert (method != NULL);
++
++	//Validate that underlying class doesn't implement method, if so it should be resolved the normal way.
++	if (mono_class_is_interface (method->klass) && mono_class_interface_offset (vt->klass, method->klass) == -1) {
++		MonoReflectionTypeHandle ref_type = mono_type_get_object_handle (mono_domain_get (), &(method->klass->byval_arg), error);
++		if (!is_ok (error))
++			return NULL;
++
++		MonoObject *cast_exception = NULL;
++		void *args[2];
++		args[0] = this_arg;
++		args[1] = MONO_HANDLE_RAW (ref_type);
++
++		if (!icastable_helper_getimpltype) {
++			mono_loader_lock ();
++			if (!icastable_helper_getimpltype) {
++				icastable_helper_getimpltype = mono_class_get_method_from_name (mono_defaults.icastablehelpers_class, "GetImplType", 2);
++			}
++			mono_loader_unlock ();
++		}
++
++		g_assert (icastable_helper_getimpltype);
++
++		MonoReflectionType *cast_ref_type = (MonoReflectionType *)mono_runtime_invoke_checked (icastable_helper_getimpltype, NULL, args, error);
++		if (!is_ok (error))
++			return NULL;
++
++		if (cast_ref_type == NULL) {
++			mono_error_set_exception_instance (error, mono_exception_from_name (mono_defaults.corlib, "System", "EntryPointNotFoundException"));
++			return NULL;
++		}
++
++		MonoClass *impl_type = mono_class_from_mono_type (cast_ref_type->type);
++		if (impl_type != NULL) {
++			MonoVTable *impl_type_vt = mono_class_vtable (mono_domain_get (), impl_type);
++			int impl_type_vtable_slot_index = 0;
++			gpointer *impl_type_vtable_slot = NULL;
++			MonoMethod *impl_type_m = NULL;
++
++			// Slot is incorrect for implementors vtable since it is implemented in different type.
++			if (method->slot >= 0) {
++				// Vtable slot.
++				gboolean no_exact_match;
++				int offset = mono_class_interface_offset_with_variance (impl_type, method->klass, &no_exact_match);
++				impl_type_vtable_slot_index = offset + method->slot;
++				g_assert (impl_type_vtable_slot_index >= 0);
++			} else {
++				// IMT slot.
++				impl_type_vtable_slot_index = method->slot;
++			}
++
++			// Get implementing method and vtable slot in implementing type.
++			res = resolve_vtable_slot (impl_type_vt, impl_type_vtable_slot_index, &impl_type_vtable_slot, &impl_type_m, error);
++			if (res == NULL)
++				res = common_call_trampoline (regs, code, impl_type_m, impl_type_vt, impl_type_vtable_slot, error);
++
++			if (res == NULL) {
++				mono_error_set_exception_instance (error, mono_exception_from_name (mono_defaults.corlib, "System", "EntryPointNotFoundException"));
++				return NULL;
++			}
++		}
++	}
++
++	return res;
++}
++
+ /**
+  * mono_vcall_trampoline:
+  *
+@@ -876,42 +1003,18 @@ mono_vcall_trampoline (mgreg_t *regs, guint8 *code, int slot, guint8 *tramp)
+ 
+ 	vt = this_arg->vtable;
+ 
+-	if (slot >= 0) {
+-		/* Normal virtual call */
+-		vtable_slot = &(vt->vtable [slot]);
++	mono_error_init (&error);
+ 
+-		/* Avoid loading metadata or creating a generic vtable if possible */
+-		addr = mono_aot_get_method_from_vt_slot (mono_domain_get (), vt, slot, &error);
+-		if (!is_ok (&error))
++	if (slot < 0 && mono_vtable_is_icastable (vt)) {
++		res = icastable_resolve_vtable_slot (regs, code, slot, this_arg, vt, &error);
++		if (res != NULL || (res == NULL && !is_ok (&error)))
+ 			goto leave;
+-		if (addr && !vt->klass->valuetype) {
+-			if (mono_domain_owns_vtable_slot (mono_domain_get (), vtable_slot))
+-				*vtable_slot = addr;
+-
+-			return mono_create_ftnptr (mono_domain_get (), addr);
+-		}
+-
+-		/*
+-		 * Bug #616463 (see
+-		 * is_generic_method_definition() above) also
+-		 * goes away if we do a
+-		 * mono_class_setup_vtable (vt->klass) here,
+-		 * because we then inflate the method
+-		 * correctly, put it in the cache, and the
+-		 * "wrong" inflation invocation still looks up
+-		 * the correctly inflated method.
+-		 *
+-		 * The hack above seems more stable and
+-		 * trustworthy.
+-		 */
+-		m = mono_class_get_vtable_entry (vt->klass, slot);
+-	} else {
+-		/* IMT call */
+-		vtable_slot = &(((gpointer*)vt) [slot]);
+-
+-		m = NULL;
+ 	}
+ 
++	res = resolve_vtable_slot (vt, slot, &vtable_slot, &m, &error);
++	if (res != NULL)
++		goto leave;
++
+ 	res = common_call_trampoline (regs, code, m, vt, vtable_slot, &error);
+ leave:
+ 	if (!mono_error_ok (&error)) {
+diff --git a/mono/mini/mini.h b/mono/mini/mini.h
+index 1fcb2f1..d2fdd12 100644
+--- a/mono/mini/mini.h
++++ b/mono/mini/mini.h
+@@ -2447,6 +2447,7 @@ void      mono_push_lmf                     (MonoLMFExt *ext);
+ void      mono_pop_lmf                      (MonoLMF *lmf);
+ MonoJitTlsData* mono_get_jit_tls            (void);
+ MONO_API MonoDomain* mono_jit_thread_attach (MonoDomain *domain);
++MonoDomain* mono_jit_thread_attach_ex		(MonoDomain *domain, MonoBoolean native_callable);
+ MONO_API void      mono_jit_set_domain      (MonoDomain *domain);
+ MonoInst* mono_create_tls_get               (MonoCompile *cfg, MonoTlsKey key);
+ GList    *mono_varlist_insert_sorted        (MonoCompile *cfg, GList *list, MonoMethodVar *mv, int sort_type);
+diff --git a/mono/mini/patch-info.h b/mono/mini/patch-info.h
+index 5869eed..677c9a5 100644
+--- a/mono/mini/patch-info.h
++++ b/mono/mini/patch-info.h
+@@ -58,3 +58,4 @@ PATCH_INFO(ICALL_ADDR_CALL, "icall_addr_call")
+ PATCH_INFO(GET_TLS_TRAMP, "get_tls_tramp")
+ PATCH_INFO(JIT_THREAD_ATTACH, "jit_thread_attach")
+ PATCH_INFO(SET_TLS_TRAMP, "set_tls_tramp")
++PATCH_INFO(JIT_THREAD_ATTACH_EX, "jit_thread_attach_ex")
+diff --git a/mono/mini/type-checking.c b/mono/mini/type-checking.c
+index e2335af..150a5f2 100644
+--- a/mono/mini/type-checking.c
++++ b/mono/mini/type-checking.c
+@@ -370,6 +370,47 @@ emit_special_array_iface_check (MonoCompile *cfg, MonoInst *src, MonoClass* klas
+ 
+ }
+ 
++static void
++emit_icastable_check (MonoCompile *cfg, int vtable_reg, MonoBasicBlock *is_icastable_false)
++{
++	// Check for ICastable support.
++	int icastable_reg = alloc_preg (cfg);
++	MONO_EMIT_NEW_LOAD_MEMBASE_OP (cfg, OP_LOADU1_MEMBASE, icastable_reg, vtable_reg, MONO_STRUCT_OFFSET (MonoVTable, icastable));
++	MONO_EMIT_NEW_BIALU_IMM (cfg, OP_COMPARE_IMM, -1, icastable_reg, 1);
++	MONO_EMIT_NEW_BRANCH_BLOCK (cfg, OP_IBNE_UN, is_icastable_false);
++}
++
++static void
++emit_castclass_icastable_check (MonoCompile *cfg, MonoInst *src, MonoClass *klass, int vtable_reg, MonoBasicBlock *is_icastable_true, int context_used)
++{
++	MonoBasicBlock *is_icastable_false;
++	NEW_BBLOCK (cfg, is_icastable_false);
++
++	emit_icastable_check (cfg, vtable_reg, is_icastable_false);
++	emit_castclass_with_cache (cfg, src, klass, context_used);
++
++	MONO_EMIT_NEW_BRANCH_BLOCK (cfg, OP_BR, is_icastable_true);
++
++	MONO_START_BB (cfg, is_icastable_false);
++}
++
++static void
++emit_isinst_icastable_check (MonoCompile *cfg, MonoInst *src, MonoClass *klass, int vtable_reg, int res_reg, MonoBasicBlock *is_icastable_true, int context_used)
++{
++	MonoBasicBlock *is_icastable_false;
++	NEW_BBLOCK (cfg, is_icastable_false);
++
++	emit_icastable_check (cfg, vtable_reg, is_icastable_false);
++	MonoInst *res_inst = emit_isinst_with_cache (cfg, src, klass, context_used);
++
++	MonoInst *move;
++	EMIT_NEW_UNALU (cfg, move, OP_MOVE, res_reg, res_inst->dreg);
++
++	MONO_EMIT_NEW_BRANCH_BLOCK (cfg, OP_BR, is_icastable_true);
++
++	MONO_START_BB (cfg, is_icastable_false);
++}
++
+ /*
+  * Returns NULL and set the cfg exception on error.
+  */
+@@ -399,29 +440,32 @@ handle_castclass (MonoCompile *cfg, MonoClass *klass, MonoInst *src, int context
+ 	mini_save_cast_details (cfg, klass, obj_reg, FALSE);
+ 
+ 	if (mono_class_is_interface (klass)) {
+-		int tmp_reg = alloc_preg (cfg);
+-#ifndef DISABLE_REMOTING
++		int vtable_reg = alloc_preg (cfg);
+ 		MonoBasicBlock *interface_fail_bb;
+ 		int klass_reg = alloc_preg (cfg);
+ 
+ 		NEW_BBLOCK (cfg, interface_fail_bb);
+ 
+-		MONO_EMIT_NEW_LOAD_MEMBASE (cfg, tmp_reg, obj_reg, MONO_STRUCT_OFFSET (MonoObject, vtable));
+-		mini_emit_iface_cast (cfg, tmp_reg, klass, interface_fail_bb, is_null_bb);
++		MONO_EMIT_NEW_LOAD_MEMBASE (cfg, vtable_reg, obj_reg, MONO_STRUCT_OFFSET (MonoObject, vtable));
++		mini_emit_iface_cast (cfg, vtable_reg, klass, interface_fail_bb, is_null_bb);
+ 
+ 		// iface bitmap check failed
+ 		MONO_START_BB (cfg, interface_fail_bb);
+ 
+ 		//Check if it's a rank zero array and emit fallback casting
+-		emit_special_array_iface_check (cfg, src, klass, tmp_reg, is_null_bb, context_used);
++		emit_special_array_iface_check (cfg, src, klass, vtable_reg, is_null_bb, context_used);
+ 
+-		MONO_EMIT_NEW_LOAD_MEMBASE (cfg, klass_reg, tmp_reg, MONO_STRUCT_OFFSET (MonoVTable, klass));
++		// Check if ICastable is supported for casting.
++		emit_castclass_icastable_check (cfg, src, klass, vtable_reg, is_null_bb, context_used);
++
++#ifndef DISABLE_REMOTING
++		MONO_EMIT_NEW_LOAD_MEMBASE (cfg, klass_reg, vtable_reg, MONO_STRUCT_OFFSET (MonoVTable, klass));
+ 
+ 		mini_emit_class_check (cfg, klass_reg, mono_defaults.transparent_proxy_class);
+ 
+-		tmp_reg = alloc_preg (cfg);
+-		MONO_EMIT_NEW_LOAD_MEMBASE (cfg, tmp_reg, obj_reg, MONO_STRUCT_OFFSET (MonoTransparentProxy, custom_type_info));
+-		MONO_EMIT_NEW_BIALU_IMM (cfg, OP_COMPARE_IMM, -1, tmp_reg, 0);
++		int custom_type_info_reg = alloc_preg (cfg);
++		MONO_EMIT_NEW_LOAD_MEMBASE (cfg, custom_type_info_reg, obj_reg, MONO_STRUCT_OFFSET (MonoTransparentProxy, custom_type_info));
++		MONO_EMIT_NEW_BIALU_IMM (cfg, OP_COMPARE_IMM, -1, custom_type_info_reg, 0);
+ 		MONO_EMIT_NEW_COND_EXC (cfg, EQ, "InvalidCastException");
+ 
+ 		MonoInst *args [1] = { src };
+@@ -431,22 +475,7 @@ handle_castclass (MonoCompile *cfg, MonoClass *klass, MonoInst *src, int context
+ 
+ 		MONO_EMIT_NEW_BRANCH_BLOCK (cfg, OP_BR, is_null_bb);
+ #else
+-		MonoBasicBlock *interface_fail_bb = NULL;
+-
+-		MONO_EMIT_NEW_LOAD_MEMBASE (cfg, tmp_reg, obj_reg, MONO_STRUCT_OFFSET (MonoObject, vtable));
+-
+-		if (klass->is_array_special_interface) {
+-			NEW_BBLOCK (cfg, interface_fail_bb);
+-			mini_emit_iface_cast (cfg, tmp_reg, klass, interface_fail_bb, is_null_bb);
+-			// iface bitmap check failed
+-			MONO_START_BB (cfg, interface_fail_bb);
+-
+-			//Check if it's a rank zero array and emit fallback casting
+-			emit_special_array_iface_check (cfg, src, klass, tmp_reg, is_null_bb, context_used);
+-		} else {
+-			mini_emit_iface_cast (cfg, tmp_reg, klass, NULL, NULL);
+-			MONO_EMIT_NEW_BRANCH_BLOCK (cfg, OP_BR, is_null_bb);
+-		}
++		MONO_EMIT_NEW_COND_EXC (cfg, NE_UN, "InvalidCastException");
+ #endif
+ 	} else if (mono_class_is_marshalbyref (klass)) {
+ #ifndef DISABLE_REMOTING
+@@ -581,6 +610,9 @@ handle_isinst (MonoCompile *cfg, MonoClass *klass, MonoInst *src, int context_us
+ 			MONO_START_BB (cfg, not_an_array);
+ 		}
+ 
++		// Check if ICastable is supported for casting.
++		emit_isinst_icastable_check (cfg, src, klass, vtable_reg, res_reg, end_bb, context_used);
++
+ #ifndef DISABLE_REMOTING
+ 		int tmp_reg, klass_reg;
+ 		MonoBasicBlock *call_proxy_isinst;

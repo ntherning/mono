@@ -37,7 +37,7 @@ namespace System.Resources {
     using System.Diagnostics.Tracing;
 #endif
 
-#if FEATURE_APPX
+#if FEATURE_APPX || MONO
     //
     // This is implemented in System.Runtime.WindowsRuntime as function System.Resources.WindowsRuntimeResourceManager,
     // allowing us to ask for a WinRT-specific ResourceManager.
